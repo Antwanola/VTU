@@ -1,0 +1,4 @@
+integrate the vtu api
+integrate payment system 
+develop an algo to collect payment for service before charging our account on the vtu platform
+define services
