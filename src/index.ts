@@ -63,7 +63,7 @@ connectDB();
 const initializeMonify = async () => {
 const monifyService =  new MonifyService()
 // await monifyService.initialize()
-await monifyService.testConnection()
+// await monifyService.testConnection()
 }
 initializeMonify()
 
@@ -83,7 +83,6 @@ process.on('unhandledRejection', (reason: Error, promise: Promise<any>) => {
   logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
   
   // Graceful shutdown
-  process.exit(1);
 });
 
 // Uncaught exceptions

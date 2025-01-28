@@ -10,6 +10,7 @@ const paymentRouter = express.Router();
 
 paymentRouter.post('/init-payment', PaymentRoute.initiatePayment)
 paymentRouter.post('/make-payment', PaymentRoute.initializePayment)
+paymentRouter.post('/verify-payment', PaymentRoute.verifyTransaction)
 
 
 export default paymentRouter;

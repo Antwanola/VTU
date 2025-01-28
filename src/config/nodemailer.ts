@@ -8,18 +8,17 @@ configDotenv()
 
 export const transporter = createTransport({
   host: process.env.EMAIL_HOST, // Replace with your SMTP server host
-  port: 587,               // Replace with your SMTP server port (e.g., 587 for TLS, 465 for SSL)
-  secure: false,           // Use `true` if the port is 465, otherwise `false`
+  port: 465,               // Replace with your SMTP server port (e.g., 587 for TLS, 465 for SSL)
+  secure: true,           // Use `true` if the port is 465, otherwise `false`
   auth: {
     user: process.env.EMAIL_USER,  // Replace with your SMTP username
-    pass: process.env.EMAIL_PASSWORD,           // Replace with your SMTP password
+    pass: process.env.GOOGLE_APP_PASS,           // Replace with your SMTP password
   },
 });
 
 
  async function verifyTransporterConnection() {
   try {
-    console.log(process.env.EMAIL_USER)
     await transporter.verify()
     logger.info("Email service connection established")
   } catch (error: any) {
