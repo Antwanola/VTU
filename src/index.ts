@@ -8,7 +8,9 @@ import { corsOptions } from './config/corsOptions';
 import cors from "cors"
 import router from './routes';
 import { redisClient } from './config/redis';
-import { MonifyService } from './services/payment';
+import { dataService } from './services/gladtidings';
+import { quickTellerService } from './services/quickTeller';
+import { seedData } from './utils/seeData';
 
 
 
@@ -19,7 +21,8 @@ app.use(helmet());
 
 // cors
 app.use(cors(corsOptions));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Initialize the connection
 const initializeRedis = async () => {
@@ -60,12 +63,21 @@ app.use(limiter);
 // Connect to MongoDB
 connectDB();
 
-const initializeMonify = async () => {
-const monifyService =  new MonifyService()
-// await monifyService.initialize()
-// await monifyService.testConnection()
+// const  initQuick = async () => {
+//  quickTellerService.handleQuickteller()
+// }
+// initQuick()
+
+// const seed = async () => {
+//   await seedData()
+// }
+
+
+const initializeGladTidings = async () => {
+  await dataService.initialize()
+  await dataService.findData("GLOf1_PLAN", "1.0GB")
 }
-initializeMonify()
+initializeGladTidings()
 
 //use routes
 app.use("/", router)

@@ -5,6 +5,7 @@ import { PaymentDetails, PaymentResponse } from '../utils/types/payment';
 import { AppError } from '../utils/HandleErrors';
 import { logger } from '../utils/logger';
 import { TransactionStatus } from '../utils/types/payment';
+import { Transaction } from '../models/transactions';
 
 export class MonifyService {
   private readonly baseUrl: string;
@@ -146,7 +147,7 @@ export class MonifyService {
 
       const response = await client.post<PaymentResponse>(
         '/api/v1/merchant/transactions/init-transaction', 
-        payload
+        payload,
       );
 
       if (!response.data.requestSuccessful) {
@@ -192,8 +193,9 @@ export class MonifyService {
       const response = await client.get<TransactionStatus>(
         `/api/v2/transactions/${encodedReference}`
       );
+      console.log({response: response.data.responseMessage})
 
-      if (!response.data.requestSuccessful) {
+      if (response.data.responseMessage !=='success' ) {
         throw new AppError(
           `Payment verification failed: ${response.data.responseMessage}`
         );
@@ -240,6 +242,47 @@ export class MonifyService {
       });
       return false;
     }
+  }
+
+  public checkPaymentStatus = async (transactionReference: string): Promise<boolean> => {
+    const client = await this.getApiClient();
+    const encodedReference = encodeURIComponent(transactionReference);
+    const paymentGatewayApiUrl = `${this.baseUrl}/api/v2/transactions/${encodedReference}`// Replace with your API URL
+  // console.log({paymentGatewayApiUrl})
+    const maxAttempts = 10; // Set a maximum number of attempts
+    let attempts = 0;
+  
+    while (attempts < maxAttempts) {
+      try {
+        const response = await client.get(paymentGatewayApiUrl);
+        console.log({checkRes:response.data})
+        const status = response.data.paymentStatus;
+  
+        if (status === 'PAID') {
+          logger.info("payment successful",{transactionReference: status})
+          return true;
+        } else if (status === 'failed') {
+          console.log('Payment failed.');
+          return false;
+        } else if (status === 'pending') {
+          console.log('Payment pending. Checking again in 5 seconds...');
+          await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+        } else {
+          console.log(`Unknown status: ${status}. Checking again in 5 seconds...`);
+          await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+        }
+  
+      } catch (error) {
+        console.error('Error checking payment status:', error);
+        // Handle the error appropriately, e.g., retry, log, or notify
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds before retrying
+      }
+  
+      attempts++;
+    }
+  
+    console.log(`Maximum attempts (${maxAttempts}) reached. Payment status could not be determined.`);
+    return false; // Or throw an error if you prefer
   }
 }
 

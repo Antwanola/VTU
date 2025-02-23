@@ -3,6 +3,7 @@ export interface PaymentDetails {
     customerEmail: string;
     customerName: string;
     paymentReference: string;
+    transactionReference?: string;
     paymentDescription: string;
     redirectUrl: string | undefined;
     currencyCode: string | undefined;

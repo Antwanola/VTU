@@ -1,14 +1,21 @@
-// types/custom.d.ts
-import { Request } from 'express'
+// express.d.ts
+import { Request } from 'express';
 
-export interface UserRequest extends Request {
-  user?: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    role: string;
-    isVerified: boolean;
+declare global {
+  namespace Express {
+   export interface UserRequest extends Request {
+      user?: {
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        phone: string;
+        role: string;
+        isVerified: boolean;
+      };
+    }
   }
 }
+
+// Export the type for reuse
+export type { UserRequest };

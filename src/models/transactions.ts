@@ -26,7 +26,8 @@ export interface ITransaction extends Document {
   type: TransactionType;
   amount: number;
   status: TransactionStatus;
-  reference: string;
+  paymentReference: string;
+  transactionReference: string;
   metadata: TransactionMetadata;
   createdAt: Date;
 }
@@ -53,10 +54,13 @@ const transactionSchema = new Schema<ITransaction>({
     enum: Object.values(TransactionStatus),
     default: TransactionStatus.PENDING
   },
-  reference: {
+  paymentReference: {
     type: String,
     required: [true, 'Transaction reference is required'],
-    unique: true
+  },
+  transactionReference: {
+    type: String,
+    required: [true, 'Transaction reference is required'],
   },
   metadata: {
     type: Schema.Types.Mixed,
@@ -80,7 +84,7 @@ const transactionSchema = new Schema<ITransaction>({
 
 // Add indexes for better query performance
 transactionSchema.index({ user: 1, createdAt: -1 });
-transactionSchema.index({ reference: 1 }, { unique: true });
+transactionSchema.index({ transactionReference: 1 }, { unique: true });
 transactionSchema.index({ status: 1 });
 
 // Create and export the model
