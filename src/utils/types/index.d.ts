@@ -17,5 +17,18 @@ declare global {
   }
 }
 
+declare global {
+  namespace Express {
+    export interface DataRequest extends Request {
+      data?: {
+        id?: string;
+        network: string;
+        plan: string;
+        duration: string;
+      };
+    }
+  }
+}
+
 // Export the type for reuse
-export type { UserRequest };
+export type { UserRequest, DataRequest };

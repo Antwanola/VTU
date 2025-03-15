@@ -3,14 +3,16 @@ import { GLAD_TIDINGS_CONFIG } from "../config/gladTidingsConfig";
 import { DataPayload, AIRTEL_PLAN, FindDataPayload, FindDataRespose } from '../utils/types/gladTidingsPayload';
 import { AppError } from "../utils/HandleErrors";
 import { NetworkID } from "../utils/types/networkID";
+import { error } from "console";
 
 class GladTidingsService {
     private baseUrl: string;
     private authToken: string;
     private axiosInstance: AxiosInstance;
-    private findNetworkPlan: (data: string) => string | undefined;
+    public findNetworkPlan: (data: string) => string | undefined;
 
     constructor() {
+        //find the network number identifier
         this.findNetworkPlan = (data: string): string | undefined => {
             for (const network in NetworkID) {
               if (NetworkID[network] == data) {
@@ -40,10 +42,10 @@ class GladTidingsService {
         try {
             const response: AxiosResponse = await this.axiosInstance.get('/user');
             if (!response.data || !response.data.user) {
-                throw new AppError("Failed to fetch users from Glad Tidings API");
+                throw new Error("Failed to fetch users from Glad Tidings API");
             }
             const dataService = response.data.Dataplans;
-            // console.log(dataService)
+            // console.log(dataService)S
             return dataService
         } catch (error: any) {
             throw new AppError(error.message || "Failed to initialize Glad Tidings service");
@@ -51,57 +53,61 @@ class GladTidingsService {
     };
 
     // Buy data
-    public findData = async (data: string, plan: string): Promise<FindDataRespose | any> => {
-        console.log({data})
-    
-        // if (!data) {
-        //     return Error ("Missing required data to find data plan");
-        // }
-        const networkID = Number(this.findNetworkPlan(data));    
+    public findData = async (network: string, plan: string, duration: string): Promise<FindDataRespose | any> => {
+        let service;
         try {
-            const response = await this.initialize();    
-            if (!response) {
-                return new AppError("Failed to find data plan");
+            const response = await this.initialize();
+            if (!response || !response[network] || !response[network].ALL) {
+                throw new Error ("Failed to find data plan");
             }
-            const networkServices = response[data];    
-            const findService = networkServices.ALL.find((service: any) => 
-                service.plan == plan
+            const networkServices = response[network].ALL;
+            const findService = networkServices.filter((service: any) => 
+                service.plan == plan 
+            && service.month_validate.substring(0, 2) == duration.substring(0, 2)
             );
-            console.log({data:findService})
+            for (let index = 0; index < findService.length; index++) {
+             service = findService[index];
+           }
+           if (service.month_validate.includes("CURRENTLY UNAVAILABLE")) {
+            throw new Error("Data plan is currently unavailable");
+           }
+            if (!findService || findService.length === 0) {
+                throw new AppError("No matching data service found");
+            }
     
-            // if (!findService || findService.length === 0) {
-            //     return new AppError("No matching service found");
-            // }
-    
-            // return findService;
+            return service;
         } catch (error: any) {
             return new Error(error.message || "Failed to find data plan");
         }
     };
 
-    // public purchaseDataFromMErchant = async (data: DataPayload): Promise<any> => {
-    //     const { network, mobile_number, plan, ident } = data;
+    public purchaseDataFromMErchant = async (payload: DataPayload): Promise<any> => {
+        const { network, mobile_number, plan, Ported_number, ident } = payload;
+        console.log({network, mobile_number, plan, Ported_number, ident})
     
-    //     if (!network || !mobile_number || !plan || !ident) {
-    //         return new AppError("Missing required data to purchase data");
-    //     }
+        if (!network || !mobile_number || !plan || !ident) {
+            return new AppError("Missing required information to purchase data");
+        }
     
-    //     try {
-    //         const response = await this.axiosInstance.post('/purchase', {
-    //             network,
-    //             mobile_number,
-    //             plan,
-    //             ident
-    //         });
+        try {
+            const response = await this.axiosInstance.post('/data/', {
+                network,
+                mobile_number,
+                Ported_number,
+                plan,
+                ident
+            });
+            console.log(response.data)
     
-    //         if (!response.data || !response.data.success) {
-    //             return new AppError("Failed to purchase data from merchant");
-    //         }
+            if (response.data.success !== "successful") {
+                return new AppError("Failed to purchase data from merchant");
+            }
     
-    //         return response.data;
-    //     } catch (error: any) {
-    //         return new AppError(error.message || "Failed to purchase data from merchant");
-    //     }
+            return response.data;
+        } catch (error: any) {
+            return new AppError(error.message || "Failed to purchase data from merchant");
+        }
     }
+}
 
 export const dataService = new GladTidingsService();

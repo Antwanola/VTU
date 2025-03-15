@@ -26,10 +26,10 @@ interface JwtPayload {
 class AuthController {
   
   // Generate JWT Token
-  private generateToken(id: string, email: string): string {
+  private generateToken(user: Object): string {
     if (!process.env.JWT_SECRET)  throw new Error('JWT_SECRET is not defined in environment variables');
     return jwt.sign(
-      { id, email },
+      {user},
       process.env.JWT_SECRET as string,
       { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
     );
@@ -134,7 +134,7 @@ private async sendVerificationEmail (email: string, verificationToken: string, c
 
       // Generate JWT
       if(user) {
-        const token = this.generateToken(user._id as string, user.email);
+        const token = this.generateToken(user);
 
         // Remove sensitive data
       const userResponse = {
@@ -179,7 +179,8 @@ private async sendVerificationEmail (email: string, verificationToken: string, c
       }
 
       // Generate token
-      const token = this.generateToken(user._id as string, user.email);
+      const token = this.generateToken(user);
+      console.log(token)
 
       // Remove sensitive data
       const userResponse = {
@@ -206,7 +207,7 @@ private async sendVerificationEmail (email: string, verificationToken: string, c
   };
 
     // Auth header validation and JWT verification
-    public authenticationToken(req: UserRequest, res: Response, next: NextFunction): void {
+    public async authenticationToken(req: UserRequest, res: Response, next: NextFunction): Promise<void> {
       // Extract the Authorization header
       const authHeader = req.headers['authorization'];
   
@@ -593,7 +594,7 @@ public forgotPassword = async (req: Request, res: Response, next: NextFunction) 
 public isAdmin = async (req: UserRequest, res: Response, next: NextFunction) => {
   try {
     const user = req.user;
-    const getUser = await User.findById(user?.id)
+    const getUser = await User.findOne(user?.email)
     if (!getUser) {
       throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
     }
@@ -601,12 +602,14 @@ public isAdmin = async (req: UserRequest, res: Response, next: NextFunction) => 
     if (getUser.role !== 'admin') {
       throw new AppError('Unauthorized. User not admin', 401, ErrorCodes.AUTH_006);
     }
+    req.user.role = getUser.role
     next()
 
   } catch (error: any) {
     res.status(401).json({ error: error.message });
   }
 }
+
 }
 
 export const authController = new AuthController();

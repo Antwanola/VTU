@@ -3,8 +3,8 @@ import { dataList } from '../config/dataList';
 
 export const seedData = async () => {
   for (const [provider, bundles] of Object.entries(dataList)) {
-    for (const bundleType of bundles) {
-      const data = new Data({ networkProvider: provider, bundleType });
+    for (const plan of bundles) {
+      const data = new Data({ networkProvider: provider, plan });
       await data.save();
     }
   }

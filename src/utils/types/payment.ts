@@ -7,8 +7,8 @@ export interface PaymentDetails {
     paymentDescription: string;
     redirectUrl: string | undefined;
     currencyCode: string | undefined;
-    contractCode: string;
-    paymentMethods?: []
+    contractCode: string | undefined;
+    paymentMethods?: string[]
   }
   export interface ValidationError {
     field: string;

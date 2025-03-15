@@ -73,11 +73,11 @@ connectDB();
 // }
 
 
-const initializeGladTidings = async () => {
-  await dataService.initialize()
-  await dataService.findData("GLOf1_PLAN", "1.0GB")
-}
-initializeGladTidings()
+// const initializeGladTidings = async () => {
+//   await dataService.initialize()
+//   await dataService.findData("AIRTEL_PLAN", "1.0GB", "30 days")
+// }
+// initializeGladTidings()
 
 //use routes
 app.use("/", router)

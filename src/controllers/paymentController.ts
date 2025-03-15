@@ -1,3 +1,4 @@
+import { AuthService } from './../middleware/Auth';
 import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import { AppError } from "../utils/HandleErrors";
@@ -8,7 +9,9 @@ import { monifyService } from "../services/payment";
 import { PaymentDetails } from "../utils/types/payment";
 import { Transaction, TransactionStatus } from "../models/transactions";
 import { UserRequest } from "../utils/types/index";
-import { error } from "console";
+import { Data } from "../models/dataPlans";
+import { Error } from 'mongoose';
+import { ErrorCodes } from '@/utils/errorCodes';
 
 config(); // Changed to config() as configDotenv is deprecated
 
@@ -24,29 +27,34 @@ class PaymentController {
   ): Promise<void> => {
     const generateReference = async () => {
       const timestamp = Date.now();
-      const random = crypto.randomBytes(4).toString("hex");
-      return `PAY${timestamp}${random}`;
+      const random = +1
+      return `PAY${timestamp}-${random}`;
     };
     try {
+      console.log(req.user.user)
+      const { sku } = req.body
+      const getAmount = await Data.find({sku});
+      if (!getAmount){
+        throw new AppError("Product not identified. Please provide producnt Sku number")
+      }
       const details: PaymentDetails = {
-        amount: req.body.amount,
-        customerEmail: req.body.customerEmail,
-        customerName: req.body.customerName,
+        amount: getAmount[0].price as number,
+        customerEmail: req.user.user.email,
+        customerName: `${req.user.user.firstName} ${req.user.user.lastName}`,
         paymentDescription: req.body.paymentDescription,
         paymentReference: await generateReference(),
-        contractCode: req.body.contractCode,
+        contractCode: process.env.MONNIFY_CONTRACT_CODE,
         currencyCode: "NGN",
         redirectUrl: process.env.PAYMENT_REDIRECT_URL,
-        paymentMethods: req.body.paymentMethods,
+        paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
       };
-
+      console.log({details})
       const payment = await monifyService.initiatePayment(details);
-      console.log({ payment });
       if (!payment) {
         throw new AppError("Payment initialization failed");
       }
       const createTransaction = await Transaction.create({
-        user: req.user.id,
+        user: req.user.user._id,
         type: "data",
         amount: details.amount,
         status: TransactionStatus.PENDING,
@@ -55,7 +63,7 @@ class PaymentController {
         metadata: {
           paymentDescription: details.paymentDescription,
           customer: details.customerName,
-          paymentStatus: "PENDING",
+          paymentStatus: TransactionStatus.PENDING,
         },
       });
       await createTransaction.save();
@@ -64,8 +72,8 @@ class PaymentController {
         data: payment,
       });
     } catch (error: any) {
-      logger.error(error.message);
-      res.json(error.message).end();
+      logger.error({error: error.message});
+      res.json({error:error.message});
       next(error);
     }
   };
