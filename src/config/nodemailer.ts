@@ -26,7 +26,7 @@ async function verifyTransporterConnection() {
 
     // Verify connection
     await transporter.verify();
-    logger.info("Email service connection establish
+    logger.info("Email service connection establish")
   } catch (error: any) {
     logger.error("Email service connection failed:", error);
     throw new AppError(
