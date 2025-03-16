@@ -31,7 +31,7 @@ export const connectDB = async (): Promise<void> => {
     else {
       await mongoose.connect(process.env.MONGODB_URI as string)
     }
-    await mongoose.connect(process.env.DEV_URI as string);
+    await mongoose.connect(process.env.MONGODB_URI as string);
     logger.info(`MongoDB Connected using ${process.env.NODE_ENV}`);
   } catch (error) {
     logger.error('MongoDB Connection Error:', error);
