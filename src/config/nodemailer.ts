@@ -14,8 +14,8 @@ export const transporter = createTransport({
     pass: process.env.GOOGLE_APP_PASS,           // Replace with your SMTP pass
   
   },
-  debug: true, // Enable debugging output
-  logger: true, // Log SMTP activity
+  debug: false, // Enable debugging output
+  logger: false, // Log SMTP activity
 });
 
 async function verifyTransporterConnection() {
