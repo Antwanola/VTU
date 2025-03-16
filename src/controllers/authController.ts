@@ -10,6 +10,7 @@ import { redisClient } from '../config/redis';
 import { configDotenv } from 'dotenv';
 import bcrypt from 'bcryptjs';
 import { get } from 'http';
+import { promises } from 'dns';
 
 configDotenv()
 
@@ -129,7 +130,7 @@ private async sendVerificationEmail (email: string, verificationToken: string, c
       }
 
       // TODO: Send verification email
-      await this.sendVerificationEmail(email, verificationToken);
+      await this.sendVerificationEmail(email, verificationToken, "User verification Token");
       
 
       // Generate JWT
@@ -607,6 +608,17 @@ public isAdmin = async (req: UserRequest, res: Response, next: NextFunction) => 
 
   } catch (error: any) {
     res.status(401).json({ error: error.message });
+  }
+}
+public getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const user = await User.find()
+    if (!user) {
+      throw new AppError("couldn't find user")
+    }
+    res.json(user)
+  } catch (error: any) {
+    res.json(error.message)
   }
 }
 
