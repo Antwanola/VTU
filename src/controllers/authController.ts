@@ -78,23 +78,32 @@ class AuthController {
 
 
 //Send Verification Email
-private async sendVerificationEmail (email: string, verificationToken: string, context?: string ): Promise<void> { 
-    const mailOptions: MailOptions = {
-        from: process.env.EMAIL_FROM as string,
-        to: email,
-        subject: "Verification Token",
-        text: `${context}: ${verificationToken}`
-    }
-      try {
-        transporter.sendMail(mailOptions, (err, info) => {
-          if (err) {
-              throw err
-          }
-          logger.info('Verification email sent to: ' + info.accepted)
-      })
-      } catch (err: any) {
-        throw new AppError(err.message)
-      }
+private async sendVerificationEmail(email: string, verificationToken: string, context?: string): Promise<{success: boolean, message?: string}> {
+  const mailOptions: MailOptions = {
+    from: process.env.EMAIL_FROM as string,
+    to: email,
+    subject: "Verification Token",
+    text: `${context}: ${verificationToken}`
+  };
+  
+  try {
+    // Convert the callback-based transporter.sendMail to a Promise
+    const info = await new Promise<any>((resolve, reject) => {
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(info);
+        }
+      });
+    });
+    
+    logger.info('Verification email sent to: ' + info.accepted);
+    return { success: true };
+  } catch (err: any) {
+    logger.error(`Failed to send verification email: ${err.message}`);
+    return { success: false, message: err.message };
+  }
 }
 
   // Register new user
@@ -131,8 +140,10 @@ private async sendVerificationEmail (email: string, verificationToken: string, c
       }
 
       // TODO: Send verification email
-      await this.sendVerificationEmail(email, verificationToken, "User verification Token");
-      
+      const sendEmail = await this.sendVerificationEmail(email, verificationToken, "User verification Token");
+      if (!sendEmail.success){
+        throw new AppError(sendEmail.message as string)
+      }
 
       // Generate JWT
       if(user) {
@@ -159,7 +170,7 @@ private async sendVerificationEmail (email: string, verificationToken: string, c
       });
       }
     } catch (error: any) {
-      res.json(error.message)
+      res.json({error:error.message})
     }
   };
 
