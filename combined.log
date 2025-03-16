@@ -7334,3 +7334,142 @@
 {"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-03-16T07:17:53.806Z"}
 {"amount":600,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1742109473808_14c4031a","timestamp":"2025-03-16T07:17:53.809Z"}
 {"level":"info","message":"Payment initiated successfully","reference":"PAY_1742109473808_14c4031a","status":"success","timestamp":"2025-03-16T07:17:54.208Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:43:37.249Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:43:37.264Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:43:37.269Z"}
+{"level":"info","message":"Redis test key \"redis:init\" has value: initialized","timestamp":"2025-03-16T07:43:37.284Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T07:43:37.310Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:43:38.563Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T07:43:39.705Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:50:45.565Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:50:45.582Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:50:45.587Z"}
+{"level":"info","message":"Redis test key \"redis:init\" has value: initialized","timestamp":"2025-03-16T07:50:45.589Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T07:50:45.628Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:50:46.991Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T07:50:48.219Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:50:58.827Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:50:58.838Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:50:58.841Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T07:50:58.864Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:50:59.982Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T07:51:01.012Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:52:20.164Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:52:20.176Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:52:20.180Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T07:52:20.206Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:52:21.504Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T07:52:22.629Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:56:32.106Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:56:32.117Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:56:32.120Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T07:56:32.143Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:56:33.405Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T07:56:34.544Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:59:26.280Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:59:26.294Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:59:26.298Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T07:59:26.320Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:59:27.683Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T07:59:28.793Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:59:48.714Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:59:48.726Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:59:48.730Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T07:59:48.752Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:59:49.901Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T07:59:50.955Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T08:00:02.125Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T08:00:02.139Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T08:00:02.143Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T08:00:02.165Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T08:00:03.417Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T08:00:04.646Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T08:01:39.705Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T08:01:39.718Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T08:01:39.721Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T08:01:39.742Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T08:01:40.954Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T08:01:42.128Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T10:40:03.400Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T10:40:03.435Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T10:40:03.461Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T10:40:03.483Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T10:40:04.510Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T10:40:05.363Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T11:01:51.344Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T11:01:51.358Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T11:01:51.362Z"}
+{"level":"error","message":"MongoDB Connection Error: Can't call `openUri()` on an active connection with different connection strings. Make sure you aren't calling `mongoose.connect()` multiple times. See: https://mongoosejs.com/docs/connections.html#multiple_connections","stack":"MongooseError: Can't call `openUri()` on an active connection with different connection strings. Make sure you aren't calling `mongoose.connect()` multiple times. See: https://mongoosejs.com/docs/connections.html#multiple_connections\n    at NativeConnection.createClient (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:239:13)\n    at NativeConnection.openUri (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\connection.js:1016:34)\n    at Mongoose.connect (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\mongoose.js:446:15)\n    at connectDB (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\config\\database.ts:34:20)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-03-16T11:01:51.388Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T11:26:47.503Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T11:26:47.531Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T11:26:47.554Z"}
+{"level":"error","message":"MongoDB Connection Error: Can't call `openUri()` on an active connection with different connection strings. Make sure you aren't calling `mongoose.connect()` multiple times. See: https://mongoosejs.com/docs/connections.html#multiple_connections","stack":"MongooseError: Can't call `openUri()` on an active connection with different connection strings. Make sure you aren't calling `mongoose.connect()` multiple times. See: https://mongoosejs.com/docs/connections.html#multiple_connections\n    at NativeConnection.createClient (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:239:13)\n    at NativeConnection.openUri (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\connection.js:1016:34)\n    at Mongoose.connect (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\mongoose.js:446:15)\n    at connectDB (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\config\\database.ts:34:20)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-03-16T11:26:47.689Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T11:28:28.019Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T11:28:28.031Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T11:28:28.035Z"}
+{"level":"error","message":"MongoDB Connection Error: Can't call `openUri()` on an active connection with different connection strings. Make sure you aren't calling `mongoose.connect()` multiple times. See: https://mongoosejs.com/docs/connections.html#multiple_connections","stack":"MongooseError: Can't call `openUri()` on an active connection with different connection strings. Make sure you aren't calling `mongoose.connect()` multiple times. See: https://mongoosejs.com/docs/connections.html#multiple_connections\n    at NativeConnection.createClient (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\connection.js:239:13)\n    at NativeConnection.openUri (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\connection.js:1016:34)\n    at Mongoose.connect (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\mongoose.js:446:15)\n    at connectDB (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\config\\database.ts:34:20)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-03-16T11:28:28.065Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T11:29:07.399Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T11:29:07.417Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T11:29:07.420Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T11:29:08.432Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T11:29:09.265Z"}
+{"level":"info","message":"Email service connection establish","timestamp":"2025-03-16T11:29:09.294Z"}
+{"error":{"ErrorCodes":"Email not verified","isOperational":true,"statusCode":401},"level":"error","message":"[Global Error Handler] Please verify your email address first","method":"POST","path":"/api/v1/login","stack":"Error: Please verify your email address first\n    at AuthController.login (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:179:15)","timestamp":"2025-03-16T11:31:42.824Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T11:34:56.531Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T11:34:56.546Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T11:34:56.550Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T11:34:57.689Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T11:34:58.269Z"}
+{"error":{"ErrorCodes":"Email not verified","isOperational":true,"statusCode":401},"level":"error","message":"[Global Error Handler] Please verify your email address first","method":"POST","path":"/api/v1/login","stack":"Error: Please verify your email address first\n    at AuthController.login (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:179:15)","timestamp":"2025-03-16T11:35:03.973Z"}
+{"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-16T11:59:37.651Z"}
+{"level":"info","message":"Verification email sent to: antwanola29@gmail.com","timestamp":"2025-03-16T11:59:41.140Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:10:23.951Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:10:23.961Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:10:23.977Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:10:24.991Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:10:25.640Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:10:34.463Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:10:34.478Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:10:34.481Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:10:35.549Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:10:36.252Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:26:51.404Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:26:51.409Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:26:51.411Z"}
+{"code":"ESOCKET","command":"CONN","level":"error","library":"SSL routines","message":"Email service connection failed: D4580000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n D4580000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","reason":"wrong version number","stack":"Error: D4580000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","timestamp":"2025-03-16T12:26:51.853Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-03-16T12:26:51.854Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:26:52.986Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:35:20.793Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:35:20.800Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:35:20.802Z"}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","message":"Email service connection failed: Invalid login: 535 5.7.8 Authentication failed Invalid login: 535 5.7.8 Authentication failed","response":"535 5.7.8 Authentication failed","responseCode":535,"stack":"Error: Invalid login: 535 5.7.8 Authentication failed\n    at SMTPConnection._formatError (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:807:19)\n    at SMTPConnection._actionAUTHComplete (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:1586:34)\n    at SMTPConnection.<anonymous> (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:554:26)\n    at SMTPConnection._processResponse (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:991:20)\n    at SMTPConnection._onData (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:772:14)\n    at TLSSocket.SMTPConnection._onSocketData (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:195:44)\n    at TLSSocket.emit (node:events:519:28)\n    at TLSSocket.emit (node:domain:488:12)\n    at addChunk (node:internal/streams/readable:559:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)","timestamp":"2025-03-16T12:35:21.895Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-03-16T12:35:21.897Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:35:22.691Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:37:43.542Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:37:43.549Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:37:43.550Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:37:44.655Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:37:45.493Z"}
+{"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-16T12:38:32.965Z"}
+{"level":"info","message":"Verification email sent to: antwanola29@gmail.com","timestamp":"2025-03-16T12:38:35.112Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:54:34.353Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:54:34.360Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:54:34.368Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:54:36.066Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:54:36.628Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:55:28.139Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:55:28.145Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:55:28.148Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:55:29.258Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:55:29.870Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:55:40.331Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:55:40.337Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:55:40.339Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:55:45.887Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:55:45.895Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:55:45.897Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:55:47.066Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:55:47.777Z"}
+{"error":{"ErrorCodes":"User already exist","isOperational":true,"statusCode":400},"level":"error","message":"[Global Error Handler] Email already registered","method":"POST","path":"/api/v1/register","stack":"Error: Email already registered\n    at AuthController.register (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:111:17)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-03-16T13:42:39.191Z"}
+{"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-16T13:43:27.607Z"}
+{"level":"info","message":"Verification email sent to: antwanola29@gmail.com","timestamp":"2025-03-16T13:43:29.443Z"}

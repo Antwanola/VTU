@@ -38,12 +38,6 @@ const initializeRedis = async () => {
     redisClient.on('error', (err) => {
       logger.error('Redis Client Error', err);
     });
-
-    // Optional: Test connection
-    const testKey = 'redis:init';
-    await redisClient.set(testKey, 'initialized');
-    const value = await redisClient.get(testKey);
-    logger.info(`Redis test key "${testKey}" has value: ${value}`);
   } catch (err) {
     logger.error('Error during Redis initialization', err);
   }

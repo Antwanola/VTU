@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=production  echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./src/index.ts",
+    "start": "node --max-old-space-size=4096 ./node_modules/.bin/ts-node ./src/index.ts",
     "dev": "cross-env NODE_ENV=development nodemon src/index.ts"
   },
   "keywords": [],

@@ -18,6 +18,7 @@ authRouter.post('/change-pin',authController.authenticationToken, authController
 authRouter.get('/get-profile', authController.authenticationToken, authController.getUserProfile);
 authRouter.get('/forgot-password-request', authController.resetPasswordRequest)
 authRouter.post('/forgot-password',  authController.forgotPassword);
+authRouter.get('/get-users', authController.getUsers)
 
 // authRouter.post('/reset-password/:token', authController.resetPassword);
 

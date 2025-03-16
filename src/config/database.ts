@@ -25,10 +25,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 export const connectDB = async (): Promise<void> => {
   try {
-    if (process.env.NODE_ENV == 'development') {
-      await mongoose.connect(process.env.DEV_URI as string);
-    }
-    await mongoose.connect(process.env.DEV_URI as string);
+    await mongoose.connect(process.env.MONGODB_URI as string);
     logger.info(`MongoDB Connected using ${process.env.NODE_ENV}`);
   } catch (error) {
     logger.error('MongoDB Connection Error:', error);
