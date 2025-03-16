@@ -7314,3 +7314,9 @@
 {"level":"info","message":"Payment initiated successfully","reference":"PAY_1742079909202_aac89c38","status":"success","timestamp":"2025-03-15T23:05:09.600Z"}
 {"amount":600,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1742079976698_0a6d2f85","timestamp":"2025-03-15T23:06:16.698Z"}
 {"level":"info","message":"Payment initiated successfully","reference":"PAY_1742079976698_0a6d2f85","status":"success","timestamp":"2025-03-15T23:06:17.610Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T07:12:10.370Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T07:12:10.384Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T07:12:10.403Z"}
+{"level":"info","message":"Redis test key \"redis:init\" has value: initialized","timestamp":"2025-03-16T07:12:10.413Z"}
+{"level":"info","message":"MongoDB Connected using undefined","timestamp":"2025-03-16T07:12:10.453Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T07:12:11.574Z"}
