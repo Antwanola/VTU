@@ -3,8 +3,7 @@ import { configDotenv } from "dotenv";
 import { logger } from "../utils/logger";
 import { AppError } from "../utils/HandleErrors";
 
-configDotenv()
-
+configDotenv();
 
 export const transporter = createTransport({
   host: process.env.EMAIL_HOST, // Replace with your SMTP server host
@@ -12,25 +11,38 @@ export const transporter = createTransport({
   secure: true,           // Use `true` if the port is 465, otherwise `false`
   auth: {
     user: process.env.EMAIL_USER,  // Replace with your SMTP username
-    pass: process.env.GOOGLE_APP_PASS,           // Replace with your SMTP password
+    pass: process.env.GOOGLE_APP_PASS,           // Replace with your SMTP pass
+  
   },
+  debug: true, // Enable debugging output
+  logger: true, // Log SMTP activity
 });
 
-
- async function verifyTransporterConnection() {
+async function verifyTransporterConnection() {
   try {
+
     await transporter.verify()
     logger.info("Email service connection established")
+
+    // Verify connection
+    await transporter.verify();
+    logger.info("Email service connection establish
   } catch (error: any) {
-    logger.error('Email service connection failed:', error);
-    throw new AppError(`Email service connection failed: ${error.message}`, 500)
+    logger.error("Email service connection failed:", error);
+    throw new AppError(
+      `Email service connection failed: ${error.message}`,
+      500
+    );
   }
 }
 
-verifyTransporterConnection()
+// Immediately test the connection
+verifyTransporterConnection();
+
+// Define MailOptions interface for sending emails
 export interface MailOptions {
-  from: string
-  to: string
-  subject: string
-  text: string
+  from: string;
+  to: string;
+  subject: string;
+  text: string;
 }
