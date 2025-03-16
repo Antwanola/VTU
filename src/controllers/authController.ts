@@ -11,6 +11,7 @@ import { configDotenv } from 'dotenv';
 import bcrypt from 'bcryptjs';
 import { get } from 'http';
 import { promises } from 'dns';
+import { Error } from 'mongoose';
 
 configDotenv()
 
@@ -157,8 +158,8 @@ private async sendVerificationEmail (email: string, verificationToken: string, c
         data: userResponse
       });
       }
-    } catch (error) {
-      next(error);
+    } catch (error: any) {
+      res.json(error.message)
     }
   };
 

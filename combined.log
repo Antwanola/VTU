@@ -7452,3 +7452,24 @@
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:37:45.493Z"}
 {"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-16T12:38:32.965Z"}
 {"level":"info","message":"Verification email sent to: antwanola29@gmail.com","timestamp":"2025-03-16T12:38:35.112Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:54:34.353Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:54:34.360Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:54:34.368Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:54:36.066Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:54:36.628Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:55:28.139Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:55:28.145Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:55:28.148Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:55:29.258Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:55:29.870Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:55:40.331Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:55:40.337Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:55:40.339Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-16T12:55:45.887Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-16T12:55:45.895Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-16T12:55:45.897Z"}
+{"level":"info","message":"Email service connection established","timestamp":"2025-03-16T12:55:47.066Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-16T12:55:47.777Z"}
+{"error":{"ErrorCodes":"User already exist","isOperational":true,"statusCode":400},"level":"error","message":"[Global Error Handler] Email already registered","method":"POST","path":"/api/v1/register","stack":"Error: Email already registered\n    at AuthController.register (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:111:17)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-03-16T13:42:39.191Z"}
+{"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-16T13:43:27.607Z"}
+{"level":"info","message":"Verification email sent to: antwanola29@gmail.com","timestamp":"2025-03-16T13:43:29.443Z"}

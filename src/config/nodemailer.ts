@@ -13,8 +13,8 @@ export const transporter: Transporter = createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.BREVO_PASS, // Consider OAuth2
   },
-  debug: process.env.NODE_ENV === "development", // Enable debug in development
-  logger: process.env.NODE_ENV === "development", // Enable logger in development
+  debug: process.env.NODE_ENV === "production", // Enable debug in development
+  logger: process.env.NODE_ENV === "production", // Enable logger in development
 });
 
 async function verifyTransporterConnection() {
@@ -27,7 +27,7 @@ async function verifyTransporterConnection() {
       errorMessage += `: ${error.message}`;
     }
     logger.error(errorMessage, error);
-    throw new AppError(errorMessage, 500);
+    throw new AppError(errorMessage, 200);
   }
 }
 
