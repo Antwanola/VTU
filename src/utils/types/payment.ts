@@ -3,9 +3,12 @@ export interface PaymentDetails {
     customerEmail: string;
     customerName: string;
     paymentReference: string;
+    transactionReference?: string;
     paymentDescription: string;
-    redirectUrl: string;
-    currency: string | undefined;
+    redirectUrl: string | undefined;
+    currencyCode: string | undefined;
+    contractCode: string | undefined;
+    paymentMethods?: string[]
   }
   export interface ValidationError {
     field: string;
@@ -49,9 +52,15 @@ export interface PaymentDetails {
     responseBody: {
       transactionReference: string;
       paymentReference: string;
-      status: string;
-      amount: number;
+      paymentStatus: string;
+      amountPaid: number;
+      totalPayable: number;
       paidOn: string;
       paymentDescription?: string;
+      settlementAmount: number;
+      customer : {
+        email: string;
+        name: string
+      }
     };
   }
