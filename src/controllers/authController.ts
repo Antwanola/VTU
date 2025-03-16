@@ -102,7 +102,7 @@ private async sendVerificationEmail(email: string, verificationToken: string, co
     return { success: true };
   } catch (err: any) {
     logger.error(`Failed to send verification email: ${err.message}`);
-    return { success: false, message: err.message };
+    return { success: false, message: err };
   }
 }
 
