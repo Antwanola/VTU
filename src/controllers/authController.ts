@@ -4,7 +4,6 @@ import User, { IUser } from '../models/users';
 import { AppError } from '../utils/HandleErrors';
 import { logger } from '../utils/logger';
 import { ErrorCodes } from '../utils/errorCodes';
-import { transporter, MailOptions } from '../config/nodemailer';
 import { UserRequest } from '../utils/types';
 import { redisClient } from '../config/redis';
 import { configDotenv } from 'dotenv';
@@ -302,7 +301,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       next(error);
     }
   };
-  //Send verification
+  //Send verification for email authentication on reset
   public sendVerification = async ( req: Request, res: Response, next: NextFunction ): Promise<void> => {
     try {
       const { email } = req.body;
@@ -314,7 +313,8 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       if (typeof verificationToken !== 'string' || verificationToken.length !== 6) {
         throw new AppError('Failed to generate verification token', 500, ErrorCodes.AUTH_005);
       }
-      await this.sendVerificationEmail(email, verificationToken, 'Reset token');
+      // await this.sendVerificationEmail(email, verificationToken, 'Reset token');
+      const sendtask = await this.brevoSendEmail(email,"Reset Token", verificationToken  )
       logger.info(`Verification email sent to: ${email}`);
       res.status(200).json({
         status: 'success',
@@ -325,7 +325,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
     }
   }
 
-  // Resend verification email
+  // Resend verification email to verify account again
   public verifyAccount = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { email } = req.body;
@@ -344,7 +344,8 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       const verificationToken = await this.createOTPForEmail(email);
 
       // TODO: Send verification email
-      await this.sendVerificationEmail(email, verificationToken);
+      // await this.sendVerificationEmail(email, verificationToken);
+      const sentTask = await this.brevoSendEmail(email, "Reset Acount Token", verificationToken)
 
       logger.info(`Verification email resent to: ${email}`);
 
@@ -372,7 +373,8 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       const resetToken = this.generateOTP();
 
       // TODO: Send reset email
-      await this.sendVerificationEmail(email, resetToken, 'Reset token');
+      // await this.sendVerificationEmail(email, resetToken, 'Reset token');
+      const sendTask = await this.brevoSendEmail(email, "Reset Token", resetToken)
 
       logger.info(`Password reset requested for: ${email}`);
       next(resetToken)
