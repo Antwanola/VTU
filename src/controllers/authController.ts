@@ -168,26 +168,14 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
 
       // Generate JWT
       if(user) {
-        const token = this.generateToken(user);
+        // const token = this.generateToken(user);
 
         // Remove sensitive data
-      const userResponse = {
-        id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phone: user.phone,
-        role: user.role,
-        isVerified: user.isVerified
-      };
-
       logger.info(`New user registered: ${email}`);
 
       res.status(201).json({
         status: 'success',
         message: 'Registration successful. Please verify your email.',
-        token,
-        data: userResponse
       });
       }
     } catch (error: any) {
