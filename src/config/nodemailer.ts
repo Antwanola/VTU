@@ -15,6 +15,9 @@ export const transporter: Transporter = createTransport({
   },
   debug: process.env.NODE_ENV === "developement", // Enable debug in development
   logger: process.env.NODE_ENV === "development", // Enable logger in development
+   tls: {
+    rejectUnauthorized: true // Only use this in testing environments
+  },
 });
 
 async function verifyTransporterConnection() {

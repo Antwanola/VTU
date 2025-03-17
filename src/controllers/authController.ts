@@ -9,9 +9,7 @@ import { UserRequest } from '../utils/types';
 import { redisClient } from '../config/redis';
 import { configDotenv } from 'dotenv';
 import bcrypt from 'bcryptjs';
-import { get } from 'http';
-import { promises } from 'dns';
-import { Error } from 'mongoose';
+import axios from 'axios';
 
 configDotenv()
 
@@ -78,31 +76,55 @@ class AuthController {
 
 
 //Send Verification Email
-private async sendVerificationEmail(email: string, verificationToken: string, context?: string): Promise<{success: boolean, message?: string}> {
-  const mailOptions: MailOptions = {
-    from: process.env.EMAIL_FROM as string,
-    to: email,
-    subject: "Verification Token",
-    text: `${context}: ${verificationToken}`
-  };
-  
+private async sendVerificationEmail (email: string, verificationToken: string, context?: string ): Promise<void> { 
+    const  mailOptions: MailOptions = {
+        from: "antwanola29@gmail.com",
+        to: email,
+        subject: "Verification Token",
+        text: `${context}: ${verificationToken}`
+    }
+      try {
+        transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+              throw err
+          }
+          logger.info('Verification email sent to: ' + info.accepted)
+      })
+      } catch (err: any) {
+        throw new AppError(err.message)
+      }
+}
+/**
+ * 
+ * @param clientEmail  //the email to sent to
+ * @param context //the context of the email
+ * @param tokent // the token to be sent
+ */
+public brevoSendEmail = async(clientEmail: string, context: string, token: string ): Promise<void> => {
+  const API_KEY = process.env.BREV0_API_KEY;
+  const BrevoUri = "https://api.brevo.com/v3/smtp/email"
+
+  const emailData = {
+    sender: {
+      name: 'Ambituox Data Plug',
+      email: 'antwanola29@gmail.com'
+    },
+    to: [
+      {email:clientEmail}
+    ],
+    subject: "Authentication Token",
+    htmlContent: `<html><bod><h1> ${context}: ${token}</h1></bod></html>`
+  }
   try {
-    // Convert the callback-based transporter.sendMail to a Promise
-    const info = await new Promise<any>((resolve, reject) => {
-      transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(info);
-        }
-      });
-    });
-    
-    logger.info('Verification email sent to: ' + info.accepted);
-    return { success: true };
-  } catch (err: any) {
-    logger.error(`Failed to send verification email: ${err.message}`);
-    return { success: false, message: err };
+    const sendTask = await axios.post(BrevoUri, emailData, {
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": API_KEY
+      }
+    })
+    console.log(sendTask.data)
+  } catch (error: any) {
+    throw new AppError(error.message)
   }
 }
 
@@ -112,6 +134,7 @@ private async sendVerificationEmail(email: string, verificationToken: string, co
       const { firstName, lastName, email, phone, password, pin } = req.body;
 
       // Check if user exists
+      // TODO: find user
       const existingUser = await User.findOne({ 
         $or: [{ email }, { phone }] 
       });
@@ -140,10 +163,9 @@ private async sendVerificationEmail(email: string, verificationToken: string, co
       }
 
       // TODO: Send verification email
-      const sendEmail = await this.sendVerificationEmail(email, verificationToken, "User verification Token");
-      if (!sendEmail.success){
-        throw new AppError(sendEmail.message as string)
-      }
+      // await this.sendVerificationEmail(email, verificationToken, "User verification Token");
+      await this.brevoSendEmail(email, "Verification token", verificationToken)
+      
 
       // Generate JWT
       if(user) {
