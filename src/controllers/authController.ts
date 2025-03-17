@@ -76,24 +76,24 @@ class AuthController {
 
 
 //Send Verification Email
-private async sendVerificationEmail (email: string, verificationToken: string, context?: string ): Promise<void> { 
-    const  mailOptions: MailOptions = {
-        from: "antwanola29@gmail.com",
-        to: email,
-        subject: "Verification Token",
-        text: `${context}: ${verificationToken}`
-    }
-      try {
-        transporter.sendMail(mailOptions, (err, info) => {
-          if (err) {
-              throw err
-          }
-          logger.info('Verification email sent to: ' + info.accepted)
-      })
-      } catch (err: any) {
-        throw new AppError(err.message)
-      }
-}
+// private async sendVerificationEmail (email: string, verificationToken: string, context?: string ): Promise<void> { 
+//     const  mailOptions: MailOptions = {
+//         from: "antwanola29@gmail.com",
+//         to: email,
+//         subject: "Verification Token",
+//         text: `${context}: ${verificationToken}`
+//     }
+//       try {
+//         transporter.sendMail(mailOptions, (err, info) => {
+//           if (err) {
+//               throw err
+//           }
+//           logger.info('Verification email sent to: ' + info.accepted)
+//       })
+//       } catch (err: any) {
+//         throw new AppError(err.message)
+//       }
+// }
 /**
  * 
  * @param clientEmail  //the email to sent to
