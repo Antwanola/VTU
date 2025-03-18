@@ -129,8 +129,10 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
 
   // Register new user
   public register = async (req: Request, res: Response, next: NextFunction) => {
+    const reqBaseURI = `${req.protocol}://${req.get('host')}`
+    const redirectURI = `${reqBaseURI}/api/v1/login`
     try {
-      const { firstName, lastName, email, phone, password, pin } = req.body;
+      const { firstName, lastName, email, phone, password } = req.body;
 
       // Check if user exists
       // TODO: find user
@@ -152,7 +154,6 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
         email,
         phone,
         password,
-        pin
       });
 
       // Generate verification token
@@ -163,7 +164,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
 
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken, "User verification Token");
-      await this.brevoSendEmail(email, "Verification token", verificationToken)
+      // await this.brevoSendEmail(email, "Verification token", verificationToken)
       
 
       // Generate JWT
@@ -176,6 +177,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       res.status(201).json({
         status: 'success',
         message: 'Registration successful. Please verify your email.',
+        redirectURI: redirectURI
       });
       }
     } catch (error: any) {
@@ -517,29 +519,29 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
 
 
   // Change PIN
-  public changePin = async (req: UserRequest, res: Response, next: NextFunction) => {
-    try {
-      const { currentPin, newPin } = req.body;
+  // public changePin = async (req: UserRequest, res: Response, next: NextFunction) => {
+  //   try {
+  //     const { currentPin, newPin } = req.body;
 
-      const user = await User.findById(req.user?.id).select('+pin');
+  //     const user = await User.findById(req.user?.id).select('+pin');
 
-      if (!user || !(await user.comparePin(currentPin))) {
-        throw new AppError('Current PIN is incorrect', 401, ErrorCodes.AUTH_005);
-      }
+  //     if (!user || !(await user.comparePin(currentPin))) {
+  //       throw new AppError('Current PIN is incorrect', 401, ErrorCodes.AUTH_005);
+  //     }
 
-      user.pin = newPin;
-      await user.save();
+  //     user.pin = newPin;
+  //     await user.save();
 
-      logger.info(`PIN changed for user: ${user.email}`);
+  //     logger.info(`PIN changed for user: ${user.email}`);
 
-      res.status(200).json({
-        status: 'success',
-        message: 'PIN changed successfully'
-      });
-    } catch (error) {
-      next(error);
-    }
-  };
+  //     res.status(200).json({
+  //       status: 'success',
+  //       message: 'PIN changed successfully'
+  //     });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
 
   public resetPasswordWithToken = async (req: Request, res: Response, next: NextFunction) => {
   try {

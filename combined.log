@@ -7882,3 +7882,65 @@
 {"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-17T03:05:13.713Z"}
 {"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-17T03:05:13.715Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-17T03:05:15.178Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:27:59.466Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:27:59.474Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:27:59.476Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:28:01.082Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:30:26.161Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:30:26.169Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:30:26.170Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:30:27.866Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:30:34.911Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:30:34.922Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:30:34.924Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:31:29.294Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:31:29.303Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:31:29.305Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:31:35.167Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:31:35.176Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:31:35.178Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:31:37.650Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:37:20.548Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:37:20.555Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:37:20.558Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:37:22.227Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:38:02.198Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:38:02.205Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:38:02.207Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:38:03.650Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:40:45.370Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:40:45.378Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:40:45.380Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:40:46.986Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:43:00.485Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:43:00.494Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:43:00.496Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:43:02.115Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:44:55.499Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:44:55.507Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:44:55.508Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:44:57.149Z"}
+{"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-18T14:44:59.120Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:46:19.669Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:46:19.676Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:46:19.678Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:46:21.365Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:46:36.051Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:46:36.066Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:46:36.069Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:46:43.867Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:46:43.875Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:46:43.877Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:46:56.388Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:46:56.400Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:46:56.404Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:46:58.107Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:47:02.780Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:47:02.790Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:47:02.792Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:47:04.497Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:47:12.013Z"}
+{"level":"info","message":"Redis client connected successfully","timestamp":"2025-03-18T14:47:12.023Z"}
+{"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:47:12.026Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:47:13.697Z"}
+{"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-18T14:47:23.623Z"}
