@@ -24,25 +24,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Initialize the connection
-const initializeRedis = async () => {
-  try {
-    redisClient.on('connect', () => {
-      logger.info('Redis client connected successfully');
-    });
-
-    redisClient.on('ready', () => {
-      logger.info('Redis client is ready to use');
-    });
-
-    redisClient.on('error', (err) => {
-      logger.error('Redis Client Error', err);
-    });
-  } catch (err) {
-    logger.error('Error during Redis initialization', err);
-  }
-};
-initializeRedis()
 
 // Middleware
 app.use(express.json()); // Add JSON body parser

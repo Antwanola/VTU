@@ -35,43 +35,43 @@ class AuthController {
   }
 
   // Generate Verification Token.
-  private generateOTP(): string {
-   return Math.floor(100000 + Math.random() * 9000).toString();
-  }
-  async createOTPForEmail(email: string): Promise<string> {
-    const otp = this.generateOTP();
+  // private generateOTP(): string {
+  //  return Math.floor(100000 + Math.random() * 9000).toString();
+  // }
+  // async createOTPForEmail(email: string): Promise<string> {
+  //   const otp = this.generateOTP();
     
-    // Create Redis key using email
-    const key = `otp:${email}`;
+  //   // Create Redis key using email
+  //   const key = `otp:${email}`;
     
-    // Store OTP in Redis with 15 minutes expiration
-    const setKey = await redis.set(key, otp, 'EX', 15 * 60); // 15 minutes in seconds
+  //   // Store OTP in Redis with 15 minutes expiration
+  //   const setKey = await redis.set(key, otp, 'EX', 15 * 60); // 15 minutes in seconds
     
-    if (setKey !== "OK") {
-      throw new AppError('Failed to generate OTP', 500, ErrorCodes.AUTH_005);
-    }
-    const storedOTP = await redis.get(key);
-    if (storedOTP !== otp) {
-      throw new AppError('Failed to generate OTP', 500, ErrorCodes.AUTH_005);
-    }
-    return storedOTP
-  }
+  //   if (setKey !== "OK") {
+  //     throw new AppError('Failed to generate OTP', 500, ErrorCodes.AUTH_005);
+  //   }
+  //   const storedOTP = await redis.get(key);
+  //   if (storedOTP !== otp) {
+  //     throw new AppError('Failed to generate OTP', 500, ErrorCodes.AUTH_005);
+  //   }
+  //   return storedOTP
+  // }
 
-  async verifyOTP(email: string, submittedOTP: string): Promise<boolean> {
-    const key = `otp:${email}`;
+  // async verifyOTP(email: string, submittedOTP: string): Promise<boolean> {
+  //   const key = `otp:${email}`;
     
-    // Get stored OTP
-    const storedOTP = await redis.get(key);
+  //   // Get stored OTP
+  //   const storedOTP = await redis.get(key);
     
-    // If no OTP found or doesn't match
-    if (!storedOTP || storedOTP !== submittedOTP) { 
-      return false;
-    } 
+  //   // If no OTP found or doesn't match
+  //   if (!storedOTP || storedOTP !== submittedOTP) { 
+  //     return false;
+  //   } 
     
-    // Delete the OTP from Redis after successful verification
-    await redis.del(key);
-    return true
-  }
+  //   // Delete the OTP from Redis after successful verification
+  //   await redis.del(key);
+  //   return true
+  // }
 
 
 //Send Verification Email
@@ -157,10 +157,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       });
 
       // Generate verification token
-      const verificationToken = await this.createOTPForEmail(email);
-      if (typeof verificationToken !== 'string' || verificationToken.length !== 6) {
-        throw new AppError('Failed to generate verification token', 500, ErrorCodes.AUTH_005);
-      }
+  
 
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken, "User verification Token");

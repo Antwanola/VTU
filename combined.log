@@ -7944,3 +7944,7 @@
 {"level":"info","message":"Redis client is ready to use","timestamp":"2025-03-18T14:47:12.026Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:47:13.697Z"}
 {"level":"info","message":"New user registered: antwanola29@gmail.com","timestamp":"2025-03-18T14:47:23.623Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:59:16.786Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:59:18.511Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-03-18T14:59:21.823Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-03-18T14:59:25.508Z"}
