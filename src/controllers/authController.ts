@@ -5,14 +5,13 @@ import { AppError } from '../utils/HandleErrors';
 import { logger } from '../utils/logger';
 import { ErrorCodes } from '../utils/errorCodes';
 import { UserRequest } from '../utils/types';
-import { redisClient } from '../config/redis';
 import { configDotenv } from 'dotenv';
+import { cache } from '../config/nodeCache';
 import bcrypt from 'bcryptjs';
 import axios from 'axios';
+import { VerificationData } from '../utils/types/cacheOptions';
 
 configDotenv()
-
-const redis = redisClient
 
 
 interface JwtPayload {
@@ -94,10 +93,52 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
   }
 }
 
-  // Register new user
+/**
+ * Generate a verification token for email
+ * @param email - User email
+ * @returns The generated token
+ */
+
+public createVerificationOTP = async(email: string): Promise<string> => {
+  //generate 6digit token
+  const token = this.generateOTP()
+  //store in cache for 15 minutes
+  cache.set(`verification:${email}`, { email, token, expires: Date.now() + 900}, 900)
+  return token;
+}
+
+/**
+ * Verify the token by obtaining the details from cache then verify
+ * @param email - The user email 
+ * @param token - The sent token 
+ * @returns Boolean indicating if verification was sucessful or not
+ */
+public verifyToken = async(email: string, token: string): Promise<boolean> => {
+  //get token using cache key
+  const cacheKey = `verification:${email}`
+  const data = cache.get<VerificationData>(cacheKey);
+  if(!data || data.token !== token){
+    return false // token not found or no match
+  }
+  if (data.expires < Date.now()) {
+    cache.delete(cacheKey);
+    return false; // Token expired
+  }
+  //delete cache
+  cache.delete(cacheKey)
+
+  return true
+}
+
+/**
+ * Register new user
+ * @param req - Request from express
+ * @param res - Response from express
+ * @param next - Nextfunction from express
+ */
   public register = async (req: Request, res: Response, next: NextFunction) => {
     const reqBaseURI = `${req.protocol}://${req.get('host')}`
-    const redirectURI = `${reqBaseURI}/api/v1/login`
+    const redirectURI = `${reqBaseURI}/api/v1/verify-email`
     const verification  = this.generateOTP()
     try {
       const { firstName, lastName, email, phone, password } = req.body;
@@ -123,20 +164,17 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
         phone,
         password,
       });
-
       // Generate verification token
-  
-const verificationToken = verification
+      const token = await this.createVerificationOTP(email)
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken, "User verification Token");
-      await this.brevoSendEmail(email, "Verification token", verificationToken)
+      //send token to user email using brevo service
+      await this.brevoSendEmail(email, "Verification token", token)
       
 
-      // Generate JWT
-      if(user) {
-        // const token = this.generateToken(user);
 
-        // Remove sensitive data
+      if(user) {
+        //log user registratino
       logger.info(`New user registered: ${email}`);
 
       res.status(201).json({
@@ -229,33 +267,38 @@ const verificationToken = verification
     }
 
 
-  // Verify email
-  // public verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const { submittedOTP, email } = req.body;
-  //     const tokenVerification: boolean = await this.verifyOTP(email, submittedOTP)
+/**
+ *   Verify email
+ * @param req 
+ * @param res 
+ * @param next 
+ */
+  public verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { submittedOTP, email } = req.body;
+      const tokenVerification: boolean = await this.verifyToken(email, submittedOTP)
 
-  //     if (!tokenVerification) {
-  //       throw new AppError('Invalid token or email already verified', 400, ErrorCodes.AUTH_005);
-  //     }
-  //     const findUser = await User.findOne({email})
-  //     if (!findUser) {
-  //       throw new AppError('User not found', 400, ErrorCodes.AUTH_001)
-  //     }
-  //     findUser.isVerified = true;
-  //     findUser.save()
+      if (!tokenVerification) {
+        throw new AppError('Invalid token or email already verified', 400, ErrorCodes.AUTH_005);
+      }
+      const findUser = await User.findOne({email})
+      if (!findUser) {
+        throw new AppError('User not found', 400, ErrorCodes.AUTH_001)
+      }
+      findUser.isVerified = true;
+      findUser.save()
 
-  //     logger.info(`Email verified for user: ${email}`);
+      logger.info(`Email verified for user: ${email}`);
 
-  //     res.status(200).json({
-  //       status: 'success',
-  //       isverified: findUser.isVerified,
-  //       message: 'Email verified successfully'
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json({
+        status: 'success',
+        isverified: findUser.isVerified,
+        message: 'Email verified successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
   //Send verification for email authentication on reset
   public sendVerification = async ( req: Request, res: Response, next: NextFunction ): Promise<void> => {
     try {

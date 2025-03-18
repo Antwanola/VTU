@@ -7,7 +7,6 @@ import { logger } from './utils/logger'; // Ensure you have the logger imported
 import { corsOptions } from './config/corsOptions';
 import cors from "cors"
 import router from './routes';
-import { redisClient } from './config/redis';
 import { dataService } from './services/gladtidings';
 import { quickTellerService } from './services/quickTeller';
 import { seedData } from './utils/seeData';

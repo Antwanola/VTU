@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/users';
 import { IUser } from '../models/users';
-import { redisClient } from '@/config/redis';
+import { redisClient } from '@/config/nodeCache';
 
 
 
