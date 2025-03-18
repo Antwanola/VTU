@@ -35,43 +35,10 @@ class AuthController {
   }
 
   // Generate Verification Token.
-  // private generateOTP(): string {
-  //  return Math.floor(100000 + Math.random() * 9000).toString();
-  // }
-  // async createOTPForEmail(email: string): Promise<string> {
-  //   const otp = this.generateOTP();
-    
-  //   // Create Redis key using email
-  //   const key = `otp:${email}`;
-    
-  //   // Store OTP in Redis with 15 minutes expiration
-  //   const setKey = await redis.set(key, otp, 'EX', 15 * 60); // 15 minutes in seconds
-    
-  //   if (setKey !== "OK") {
-  //     throw new AppError('Failed to generate OTP', 500, ErrorCodes.AUTH_005);
-  //   }
-  //   const storedOTP = await redis.get(key);
-  //   if (storedOTP !== otp) {
-  //     throw new AppError('Failed to generate OTP', 500, ErrorCodes.AUTH_005);
-  //   }
-  //   return storedOTP
-  // }
+  private generateOTP(): string {
+   return Math.floor(100000 + Math.random() * 9000).toString(); 
+  }
 
-  // async verifyOTP(email: string, submittedOTP: string): Promise<boolean> {
-  //   const key = `otp:${email}`;
-    
-  //   // Get stored OTP
-  //   const storedOTP = await redis.get(key);
-    
-  //   // If no OTP found or doesn't match
-  //   if (!storedOTP || storedOTP !== submittedOTP) { 
-  //     return false;
-  //   } 
-    
-  //   // Delete the OTP from Redis after successful verification
-  //   await redis.del(key);
-  //   return true
-  // }
 
 
 //Send Verification Email
@@ -131,6 +98,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
   public register = async (req: Request, res: Response, next: NextFunction) => {
     const reqBaseURI = `${req.protocol}://${req.get('host')}`
     const redirectURI = `${reqBaseURI}/api/v1/login`
+    const verification  = this.generateOTP()
     try {
       const { firstName, lastName, email, phone, password } = req.body;
 
@@ -158,10 +126,10 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
 
       // Generate verification token
   
-
+const verificationToken = verification
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken, "User verification Token");
-      // await this.brevoSendEmail(email, "Verification token", verificationToken)
+      await this.brevoSendEmail(email, "Verification token", verificationToken)
       
 
       // Generate JWT
@@ -262,32 +230,32 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
 
 
   // Verify email
-  public verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { submittedOTP, email } = req.body;
-      const tokenVerification: boolean = await this.verifyOTP(email, submittedOTP)
+  // public verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
+  //   try {
+  //     const { submittedOTP, email } = req.body;
+  //     const tokenVerification: boolean = await this.verifyOTP(email, submittedOTP)
 
-      if (!tokenVerification) {
-        throw new AppError('Invalid token or email already verified', 400, ErrorCodes.AUTH_005);
-      }
-      const findUser = await User.findOne({email})
-      if (!findUser) {
-        throw new AppError('User not found', 400, ErrorCodes.AUTH_001)
-      }
-      findUser.isVerified = true;
-      findUser.save()
+  //     if (!tokenVerification) {
+  //       throw new AppError('Invalid token or email already verified', 400, ErrorCodes.AUTH_005);
+  //     }
+  //     const findUser = await User.findOne({email})
+  //     if (!findUser) {
+  //       throw new AppError('User not found', 400, ErrorCodes.AUTH_001)
+  //     }
+  //     findUser.isVerified = true;
+  //     findUser.save()
 
-      logger.info(`Email verified for user: ${email}`);
+  //     logger.info(`Email verified for user: ${email}`);
 
-      res.status(200).json({
-        status: 'success',
-        isverified: findUser.isVerified,
-        message: 'Email verified successfully'
-      });
-    } catch (error) {
-      next(error);
-    }
-  };
+  //     res.status(200).json({
+  //       status: 'success',
+  //       isverified: findUser.isVerified,
+  //       message: 'Email verified successfully'
+  //     });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
   //Send verification for email authentication on reset
   public sendVerification = async ( req: Request, res: Response, next: NextFunction ): Promise<void> => {
     try {
@@ -296,10 +264,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       if (!user) {
         throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
       }
-      const verificationToken = await this.createOTPForEmail(email);
-      if (typeof verificationToken !== 'string' || verificationToken.length !== 6) {
-        throw new AppError('Failed to generate verification token', 500, ErrorCodes.AUTH_005);
-      }
+      const verificationToken = this.generateOTP()
       // await this.sendVerificationEmail(email, verificationToken, 'Reset token');
       const sendtask = await this.brevoSendEmail(email,"Reset Token", verificationToken  )
       logger.info(`Verification email sent to: ${email}`);
@@ -328,7 +293,7 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
       }
 
       // Generate new verification token
-      const verificationToken = await this.createOTPForEmail(email);
+      const verificationToken = this.generateOTP()
 
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken);
@@ -540,42 +505,42 @@ public brevoSendEmail = async(clientEmail: string, context: string, token: strin
   //   }
   // };
 
-  public resetPasswordWithToken = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { email, submittedOTP, newPassword } = req.body;
+//   public resetPasswordWithToken = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//     const { email, submittedOTP, newPassword } = req.body;
 
-    // Verify the reset token (OTP)
-    const isTokenValid = await this.verifyOTP(email, submittedOTP);
+//     // Verify the reset token (OTP)
+//     const isTokenValid = await this.verifyOTP(email, submittedOTP);
 
-    if (!isTokenValid) {
-      throw new AppError('Invalid or expired token', 400, ErrorCodes.AUTH_005);
-    }
+//     if (!isTokenValid) {
+//       throw new AppError('Invalid or expired token', 400, ErrorCodes.AUTH_005);
+//     }
 
-    // Find the user
-    const user = await User.findOne({ email });
+//     // Find the user
+//     const user = await User.findOne({ email });
 
-    if (!user) {
-      throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
-    }
+//     if (!user) {
+//       throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
+//     }
 
-    // Hash the new password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
+//     // Hash the new password
+//     const salt = await bcrypt.genSalt(10);
+//     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-    // Update the user's password
-    user.password = hashedPassword;
-    await user.save();
+//     // Update the user's password
+//     user.password = hashedPassword;
+//     await user.save();
 
-    logger.info(`Password reset successful for: ${email}`);
+//     logger.info(`Password reset successful for: ${email}`);
 
-    res.status(200).json({
-      status: 'success',
-      message: 'Password reset successful',
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+//     res.status(200).json({
+//       status: 'success',
+//       message: 'Password reset successful',
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 public forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { resetCode, newPass, confirmPass, email } = req.body;
@@ -589,10 +554,6 @@ public forgotPassword = async (req: Request, res: Response, next: NextFunction) 
 
     if (!user) {
       throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
-    }
-    const verifyToken = this.verifyOTP(email, resetCode)
-    if (!verifyToken) {
-      throw new AppError("token not verified or invalid token")
     }
 
     if (newPass !==  confirmPass) {

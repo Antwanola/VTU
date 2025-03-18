@@ -10,7 +10,7 @@ authRouter.use(limiter);
 
 authRouter.post('/register', validateRequest, authController.register );
 authRouter.post('/login', validateRequest, authController.login);
-authRouter.post('/verify-email', authController.verifyEmail);
+// authRouter.post('/verify-email', authController.verifyEmail);
 authRouter.post('/verify-account', authController.verifyAccount);
 authRouter.post('/send-verification-email', authController.sendVerification);
 authRouter.post('/reset-password', authController.authenticationToken, authController.changePassword);
