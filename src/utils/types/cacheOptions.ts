@@ -1,12 +1,15 @@
 export interface CacheOptions {
-    stdTTL?: number;       // Standard TTL in seconds
-    checkperiod?: number;  // Time in seconds to check for expired keys
-    deleteOnExpire?: boolean;
-    useClones?: boolean;
+  stdTTL?: number;
+  checkperiod?: number;
+  deleteOnExpire?: boolean;
+  useClones?: boolean;
+  saveInterval?: number;
+  debug?: boolean;
   }
 
 export interface VerificationData {
-  email: string;
-  token: string;
-  expires: number;
+    email: string
+    token: number
+    expires: number
+    ttl: 1742782230761
 }

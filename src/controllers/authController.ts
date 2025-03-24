@@ -6,10 +6,12 @@ import { logger } from '../utils/logger';
 import { ErrorCodes } from '../utils/errorCodes';
 import { UserRequest } from '../utils/types';
 import { configDotenv } from 'dotenv';
-import { cache } from '../config/nodeCache';
+import { cacheInstance } from '../config/nodeCache';
 import bcrypt from 'bcryptjs';
 import axios from 'axios';
 import { VerificationData } from '../utils/types/cacheOptions';
+import fs from 'fs'
+import path from 'path';
 
 configDotenv()
 
@@ -17,8 +19,11 @@ configDotenv()
 interface JwtPayload {
   id: string;
   email: string;
-}
+} 
 
+interface DataStructure {
+  [key: string]: VerificationData; // This allows any string key to map to VerificationData
+}
 
 
 class AuthController {
@@ -103,7 +108,8 @@ public createVerificationOTP = async(email: string): Promise<string> => {
   //generate 6digit token
   const token = this.generateOTP()
   //store in cache for 15 minutes
-  cache.set(`verification:${email}`, { email, token, expires: Date.now() + 900}, 900)
+  cacheInstance.set(`verification:${email}`, { email, token, expires: Date.now() + 15 * 60 * 1000}, Date.now() + 15 * 60 * 1000)
+  console.log(cacheInstance.get(`verification:${email}`))
   return token;
 }
 
@@ -113,23 +119,65 @@ public createVerificationOTP = async(email: string): Promise<string> => {
  * @param token - The sent token 
  * @returns Boolean indicating if verification was sucessful or not
  */
-public verifyToken = async(email: string, token: string): Promise<boolean> => {
-  //get token using cache key
-  const cacheKey = `verification:${email}`
-  const data = cache.get<VerificationData>(cacheKey);
-  if(!data || data.token !== token){
-    return false // token not found or no match
-  }
-  if (data.expires < Date.now()) {
-    cache.delete(cacheKey);
-    return false; // Token expired
-  }
-  //delete cache
-  cache.delete(cacheKey)
+public verifyToken = async (email: string, token: number): Promise<boolean> => {
+  const filePath = path.resolve(process.cwd(), 'cache.json');
+  const cacheKey = `verification:${email}`;
 
-  return true
-}
+  // Try to get data from cache
+  const data = cacheInstance.get<VerificationData>(cacheKey);
+console.log({data})
+  if (data) {
+    console.log({token}, {dataToken:data?.token});
+    // Check if the token matches
+    if (data?.token !== token) { // Use optional chaining to avoid errors
+      console.log('Token does not match');
+      return false;
+    }
 
+    // Check if the token has expired
+    if (data?.expires < Date.now()) { // Use optional chaining to avoid errors
+      console.log('Token expired');
+      cacheInstance.delete(cacheKey);
+      return false;
+    }
+
+    // Delete the cache entry after successful verification
+    cacheInstance.delete(cacheKey);
+    return true;
+  }
+
+  // If data is not in cache, read from file
+  console.log('No data in cache, reading from file');
+  try {
+    const fileData = await fs.promises.readFile(filePath, 'utf8');
+    const convertedData = JSON.parse(fileData);
+
+    const value = convertedData[cacheKey]?.value; // Use optional chaining to avoid errors
+
+    if (!value) {
+      console.log('No value found in file');
+      return false;
+    }
+
+    // Check if the token matches
+    if (value.token !== token) {
+      console.log('Token does not match');
+      return false;
+    }
+
+    // Check if the token has expired
+    if (value.expires < Date.now()) {
+      console.log('Token expired');
+      return false;
+    }
+
+    // Delete the cache entry after successful verification
+    cacheInstance.delete(cacheKey);
+    return true;
+  } catch (err:any) {
+    throw new AppError(`Error reading file: ${err.message}`);
+  }
+};
 /**
  * Register new user
  * @param req - Request from express
@@ -155,8 +203,10 @@ public verifyToken = async(email: string, token: string): Promise<boolean> => {
         }
         throw new AppError('Phone number already registered', 400, ErrorCodes.AUTH_002);
       }
-
-      // Create user
+      // Generate verification token
+      const token = await this.createVerificationOTP(email)
+      
+      //Create user
       const user = await User.create({
         firstName,
         lastName,
@@ -164,17 +214,16 @@ public verifyToken = async(email: string, token: string): Promise<boolean> => {
         phone,
         password,
       });
-      // Generate verification token
-      const token = await this.createVerificationOTP(email)
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken, "User verification Token");
+      // console.log(await this.verifyToken(email, token))
       //send token to user email using brevo service
       await this.brevoSendEmail(email, "Verification token", token)
       
 
 
       if(user) {
-        //log user registratino
+    //     //log user registratino
       logger.info(`New user registered: ${email}`);
 
       res.status(201).json({
@@ -188,7 +237,12 @@ public verifyToken = async(email: string, token: string): Promise<boolean> => {
     }
   };
 
-  // Login user
+ /**
+ * Login Users
+ * @param req - Request from express
+ * @param res - Response from express
+ * @param next - Nextfunction from express
+ */
   public login = async (req: UserRequest, res: Response, next: NextFunction) => {
     try {
       const { email, password } = req.body;
@@ -233,7 +287,12 @@ public verifyToken = async(email: string, token: string): Promise<boolean> => {
     }
   };
 
-    // Auth header validation and JWT verification
+  /**
+ * Auth header validation and JWT verification
+ * @param req - Request from express
+ * @param res - Response from express
+ * @param next - Nextfunction from express
+ */
     public async authenticationToken(req: UserRequest, res: Response, next: NextFunction): Promise<void> {
       // Extract the Authorization header
       const authHeader = req.headers['authorization'];
@@ -268,7 +327,7 @@ public verifyToken = async(email: string, token: string): Promise<boolean> => {
 
 
 /**
- *   Verify email
+ *   Verify email again when it has expired
  * @param req 
  * @param res 
  * @param next 
@@ -277,6 +336,7 @@ public verifyToken = async(email: string, token: string): Promise<boolean> => {
     try {
       const { submittedOTP, email } = req.body;
       const tokenVerification: boolean = await this.verifyToken(email, submittedOTP)
+      console.log({tokenVerification})
 
       if (!tokenVerification) {
         throw new AppError('Invalid token or email already verified', 400, ErrorCodes.AUTH_005);
@@ -320,7 +380,12 @@ public verifyToken = async(email: string, token: string): Promise<boolean> => {
     }
   }
 
-  // Resend verification email to verify account again
+  /**
+   * Resend verification email to verify account again
+   * @param req 
+   * @param res 
+   * @param next 
+   */
   public verifyAccount = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { email } = req.body;
