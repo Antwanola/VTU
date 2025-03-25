@@ -127,7 +127,6 @@ public verifyToken = async (email: string, token: number): Promise<boolean> => {
   const data = cacheInstance.get<VerificationData>(cacheKey);
 console.log({data})
   if (data) {
-    console.log({token}, {dataToken:data?.token});
     // Check if the token matches
     if (data?.token !== token) { // Use optional chaining to avoid errors
       console.log('Token does not match');
@@ -401,7 +400,7 @@ console.log({data})
       }
 
       // Generate new verification token
-      const verificationToken = this.generateOTP()
+      const verificationToken = await this.createVerificationOTP(email)
 
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken);
