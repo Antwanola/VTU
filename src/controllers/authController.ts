@@ -652,10 +652,16 @@ public forgotPassword = async (req: Request, res: Response, next: NextFunction) 
   try {
     const { resetCode, newPass, confirmPass, email } = req.body;
 
-    if (!resetCode || !newPass || !confirmPass) {
+    if (!resetCode || !newPass || !confirmPass || !email) {
       throw new AppError ("make sure the fields has valid values")
     }
 
+    // Verify the reset token (OTP)
+    const isTokenValid = await this.verifyToken(email, resetCode);
+    if (!isTokenValid) {
+      throw new AppError('Invalid or expired token', 400, ErrorCodes.AUTH_005);
+    }
+    
     // Check if the user exists
     const user = await User.findOne({ email }).select('+password');
 
@@ -678,8 +684,8 @@ public forgotPassword = async (req: Request, res: Response, next: NextFunction) 
       status: 'success',
       message: 'Password reset successful',
     });
-  } catch (error) {
-    next(error);
+  } catch (error: any) {
+    res.json(error.message)
   }
 };
 
