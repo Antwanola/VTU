@@ -7,7 +7,7 @@ interface IData extends Document {
   plan?: string;
   duration?: string;
   price?: number;
-  serviceType?: Types.ObjectId;
+  serviceType?: string;
   setBy?: string;
   createdAt?: Date;
 }
@@ -18,7 +18,7 @@ const DataSchema = new Schema<IData>({
   plan: { type: String },
   duration: { type: String },
   price: { type: Number },
-  serviceType: { type: Schema.Types.ObjectId, ref: 'ServiceType' },
+  serviceType: { type: String },
   createdAt: { type: Date, default: Date.now },
   setBy: { type: String, required: true },
 });

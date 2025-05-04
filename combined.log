@@ -2078,3 +2078,5 @@
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-04T09:35:38.444Z"}
 {"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-04T09:35:50.193Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-04T09:35:50.223Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-04T09:36:32.640Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-04T09:36:32.665Z"}
