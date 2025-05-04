@@ -7,7 +7,6 @@ import { logger } from './utils/logger'; // Ensure you have the logger imported
 import { corsOptions } from './config/corsOptions';
 import cors from "cors"
 import router from './routes';
-import { redisClient } from './config/redis';
 import { dataService } from './services/gladtidings';
 import { quickTellerService } from './services/quickTeller';
 import { seedData } from './utils/seeData';
@@ -24,25 +23,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Initialize the connection
-const initializeRedis = async () => {
-  try {
-    redisClient.on('connect', () => {
-      logger.info('Redis client connected successfully');
-    });
-
-    redisClient.on('ready', () => {
-      logger.info('Redis client is ready to use');
-    });
-
-    redisClient.on('error', (err) => {
-      logger.error('Redis Client Error', err);
-    });
-  } catch (err) {
-    logger.error('Error during Redis initialization', err);
-  }
-};
-initializeRedis()
 
 // Middleware
 app.use(express.json()); // Add JSON body parser

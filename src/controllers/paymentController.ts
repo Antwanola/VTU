@@ -3,19 +3,16 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import { AppError } from "../utils/HandleErrors";
 import { logger } from "../utils/logger";
-import { redisClient } from "../config/redis";
 import { config } from "dotenv";
 import { monifyService } from "../services/payment";
 import { PaymentDetails } from "../utils/types/payment";
 import { Transaction, TransactionStatus } from "../models/transactions";
 import { UserRequest } from "../utils/types/index";
 import { Data } from "../models/dataPlans";
-import { Error } from 'mongoose';
-import { ErrorCodes } from '@/utils/errorCodes';
+
 
 config(); // Changed to config() as configDotenv is deprecated
 
-const redis = redisClient;
 
 class PaymentController {
   constructor() {}

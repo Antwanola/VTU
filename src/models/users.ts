@@ -10,7 +10,7 @@ export interface IUser extends Document {
   email: string;
   phone: string;
   password: string;
-  pin: string;
+  // pin: string;
   role: 'user' | 'agent' | 'admin';
   isVerified: boolean;
   createdAt: Date;
@@ -74,13 +74,13 @@ const userSchema = new Schema<IUser>(
       minlength: [8, 'Password must be at least 8 characters'],
       select: false, // Don't include password in queries by default
     },
-    pin: {
-      type: String,
-      required: [true, 'PIN is required'],
-      minlength: [4, 'PIN must be 4 digits'],
-      maxlength: [4, 'PIN must be 4 digits'],
-      select: false, // Don't include PIN in queries by default
-    },
+    // pin: {
+    //   type: String,
+    //   required: [true, 'PIN is required'],
+    //   minlength: [4, 'PIN must be 4 digits'],
+    //   maxlength: [4, 'PIN must be 4 digits'],
+    //   select: false, // Don't include PIN in queries by default
+    // },
     role: {
       type: String,
       enum: ['user', 'agent', 'admin'],
@@ -133,10 +133,10 @@ userSchema.pre('save', async function (next) {
     }
 
     // Hash PIN if modified
-    if (this.isModified('pin')) {
-      const salt = await bcrypt.genSalt(10);
-      this.pin = await bcrypt.hash(this.pin, salt);
-    }
+    // if (this.isModified('pin')) {
+    //   const salt = await bcrypt.genSalt(10);
+    //   this.pin = await bcrypt.hash(this.pin, salt);
+    // }
 
     next();
   } catch (error) {
