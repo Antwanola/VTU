@@ -9,12 +9,12 @@ class DataPrice {
     constructor() {}
 
     public createData = async ( req: UserRequest, res: Response, next: NextFunction): Promise<any> => {
-      let num = 100
+      let num = 0
       const ID = () => {
-        return `SKU_${num++}`
+        return `SKU_${num++}`.padStart(4, '0')
       }
         try {
-              const { networkProvider, plan, price, duration }: DBdataSet = req.body;
+              const { networkProvider, plan, price, duration, serviceType }: DBdataSet = req.body;
               const who = req.user.role
             
               // Check if the data plan exists
@@ -24,7 +24,7 @@ class DataPrice {
               }
 
               // Create a new data
-              const newData = new Data({ networkProvider, plan, price, duration, setBy: who, sku:ID()});
+              const newData = new Data({ networkProvider, plan, price, duration, serviceType, setBy: who, sku:ID()});
               const saved = await newData.save();
               if(!saved){
                 throw new AppError("New data not created")
@@ -39,18 +39,16 @@ class DataPrice {
 
     // Update price for a specific network provider and bundle type (admin only)
 public updateData = async (req: UserRequest, res: Response, next: NextFunction): Promise<any> => {
-  let num = 100
-  const ID = () => {
-    return `SKU_${++num}`
-  }
   try {
-    const { networkProvider, plan, price, duration }: DBdataSet = req.body;
+    const { networkProvider, plan, price, duration, serviceType }: DBdataSet = req.body;
+    console.log(networkProvider, plan)
+
     const update: DBdataSet = {
       networkProvider,
-      sku: ID(),
       plan,
-      price,  
+      price,
       duration,
+      serviceType,
       setBy: req.user.role
     }
 
@@ -60,7 +58,7 @@ public updateData = async (req: UserRequest, res: Response, next: NextFunction):
       { $set: update },
       { new: true }
     );
-  
+  console.log({updateData})
     if (!updateData) {
       throw new AppError('Data plan not found. Please create one', 404);
     }
@@ -100,8 +98,20 @@ public allData = async (req: Request, res: Response, next: NextFunction): Promis
     res.json(error.message)
   }
 }
+  public deleteData = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    try {
+      const { sku } = req.params;
+      const deletedData = await Data.findOneAndDelete({ sku });
+      if (!deletedData) {
+        throw new AppError('Data plan not found', 404);
+      }
+      res.status(200).json({ message: 'Data plan deleted successfully' });
+    } catch (error: any) {
+      logger.error({ error: error.message });
+      res.json({ error: error.message });
+    }
+  }
 }
-
 
 
 export const newDataPrice = new DataPrice();

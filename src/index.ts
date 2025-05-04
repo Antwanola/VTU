@@ -53,8 +53,12 @@ connectDB();
 // }
 // initializeGladTidings()
 
+//Trust proxy for test
+app.set('trust proxy', 1);
+
+
 //use routes
-app.use("/", router)
+app.use("/", limiter, router)
 
 // 404 handler (place before global error handler)
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {

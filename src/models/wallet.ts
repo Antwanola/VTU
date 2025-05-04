@@ -5,10 +5,14 @@ import { IUser } from './users';
 // Interface for the base Wallet document
 interface IWallet {
     user: Types.ObjectId;
+    userEmail: string; // Optional field for user email
     balance: number;
     ledgerBalance: number;
     status: 'active' | 'suspended';
-    transactions: Types.ObjectId[];
+    currency: string; // Optional field for currency
+    accountReference: string; // Optional field for account reference
+    lastTransactionReference?: string | undefined
+    getAllAvailableBanks: boolean
     createdAt: Date;
     updatedAt: Date;
 }
@@ -27,6 +31,12 @@ const walletSchema = new Schema<IWalletDocument>(
             required: true,
             unique: true,
         },
+        userEmail: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+
         balance: {
             type: Number,
             required: true,
@@ -45,10 +55,17 @@ const walletSchema = new Schema<IWalletDocument>(
             default: 'active',
             required: true,
         },
-        transactions: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Transaction',
-        }],
+        currency: {
+            type: String,
+            default: 'NGN',
+            required: true,
+        },
+        accountReference: {
+            type: String,
+        },
+        lastTransactionReference: {
+            type: String
+        },
     },
     {
         timestamps: true,

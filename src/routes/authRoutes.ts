@@ -2,6 +2,7 @@ import express from 'express';
 import { authController } from '../controllers/authController';
 import { validateRequest } from '../middleware/validation';
 import { limiter } from '../middleware/rateLimiter';
+import {newUserRoleController} from '../controllers/AdminController/userRole';
 
 const authRouter = express.Router();
 
@@ -19,6 +20,7 @@ authRouter.get('/get-profile', authController.authenticationToken, authControlle
 authRouter.get('/forgot-password-request', authController.resetPasswordRequest)
 authRouter.post('/forgot-password',  authController.forgotPassword);
 authRouter.get('/get-users', authController.getUsers)
+
 
 // authRouter.post('/reset-password/:token', authController.resetPassword);
 

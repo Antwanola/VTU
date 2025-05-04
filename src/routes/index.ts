@@ -6,6 +6,7 @@ import dataContollerRoute from "./buyDataRoute"
 import quickTellerRouter from "./quictellerRoutes"
 //Admin Router
 import dataRoute from "./Admins/dataCreateRoute"
+import userAdminRoute from './Admins/userAdminOperations';
 
 const router = express.Router()
 
@@ -16,6 +17,8 @@ router.use('/api/v1', quickTellerRouter)
 
 
 router.use('/api/v1/admin', dataRoute)
+router.use('/api/v1/admin', userAdminRoute)
+
 
 
 export default router;

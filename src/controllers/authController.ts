@@ -1,3 +1,4 @@
+import { MonifyService } from './../services/payment';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import User, { IUser } from '../models/users';
@@ -12,6 +13,7 @@ import axios from 'axios';
 import { VerificationData } from '../utils/types/cacheOptions';
 import fs from 'fs'
 import path from 'path';
+import {monifyService} from '../services/payment';
 
 configDotenv()
 
@@ -213,16 +215,18 @@ console.log({data})
         phone,
         password,
       });
+      if (!user) {
+        throw new AppError('User registration failed', 400, ErrorCodes.AUTH_001);
+      }
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken, "User verification Token");
       // console.log(await this.verifyToken(email, token))
       //send token to user email using brevo service
       await this.brevoSendEmail(email, "Verification token", token)
-      
 
 
       if(user) {
-    //     //log user registratino
+      //log user registratino
       logger.info(`New user registered: ${email}`);
 
       res.status(201).json({
@@ -281,8 +285,8 @@ console.log({data})
         token,
         data: userResponse
       });
-    } catch (error) {
-      next(error);
+    } catch (error: any) {
+      res.send(error.message)
     }
   };
 
@@ -344,8 +348,14 @@ console.log({data})
       if (!findUser) {
         throw new AppError('User not found', 400, ErrorCodes.AUTH_001)
       }
+      console.log({findUser})
       findUser.isVerified = true;
-      findUser.save()
+      const wallet = await monifyService.createWallet_InApp(findUser)
+      if (!wallet) {
+        throw new AppError('Unable to create wallet from verify email controller', 400, ErrorCodes.AUTH_001)
+      }
+      findUser.wallet = wallet._id
+      await findUser.save()
 
       logger.info(`Email verified for user: ${email}`);
 
@@ -507,8 +517,9 @@ console.log({data})
   public getUserProfile = async ( req: UserRequest, res: Response, next: NextFunction): Promise<void> => {
 
     try {
-      const user = req.user;
-      const searchUser = await User.findById(user?.id)
+      console.log(req.user.user)
+      const user = req.user.user;
+      const searchUser = await User.findById(user._id).populate('wallet').populate('transactions')
       if (!searchUser) {
         throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
       }

@@ -1,7 +1,8 @@
 import mongoose, { Document, Model, Schema, Types } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
-import { ITransaction, TransactionStatus, Transaction } from './transactions';
+import { ITransaction, TransactionStatusEnum, Transaction } from './transactions';
+import Wallet from './wallet';
 
 // Interface for the User document
 export interface IUser extends Document {
@@ -16,6 +17,7 @@ export interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
   transactions?: Types.ObjectId[] | ITransaction[];
+  wallet?: Types.ObjectId | string | typeof Wallet;
  
   // Helper methods
   getTransactions(filters?: Partial<ITransaction>): Promise<ITransaction[]>;
@@ -101,7 +103,11 @@ const userSchema = new Schema<IUser>(
     transactions: [{
       type: Schema.Types.ObjectId,
       ref: 'Transaction'
-    }]
+    }],
+    wallet: {
+      type: Schema.Types.ObjectId,
+      ref: 'Wallet',
+    },
   },
   {
     timestamps: true, // Automatically handle createdAt and updatedAt
@@ -144,6 +150,13 @@ userSchema.pre('save', async function (next) {
   }
 });
 
+userSchema.pre('findOneAndDelete', async function(next) {
+  const user = await this.model.findOne(this.getFilter());
+  if (user) {
+    await mongoose.model('Wallet').deleteOne({ user: user._id });
+  }
+  next();
+});
 // Get user's transactions with optional filters
 userSchema.methods.getTransactions = async function(
   filters: Partial<Omit<ITransaction, keyof Document>> = {}
@@ -159,8 +172,8 @@ userSchema.methods.getTotalSpent = async function(): Promise<number> {
   const result = await Transaction.aggregate([
     {
       $match: {
-        user: new mongoose.Types.ObjectId(this._id),
-        status: TransactionStatus.SUCCESS
+        user: this._id,
+        status: TransactionStatusEnum.SUCCESS
       }
     },
     {
