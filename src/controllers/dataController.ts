@@ -5,6 +5,7 @@ import { logger } from "../utils/logger";
 import { FindDataRespose } from "../utils/types/gladTidingsPayload";
 import crypto from "crypto"
 import { DataRequest } from '../utils/types/index';
+import { walletService } from "../services/inApp_wallet";
 
 
 
@@ -41,6 +42,8 @@ export class DataCntroller {
                 const random = crypto.randomBytes(4).toString('hex');
                 return `Data${timestamp}${random}`;
         }
+        const current_user_email = req.user.user.email;
+        console.log({current_user_email})
         //bring in the data from the findData
         const findData: FindDataRespose = req.data;
         //plan id, phone num, network, plan
@@ -59,6 +62,7 @@ export class DataCntroller {
                 console.log({getDataFromApi: getDataFromApi.message})
                 throw new AppError(getDataFromApi.message)
             }
+            // const deduct_from_wallet = await walletService.debitWallet(current_user_email, amount)
             res.status(200).json({
                 success: true,
                 // data: getDataFromApi,

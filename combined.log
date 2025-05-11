@@ -2080,3 +2080,31 @@
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-04T09:35:50.223Z"}
 {"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-04T09:36:32.640Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-04T09:36:32.665Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-04T23:42:00.659Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-04T23:42:00.738Z"}
+{"level":"error","message":{"error":"Cannot set headers after they are sent to the client"},"timestamp":"2025-05-04T23:57:50.878Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-04T23:57:50.881Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-04T23:57:58.381Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-04T23:58:39.584Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-05T00:00:52.821Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-05T00:16:10.520Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-05T00:16:10.555Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-05T00:18:28.431Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-05T00:18:28.452Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-05T00:30:31.350Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-05T00:30:31.371Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-05T00:30:42.002Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-05T00:30:42.032Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-05T00:31:52.992Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-05T00:32:05.161Z"}
+{"level":"error","message":{"error":"Data plan already exists"},"timestamp":"2025-05-05T00:34:35.548Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-05T00:37:34.123Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-05T00:37:34.144Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-05T01:02:11.191Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-05T01:02:11.219Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-11T17:46:37.382Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-11T17:46:37.535Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-11T17:46:42.933Z"}
+{"error":{},"level":"error","message":"[Global Error Handler] Cannot read properties of undefined (reading 'user')","method":"GET","path":"/api/v1/get-profile","stack":"TypeError: Cannot read properties of undefined (reading 'user')\n    at AuthController.getUserProfile (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:520:28)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:327:9\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:109:14\n    at getSecret (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:97:14)\n    at Object.module.exports [as verify] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:101:10)\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:318:11)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)","timestamp":"2025-05-11T17:47:19.788Z"}
+{"error":{},"level":"error","message":"[Global Error Handler] Cannot read properties of undefined (reading 'user')","method":"GET","path":"/api/v1/get-profile","stack":"TypeError: Cannot read properties of undefined (reading 'user')\n    at AuthController.getUserProfile (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:520:28)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:327:9\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:109:14\n    at getSecret (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:97:14)\n    at Object.module.exports [as verify] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:101:10)\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:318:11)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)","timestamp":"2025-05-11T17:47:36.712Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-11T17:47:53.392Z"}

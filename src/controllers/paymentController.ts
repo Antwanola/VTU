@@ -37,7 +37,6 @@ class PaymentController {
     try {
       const { sku, paymentDescription, amount, paymentCategory, servicePaidFor } = req.body
       // const getAmount = await Data.find({sku});
-      console.log({servicePaidFor})
       // if (!getAmount){
       //   throw new AppError("Product not identified. Please provide producnt Sku number")
       // }

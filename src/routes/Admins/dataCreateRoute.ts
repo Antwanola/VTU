@@ -24,4 +24,3 @@ dataRoute.get("/get-category", authController.authenticationToken, authControlle
 
 
 export default dataRoute;
-``
