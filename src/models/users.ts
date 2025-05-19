@@ -11,7 +11,7 @@ export interface IUser extends Document {
   email: string;
   phone: string;
   password: string;
-  // pin: string;
+  image?: string | undefined;
   role: 'user' | 'agent' | 'admin';
   isVerified: boolean;
   createdAt: Date;
@@ -76,13 +76,9 @@ const userSchema = new Schema<IUser>(
       minlength: [8, 'Password must be at least 8 characters'],
       select: false, // Don't include password in queries by default
     },
-    // pin: {
-    //   type: String,
-    //   required: [true, 'PIN is required'],
-    //   minlength: [4, 'PIN must be 4 digits'],
-    //   maxlength: [4, 'PIN must be 4 digits'],
-    //   select: false, // Don't include PIN in queries by default
-    // },
+    image: {
+      type: String,
+    },
     role: {
       type: String,
       enum: ['user', 'agent', 'admin'],

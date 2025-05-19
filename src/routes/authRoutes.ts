@@ -3,6 +3,11 @@ import { authController } from '../controllers/authController';
 import { validateRequest } from '../middleware/validation';
 import { limiter } from '../middleware/rateLimiter';
 import {newUserRoleController} from '../controllers/AdminController/userRole';
+import multer from 'multer';
+
+
+
+const uploadMulter = multer({ storage: multer.memoryStorage() });
 
 const authRouter = express.Router();
 
@@ -15,11 +20,18 @@ authRouter.post('/verify-email', authController.verifyEmail);
 authRouter.post('/verify-account', authController.verifyAccount);
 authRouter.post('/send-verification-email', authController.sendVerification);
 authRouter.post('/reset-password', authController.authenticationToken, authController.changePassword);
-// authRouter.post('/change-pin',authController.authenticationToken, authController.changePin )
-authRouter.get('/get-profile', authController.authenticationToken, authController.getUserProfile);
+
 authRouter.get('/forgot-password-request', authController.resetPasswordRequest)
 authRouter.post('/forgot-password',  authController.forgotPassword);
+
+// authRouter.post('/change-pin',authController.authenticationToken, authController.changePin )
+authRouter.get('/get-profile', authController.authenticationToken, authController.getUserProfile);
 authRouter.get('/get-users', authController.getUsers)
+
+//Profile Operations
+authRouter.get('/get-profile', authController.authenticationToken, authController.getUserProfile);
+authRouter.put('/update-profile', authController.authenticationToken, uploadMulter.single('file'), authController.updateProfile);
+
 
 
 // authRouter.post('/reset-password/:token', authController.resetPassword);

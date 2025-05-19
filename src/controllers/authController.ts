@@ -1,212 +1,228 @@
-import { MonifyService } from './../services/payment';
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import User, { IUser } from '../models/users';
-import { AppError } from '../utils/HandleErrors';
-import { logger } from '../utils/logger';
-import { ErrorCodes } from '../utils/errorCodes';
-import { UserRequest } from '../utils/types';
-import { configDotenv } from 'dotenv';
-import { cacheInstance } from '../config/nodeCache';
-import bcrypt from 'bcryptjs';
-import axios from 'axios';
-import { VerificationData } from '../utils/types/cacheOptions';
-import fs from 'fs'
-import path from 'path';
-import {monifyService} from '../services/payment';
+import multer from "multer";
+import sharp from "sharp";
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import User, { IUser } from "../models/users";
+import { AppError } from "../utils/HandleErrors";
+import { logger } from "../utils/logger";
+import { ErrorCodes } from "../utils/errorCodes";
+import { UserRequest } from "../utils/types";
+import { configDotenv } from "dotenv";
+import { cacheInstance } from "../config/nodeCache";
+import bcrypt from "bcryptjs";
+import axios from "axios";
+import { VerificationData } from "../utils/types/cacheOptions";
+import fs from "fs";
+import path from "path";
+import { monifyService } from "../services/payment";
 
-configDotenv()
-
+configDotenv();
 
 interface JwtPayload {
   id: string;
   email: string;
-} 
+}
+
+
 
 interface DataStructure {
   [key: string]: VerificationData; // This allows any string key to map to VerificationData
 }
 
-
 class AuthController {
-  
   // Generate JWT Token
   private generateToken(user: Object): string {
-    if (!process.env.JWT_SECRET)  throw new Error('JWT_SECRET is not defined in environment variables');
-    return jwt.sign(
-      {user},
-      process.env.JWT_SECRET as string,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
-    );
+    if (!process.env.JWT_SECRET)
+      throw new Error("JWT_SECRET is not defined in environment variables");
+    return jwt.sign({ user }, process.env.JWT_SECRET as string, {
+      expiresIn: process.env.JWT_EXPIRES_IN || "24h",
+    });
   }
 
   // Generate Verification Token.
   private generateOTP(): string {
-   return Math.floor(100000 + Math.random() * 9000).toString(); 
+    return Math.floor(100000 + Math.random() * 9000).toString();
   }
 
+  //Send Verification Email
+  // private async sendVerificationEmail (email: string, verificationToken: string, context?: string ): Promise<void> {
+  //     const  mailOptions: MailOptions = {
+  //         from: "antwanola29@gmail.com",
+  //         to: email,
+  //         subject: "Verification Token",
+  //         text: `${context}: ${verificationToken}`
+  //     }
+  //       try {
+  //         transporter.sendMail(mailOptions, (err, info) => {
+  //           if (err) {
+  //               throw err
+  //           }
+  //           logger.info('Verification email sent to: ' + info.accepted)
+  //       })
+  //       } catch (err: any) {
+  //         throw new AppError(err.message)
+  //       }
+  // }
+  /**
+   *
+   * @param clientEmail  //the email to sent to
+   * @param context //the context of the email
+   * @param tokent // the token to be sent
+   */
+  public brevoSendEmail = async (
+    clientEmail: string,
+    context: string,
+    token: string
+  ): Promise<void> => {
+    const API_KEY = process.env.BREV0_API_KEY;
+    const BrevoUri = "https://api.brevo.com/v3/smtp/email";
 
+    const emailData = {
+      sender: {
+        name: "Ambituox Data Plug",
+        email: "antwanola29@gmail.com",
+      },
+      to: [{ email: clientEmail }],
+      subject: "Authentication Token",
+      htmlContent: `<html><bod><h1> ${context}: ${token}</h1></bod></html>`,
+    };
+    try {
+      const sendTask = await axios.post(BrevoUri, emailData, {
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": API_KEY,
+        },
+      });
+      console.log(sendTask.data);
+    } catch (error: any) {
+      throw new AppError(error.message);
+    }
+  };
 
-//Send Verification Email
-// private async sendVerificationEmail (email: string, verificationToken: string, context?: string ): Promise<void> { 
-//     const  mailOptions: MailOptions = {
-//         from: "antwanola29@gmail.com",
-//         to: email,
-//         subject: "Verification Token",
-//         text: `${context}: ${verificationToken}`
-//     }
-//       try {
-//         transporter.sendMail(mailOptions, (err, info) => {
-//           if (err) {
-//               throw err
-//           }
-//           logger.info('Verification email sent to: ' + info.accepted)
-//       })
-//       } catch (err: any) {
-//         throw new AppError(err.message)
-//       }
-// }
-/**
- * 
- * @param clientEmail  //the email to sent to
- * @param context //the context of the email
- * @param tokent // the token to be sent
- */
-public brevoSendEmail = async(clientEmail: string, context: string, token: string ): Promise<void> => {
-  const API_KEY = process.env.BREV0_API_KEY;
-  const BrevoUri = "https://api.brevo.com/v3/smtp/email"
+  /**
+   * Generate a verification token for email
+   * @param email - User email
+   * @returns The generated token
+   */
 
-  const emailData = {
-    sender: {
-      name: 'Ambituox Data Plug',
-      email: 'antwanola29@gmail.com'
-    },
-    to: [
-      {email:clientEmail}
-    ],
-    subject: "Authentication Token",
-    htmlContent: `<html><bod><h1> ${context}: ${token}</h1></bod></html>`
-  }
-  try {
-    const sendTask = await axios.post(BrevoUri, emailData, {
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": API_KEY
+  public createVerificationOTP = async (email: string): Promise<string> => {
+    //generate 6digit token
+    const token = this.generateOTP();
+    //store in cache for 15 minutes
+    cacheInstance.set(
+      `verification:${email}`,
+      { email, token, expires: Date.now() + 15 * 60 * 1000 },
+      Date.now() + 15 * 60 * 1000
+    );
+    console.log(cacheInstance.get(`verification:${email}`));
+    return token;
+  };
+
+  /**
+   * Verify the token by obtaining the details from cache then verify
+   * @param email - The user email
+   * @param token - The sent token
+   * @returns Boolean indicating if verification was sucessful or not
+   */
+  public verifyToken = async (
+    email: string,
+    token: number
+  ): Promise<boolean> => {
+    const filePath = path.resolve(process.cwd(), "cache.json");
+    const cacheKey = `verification:${email}`;
+
+    // Try to get data from cache
+    const data = cacheInstance.get<VerificationData>(cacheKey);
+    console.log({ data });
+    if (data) {
+      // Check if the token matches
+      if (data?.token !== token) {
+        // Use optional chaining to avoid errors
+        console.log("Token does not match");
+        return false;
       }
-    })
-    console.log(sendTask.data)
-  } catch (error: any) {
-    throw new AppError(error.message)
-  }
-}
 
-/**
- * Generate a verification token for email
- * @param email - User email
- * @returns The generated token
- */
+      // Check if the token has expired
+      if (data?.expires < Date.now()) {
+        // Use optional chaining to avoid errors
+        console.log("Token expired");
+        cacheInstance.delete(cacheKey);
+        return false;
+      }
 
-public createVerificationOTP = async(email: string): Promise<string> => {
-  //generate 6digit token
-  const token = this.generateOTP()
-  //store in cache for 15 minutes
-  cacheInstance.set(`verification:${email}`, { email, token, expires: Date.now() + 15 * 60 * 1000}, Date.now() + 15 * 60 * 1000)
-  console.log(cacheInstance.get(`verification:${email}`))
-  return token;
-}
-
-/**
- * Verify the token by obtaining the details from cache then verify
- * @param email - The user email 
- * @param token - The sent token 
- * @returns Boolean indicating if verification was sucessful or not
- */
-public verifyToken = async (email: string, token: number): Promise<boolean> => {
-  const filePath = path.resolve(process.cwd(), 'cache.json');
-  const cacheKey = `verification:${email}`;
-
-  // Try to get data from cache
-  const data = cacheInstance.get<VerificationData>(cacheKey);
-console.log({data})
-  if (data) {
-    // Check if the token matches
-    if (data?.token !== token) { // Use optional chaining to avoid errors
-      console.log('Token does not match');
-      return false;
-    }
-
-    // Check if the token has expired
-    if (data?.expires < Date.now()) { // Use optional chaining to avoid errors
-      console.log('Token expired');
+      // Delete the cache entry after successful verification
       cacheInstance.delete(cacheKey);
-      return false;
+      return true;
     }
 
-    // Delete the cache entry after successful verification
-    cacheInstance.delete(cacheKey);
-    return true;
-  }
+    // If data is not in cache, read from file
+    console.log("No data in cache, reading from file");
+    try {
+      const fileData = await fs.promises.readFile(filePath, "utf8");
+      const convertedData = JSON.parse(fileData);
 
-  // If data is not in cache, read from file
-  console.log('No data in cache, reading from file');
-  try {
-    const fileData = await fs.promises.readFile(filePath, 'utf8');
-    const convertedData = JSON.parse(fileData);
+      const value = convertedData[cacheKey]?.value; // Use optional chaining to avoid errors
 
-    const value = convertedData[cacheKey]?.value; // Use optional chaining to avoid errors
+      if (!value) {
+        console.log("No value found in file");
+        return false;
+      }
 
-    if (!value) {
-      console.log('No value found in file');
-      return false;
+      // Check if the token matches
+      if (value.token !== token) {
+        console.log("Token does not match");
+        return false;
+      }
+
+      // Check if the token has expired
+      if (value.expires < Date.now()) {
+        console.log("Token expired");
+        return false;
+      }
+
+      // Delete the cache entry after successful verification
+      cacheInstance.delete(cacheKey);
+      return true;
+    } catch (err: any) {
+      throw new AppError(`Error reading file: ${err.message}`);
     }
-
-    // Check if the token matches
-    if (value.token !== token) {
-      console.log('Token does not match');
-      return false;
-    }
-
-    // Check if the token has expired
-    if (value.expires < Date.now()) {
-      console.log('Token expired');
-      return false;
-    }
-
-    // Delete the cache entry after successful verification
-    cacheInstance.delete(cacheKey);
-    return true;
-  } catch (err:any) {
-    throw new AppError(`Error reading file: ${err.message}`);
-  }
-};
-/**
- * Register new user
- * @param req - Request from express
- * @param res - Response from express
- * @param next - Nextfunction from express
- */
+  };
+  /**
+   * Register new user
+   * @param req - Request from express
+   * @param res - Response from express
+   * @param next - Nextfunction from express
+   */
   public register = async (req: Request, res: Response, next: NextFunction) => {
-    const reqBaseURI = `${req.protocol}://${req.get('host')}`
-    const redirectURI = `${reqBaseURI}/api/v1/verify-email`
-    const verification  = this.generateOTP()
+    const reqBaseURI = `${req.protocol}://${req.get("host")}`;
+    const redirectURI = `${reqBaseURI}/api/v1/verify-email`;
+    const verification = this.generateOTP();
     try {
       const { firstName, lastName, email, phone, password } = req.body;
 
       // Check if user exists
       // TODO: find user
-      const existingUser = await User.findOne({ 
-        $or: [{ email }, { phone }] 
+      const existingUser = await User.findOne({
+        $or: [{ email }, { phone }],
       });
 
       if (existingUser) {
         if (existingUser.email === email) {
-          throw new AppError('Email already registered', 400, ErrorCodes.AUTH_004);
+          throw new AppError(
+            "Email already registered",
+            400,
+            ErrorCodes.AUTH_004
+          );
         }
-        throw new AppError('Phone number already registered', 400, ErrorCodes.AUTH_002);
+        throw new AppError(
+          "Phone number already registered",
+          400,
+          ErrorCodes.AUTH_002
+        );
       }
       // Generate verification token
-      const token = await this.createVerificationOTP(email)
-      
+      const token = await this.createVerificationOTP(email);
+
       //Create user
       const user = await User.create({
         firstName,
@@ -216,226 +232,286 @@ console.log({data})
         password,
       });
       if (!user) {
-        throw new AppError('User registration failed', 400, ErrorCodes.AUTH_001);
+        throw new AppError(
+          "User registration failed",
+          400,
+          ErrorCodes.AUTH_001
+        );
       }
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken, "User verification Token");
       // console.log(await this.verifyToken(email, token))
       //send token to user email using brevo service
-      await this.brevoSendEmail(email, "Verification token", token)
+      await this.brevoSendEmail(email, "Verification token", token);
 
+      if (user) {
+        //log user registratino
+        logger.info(`New user registered: ${email}`);
 
-      if(user) {
-      //log user registratino
-      logger.info(`New user registered: ${email}`);
-
-      res.status(201).json({
-        status: 'success',
-        message: 'Registration successful. Please verify your email.',
-        redirectURI: redirectURI
-      });
+        res.status(201).json({
+          status: "success",
+          message: "Registration successful. Please verify your email.",
+          redirectURI: redirectURI,
+        });
       }
     } catch (error: any) {
-      res.json({error:error.message})
+      res.status(404).send({ error: error.message });
     }
   };
 
- /**
- * Login Users
- * @param req - Request from express
- * @param res - Response from express
- * @param next - Nextfunction from express
- */
-  public login = async (req: UserRequest, res: Response, next: NextFunction) => {
+  /**
+   * Login Users
+   * @param req - Request from express
+   * @param res - Response from express
+   * @param next - Nextfunction from express
+   */
+  public login = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { email, password } = req.body;
 
       // Get user with password
-      const user = await User.findOne({ email }).select('+password');
-      const oldPass = user?.password
+      const user = await User.findOne({ email }).select("+password");
+      const oldPass = user?.password;
       if (!user || !(await user.comparePassword(password as string))) {
-        throw new AppError('Invalid email or password', 401, ErrorCodes.AUTH_002);
+        throw new AppError(
+          "Invalid email or password",
+          401,
+          ErrorCodes.AUTH_002
+        );
       }
 
       // Check if email is verified
       if (!user.isVerified) {
-        throw new AppError('Please verify your email address first', 401, ErrorCodes.AUTH_003);
+        throw new AppError(
+          "Please verify your email address first",
+          401,
+          ErrorCodes.AUTH_003
+        );
       }
 
       // Generate token
-      const token = this.generateToken(user);
-      console.log(token)
-
-      // Remove sensitive data
-      const userResponse = {
+      const tokenPayload = {
         id: user._id as string,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         phone: user.phone,
         role: user.role,
-        isVerified: user.isVerified
+        isVerified: user.isVerified,
       };
-      req.user = userResponse;
+      const token = this.generateToken(tokenPayload);
+      console.log(token);
+      const addWallet = await (
+        await user.populate("wallet")
+      ).populate("transactions");
 
       logger.info(`User logged in: ${email}`);
 
       res.status(200).json({
-        status: 'success',
+        status: "success",
         token,
-        data: userResponse
+        data: addWallet,
       });
     } catch (error: any) {
-      res.send(error.message)
+      res.send(error.message);
     }
   };
 
   /**
- * Auth header validation and JWT verification
- * @param req - Request from express
- * @param res - Response from express
- * @param next - Nextfunction from express
- */
-    public async authenticationToken(req: UserRequest, res: Response, next: NextFunction): Promise<void> {
-      // Extract the Authorization header
-      const authHeader = req.headers['authorization'];
-  
-      // Check if the Authorization header exists and is in the correct format
-      if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.status(401).json({ message: 'User not authenticated' });
-      }
-  
-      // Extract the token from the Authorization header
-      const token = authHeader.split(' ')[1]; // "Bearer <token>"
-      
-  
-      // Check if the token exists
-      if (!token) {
-        res.status(401).json({ message: 'User not authenticated' });
-      }
+   * Auth header validation and JWT verification
+   * @param req - Request from express
+   * @param res - Response from express
+   * @param next - Nextfunction from express
+   */
+  public async authenticationToken(
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    // Extract the Authorization header
+    const authHeader = req.headers["authorization"];
 
-      // Verify the JWT
-      jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
-        if (err) {
-          res.status(403).json({ message: 'Invalid or expired token' });
-        }
-  
-        // Attach the decoded user information to the request object
-        req.user = user;
-  
-        // Proceed to the next middleware or route handler
-        next();
-      });
+    // Check if the Authorization header exists and is in the correct format
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      res.status(401).json({ message: "User not authenticated" });
     }
 
+    // Extract the token from the Authorization header
+    const token = authHeader.split(" ")[1]; // "Bearer <token>"
 
-/**
- *   Verify email again when it has expired
- * @param req 
- * @param res 
- * @param next 
- */
-  public verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
+    // Check if the token exists
+    if (!token) {
+      res.status(401).json({ message: "User not authenticated" });
+    }
+
+    // Verify the JWT
+    jwt.verify(
+      token,
+      process.env.JWT_SECRET as string,
+      (err: any, user: any) => {
+        if (err) {
+          res.status(403).json({ message: "Invalid or expired token" });
+        }
+
+        // Attach the decoded user information to the request object
+        req.user = user;
+
+        // Proceed to the next middleware or route handler
+        next();
+      }
+    );
+  }
+
+  /**
+   *   Verify email again when it has expired
+   * @param req
+   * @param res
+   * @param next
+   */
+  public verifyEmail = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { submittedOTP, email } = req.body;
-      const tokenVerification: boolean = await this.verifyToken(email, submittedOTP)
-      console.log({tokenVerification})
+      const tokenVerification: boolean = await this.verifyToken(
+        email,
+        submittedOTP
+      );
+      console.log({ tokenVerification });
 
       if (!tokenVerification) {
-        throw new AppError('Invalid token or email already verified', 400, ErrorCodes.AUTH_005);
+        throw new AppError(
+          "Invalid token or email already verified",
+          400,
+          ErrorCodes.AUTH_005
+        );
       }
-      const findUser = await User.findOne({email})
+      const findUser = await User.findOne({ email });
       if (!findUser) {
-        throw new AppError('User not found', 400, ErrorCodes.AUTH_001)
+        throw new AppError("User not found", 400, ErrorCodes.AUTH_001);
       }
-      console.log({findUser})
+      console.log({ findUser });
       findUser.isVerified = true;
-      const wallet = await monifyService.createWallet_InApp(findUser)
+      const wallet = await monifyService.createWallet_InApp(findUser);
       if (!wallet) {
-        throw new AppError('Unable to create wallet from verify email controller', 400, ErrorCodes.AUTH_001)
+        throw new AppError(
+          "Unable to create wallet from verify email controller",
+          400,
+          ErrorCodes.AUTH_001
+        );
       }
-      findUser.wallet = wallet._id
-      await findUser.save()
+      findUser.wallet = wallet._id;
+      await findUser.save();
 
       logger.info(`Email verified for user: ${email}`);
 
       res.status(200).json({
-        status: 'success',
+        status: "success",
         isverified: findUser.isVerified,
-        message: 'Email verified successfully'
+        message: "Email verified successfully",
       });
     } catch (error) {
       next(error);
     }
   };
   //Send verification for email authentication on reset
-  public sendVerification = async ( req: Request, res: Response, next: NextFunction ): Promise<void> => {
+  public sendVerification = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const { email } = req.body;
       const user = await User.findOne({ email });
       if (!user) {
-        throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
+        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
       }
-      const verificationToken = this.generateOTP()
+      const verificationToken = this.generateOTP();
       // await this.sendVerificationEmail(email, verificationToken, 'Reset token');
-      const sendtask = await this.brevoSendEmail(email,"Reset Token", verificationToken  )
+      const sendtask = await this.brevoSendEmail(
+        email,
+        "Reset Token",
+        verificationToken
+      );
       logger.info(`Verification email sent to: ${email}`);
       res.status(200).json({
-        status: 'success',
-        message: 'Verification email sent successfully'
+        status: "success",
+        message: "Verification email sent successfully",
       });
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   /**
    * Resend verification email to verify account again
-   * @param req 
-   * @param res 
-   * @param next 
+   * @param req
+   * @param res
+   * @param next
    */
-  public verifyAccount = async (req: Request, res: Response, next: NextFunction) => {
+  public verifyAccount = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { email } = req.body;
 
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AppError('User not found. Please register', 404, ErrorCodes.AUTH_002);
+        throw new AppError(
+          "User not found. Please register",
+          404,
+          ErrorCodes.AUTH_002
+        );
       }
 
       if (user.isVerified) {
-        throw new AppError('Email already verified', 200, ErrorCodes.AUTH_004);
+        throw new AppError("Email already verified", 200, ErrorCodes.AUTH_004);
       }
 
       // Generate new verification token
-      const verificationToken = await this.createVerificationOTP(email)
+      const verificationToken = await this.createVerificationOTP(email);
 
       // TODO: Send verification email
       // await this.sendVerificationEmail(email, verificationToken);
-      const sentTask = await this.brevoSendEmail(email, "Reset Acount Token", verificationToken)
+      const sentTask = await this.brevoSendEmail(
+        email,
+        "Reset Acount Token",
+        verificationToken
+      );
 
       logger.info(`Verification email resent to: ${email}`);
 
       res.status(200).json({
-        status: 'success',
-        message: 'Verification email sent successfully'
-      }); 
+        status: "success",
+        message: "Verification email sent successfully",
+      });
     } catch (error) {
       next(error);
     }
   };
 
   // Request password reset
-  public resetPasswordRequest = async (req: Request, res: Response, next: NextFunction) => {
+  public resetPasswordRequest = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { email } = req.body;
 
-      const user = await User.findOne({ email }).select('+password');
+      const user = await User.findOne({ email }).select("+password");
 
       if (!user) {
-        throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
+        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
       }
 
       // Generate reset token
@@ -443,44 +519,59 @@ console.log({data})
 
       // TODO: Send reset email
       // await this.sendVerificationEmail(email, resetToken, 'Reset token');
-      const sendTask = await this.brevoSendEmail(email, "Reset Token", resetToken)
+      const sendTask = await this.brevoSendEmail(
+        email,
+        "Reset Token",
+        resetToken
+      );
 
       logger.info(`Password reset requested for: ${email}`);
-      next(resetToken)
+      next(resetToken);
     } catch (error) {
       next(error);
     }
   };
 
   // Reset password
-  public resetPassword = async (req: Request, res: Response, next: NextFunction) => {
+  public resetPassword = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { password, email } = req.body;
       if (!password || !email) {
-        throw new AppError('Password and email are required', 400, ErrorCodes.AUTH_001);
+        throw new AppError(
+          "Password and email are required",
+          400,
+          ErrorCodes.AUTH_001
+        );
       }
-      
+
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
-      
 
       // Find user and update password
       const user = await User.findOneAndUpdate(
         { email },
-        { $set: {hashedPassword} },
+        { $set: { hashedPassword } },
         { new: true }
       );
 
       if (!user) {
-        throw new AppError('Invalid token or user not found', 400, ErrorCodes.AUTH_004);
+        throw new AppError(
+          "Invalid token or user not found",
+          400,
+          ErrorCodes.AUTH_004
+        );
       }
-      await user.save()
+      await user.save();
 
       logger.info(`Password reset successful for: ${user.email}`);
 
       res.status(200).json({
-        status: 'success',
-        message: 'Password reset successful'
+        status: "success",
+        message: "Password reset successful",
       });
     } catch (error) {
       next(error);
@@ -488,16 +579,20 @@ console.log({data})
   };
 
   // Get current user
-  public getCurrentUser = async (req: UserRequest, res: Response, next: NextFunction) => {
+  public getCurrentUser = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const user = await User.findById(req.user?.id);
 
       if (!user) {
-        throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
+        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
       }
 
       res.status(200).json({
-        status: 'success',
+        status: "success",
         data: {
           id: user._id,
           firstName: user.firstName,
@@ -505,8 +600,8 @@ console.log({data})
           email: user.email,
           phone: user.phone,
           role: user.role,
-          isVerified: user.isVerified
-        }
+          isVerified: user.isVerified,
+        },
       });
     } catch (error) {
       next(error);
@@ -514,72 +609,138 @@ console.log({data})
   };
 
   //Get profile
-  public getUserProfile = async ( req: UserRequest, res: Response, next: NextFunction): Promise<void> => {
-
+  public getUserProfile = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
-      console.log(req.user.user)
       const user = req.user.user;
-      const searchUser = await User.findById(user._id).populate('wallet').populate('transactions')
+      const searchUser = await User.findById(user.id)
+        .populate("wallet")
+        .populate("transactions");
       if (!searchUser) {
-        throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
+        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
       }
       res.status(200).json({
-        status: 'success',
-        data: searchUser
-    })
-    } catch (error) {
-      next(error)
-    }
-  }
-  // Update user profile
-  public updateProfile = async (req: UserRequest, res: Response, next: NextFunction) => {
-    try {
-      const { firstName, lastName, phone } = req.body;
-
-      const user = await User.findByIdAndUpdate(
-        req.user?.id,
-        { firstName, lastName, phone },
-        { new: true, runValidators: true }
-      );
-
-      if (!user) {
-        throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
-      }
-
-      logger.info(`Profile updated for user: ${user.email}`);
-
-      res.status(200).json({
-        status: 'success',
-        data: {
-          id: user._id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          phone: user.phone,
-          role: user.role,
-          isVerified: user.isVerified
-        }
+        status: "success",
+        data: searchUser,
       });
     } catch (error) {
       next(error);
     }
   };
+  // Update profile
+  public updateProfile = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
+    let imagePath;
+    let filename;
+    let fileExtension;
+    let userDetails = req.user.user;
+  
+    try {
+      const { firstName, lastName, phone } = req.body;
+      console.log({ file: req.file?.originalname });
+  
+      if (req.file) {
+        fileExtension = path.extname(req.file.originalname);
+        const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+        if (!allowedTypes.includes(req.file.mimetype)) {
+          throw new AppError("Only JPG, PNG, and WebP images are allowed", 400);
+        }
+  
+        // Ensure uploads directory exists
+        const uploadsDir = path.join(__dirname, "../../uploads");
+        if (!fs.existsSync(uploadsDir)) {
+          fs.mkdirSync(uploadsDir);
+        }
+  
+        filename = `profile-${userDetails?.firstName}-${Date.now()}${fileExtension}`;
+        const filepath = path.join(uploadsDir, filename);
+  
+        await sharp(req.file.buffer)
+          .resize(300, 300)
+          .jpeg({ quality: 70 })
+          .toFile(filepath);
+  
+        imagePath = `/uploads/${filename}`;
+      }
+  
+      const user = await User.findByEmail(userDetails?.email);
+      if (!user) {
+        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
+      }
+  
+      // Delete old image if exists
+      if (req.file && user.image) {
+        const baseName = path.basename(user.image);
+        const oldImagePath = path.join(__dirname, "../../uploads", baseName);
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+      }
+  
+      const updatedUser = await User.findByIdAndUpdate(
+        userDetails.id,
+        { firstName, lastName, phone, image: imagePath || user.image },
+        { new: true, runValidators: true }
+      );
+  
+      logger.info(`Profile updated for user: ${user.email}`);
+  
+      res.status(200).json({
+        status: "success",
+        data: {
+          id: updatedUser?._id,
+          firstName: updatedUser?.firstName,
+          lastName: updatedUser?.lastName,
+          email: updatedUser?.email,
+          phone: updatedUser?.phone,
+          image: updatedUser?.image,
+          role: updatedUser?.role,
+          isVerified: updatedUser?.isVerified
+        }
+      });
+    } catch (error: any) {
+      res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  };
+  
 
   // Change password
-  public changePassword = async (req: UserRequest, res: Response, next: NextFunction) => {
+  public changePassword = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { currentPassword, newPassword } = req.body;
       if (!currentPassword || !newPassword) {
-        throw new AppError('Current password and new password are required', 400, ErrorCodes.AUTH_001);
+        throw new AppError(
+          "Current password and new password are required",
+          400,
+          ErrorCodes.AUTH_001
+        );
       }
       if (currentPassword === newPassword) {
-        throw new AppError('New password cannot be the same as current password', 400, ErrorCodes.AUTH_001);
+        throw new AppError(
+          "New password cannot be the same as current password",
+          400,
+          ErrorCodes.AUTH_001
+        );
       }
 
-      const user = await User.findById(req.user?.id).select('+password');
+      const user = await User.findById(req.user?.id).select("+password");
 
       if (!user || !(await user.comparePassword(currentPassword))) {
-        throw new AppError('Current password is incorrect', 401, ErrorCodes.AUTH_002);
+        throw new AppError(
+          "Current password is incorrect",
+          401,
+          ErrorCodes.AUTH_002
+        );
       }
       user.password = newPassword;
       await user.save();
@@ -587,16 +748,13 @@ console.log({data})
       logger.info(`Password changed for user: ${user.email}`);
 
       res.status(200).json({
-        status: 'success',
-        message: 'Password changed successfully'
+        status: "success",
+        message: "Password changed successfully",
       });
     } catch (error) {
       next(error);
     }
   };
-
-
-
 
   // Change PIN
   // public changePin = async (req: UserRequest, res: Response, next: NextFunction) => {
@@ -623,113 +781,151 @@ console.log({data})
   //   }
   // };
 
-//   public resetPasswordWithToken = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const { email, submittedOTP, newPassword } = req.body;
+  //   public resetPasswordWithToken = async (req: Request, res: Response, next: NextFunction) => {
+  //   try {
+  //     const { email, submittedOTP, newPassword } = req.body;
 
-//     // Verify the reset token (OTP)
-//     const isTokenValid = await this.verifyOTP(email, submittedOTP);
+  //     // Verify the reset token (OTP)
+  //     const isTokenValid = await this.verifyOTP(email, submittedOTP);
 
-//     if (!isTokenValid) {
-//       throw new AppError('Invalid or expired token', 400, ErrorCodes.AUTH_005);
-//     }
+  //     if (!isTokenValid) {
+  //       throw new AppError('Invalid or expired token', 400, ErrorCodes.AUTH_005);
+  //     }
 
-//     // Find the user
-//     const user = await User.findOne({ email });
+  //     // Find the user
+  //     const user = await User.findOne({ email });
 
-//     if (!user) {
-//       throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
-//     }
+  //     if (!user) {
+  //       throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
+  //     }
 
-//     // Hash the new password
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(newPassword, salt);
+  //     // Hash the new password
+  //     const salt = await bcrypt.genSalt(10);
+  //     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-//     // Update the user's password
-//     user.password = hashedPassword;
-//     await user.save();
+  //     // Update the user's password
+  //     user.password = hashedPassword;
+  //     await user.save();
 
-//     logger.info(`Password reset successful for: ${email}`);
+  //     logger.info(`Password reset successful for: ${email}`);
 
-//     res.status(200).json({
-//       status: 'success',
-//       message: 'Password reset successful',
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-public forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { resetCode, newPass, confirmPass, email } = req.body;
+  //     res.status(200).json({
+  //       status: 'success',
+  //       message: 'Password reset successful',
+  //     });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
+  public forgotPassword = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { resetCode, newPass, confirmPass, email } = req.body;
 
-    if (!resetCode || !newPass || !confirmPass || !email) {
-      throw new AppError ("make sure the fields has valid values")
+      if (!resetCode || !newPass || !confirmPass || !email) {
+        throw new AppError("make sure the fields has valid values");
+      }
+
+      // Verify the reset token (OTP)
+      const isTokenValid = await this.verifyToken(email, resetCode);
+      if (!isTokenValid) {
+        throw new AppError(
+          "Invalid or expired token",
+          400,
+          ErrorCodes.AUTH_005
+        );
+      }
+
+      // Check if the user exists
+      const user = await User.findOne({ email }).select("+password");
+
+      if (!user) {
+        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
+      }
+
+      if (newPass !== confirmPass) {
+        throw new AppError("make sure both fields are the same");
+      }
+
+      const new_pass = await user.comparePassword(newPass);
+      if (new_pass) {
+        throw new AppError(
+          "new password cannot be the same as the old password"
+        );
+      }
+      user.password = newPass;
+      const saved = await user.save();
+      logger.info(`Password reset successful for: ${email}`);
+      res.status(200).json({
+        status: "success",
+        message: "Password reset successful",
+      });
+    } catch (error: any) {
+      res.json(error.message);
     }
+  };
 
-    // Verify the reset token (OTP)
-    const isTokenValid = await this.verifyToken(email, resetCode);
-    if (!isTokenValid) {
-      throw new AppError('Invalid or expired token', 400, ErrorCodes.AUTH_005);
-    }
-    
-    // Check if the user exists
-    const user = await User.findOne({ email }).select('+password');
+  public isAdmin = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const user = req.user;
+      const getUser = await User.findOne(user?.email);
+      if (!getUser) {
+        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
+      }
 
-    if (!user) {
-      throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
+      if (getUser.role !== "admin") {
+        throw new AppError(
+          "Unauthorized. User not admin",
+          401,
+          ErrorCodes.AUTH_006
+        );
+      }
+      req.user.role = getUser.role;
+      next();
+    } catch (error: any) {
+      res.status(401).json({ error: error.message });
     }
-
-    if (newPass !==  confirmPass) {
-      throw new AppError("make sure both fields are the same")
+  };
+  public getUsers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const user = await User.find();
+      if (!user) {
+        throw new AppError("couldn't find user");
+      }
+      res.json(user);
+    } catch (error: any) {
+      res.json(error.message);
     }
-
-    const new_pass = await user.comparePassword(newPass)
-    if (new_pass) {
-      throw new AppError("new password cannot be the same as the old password")
+  };
+  public getLoggedInUser = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const user = req.user.user;
+      const getUser = await User.findById(user._id)
+        .populate("wallet")
+        .populate("transactions");
+      if (!getUser) {
+        throw new AppError("couldn't find user");
+      }
+      res.json(getUser);
+    } catch (error: any) {
+      res.json(error.message);
     }
-    user.password = newPass;
-    const saved = await user.save()
-    logger.info( `Password reset successful for: ${email}`)
-    res.status(200).json({
-      status: 'success',
-      message: 'Password reset successful',
-    });
-  } catch (error: any) {
-    res.json(error.message)
-  }
-};
-
-public isAdmin = async (req: UserRequest, res: Response, next: NextFunction) => {
-  try {
-    const user = req.user;
-    const getUser = await User.findOne(user?.email)
-    if (!getUser) {
-      throw new AppError('User not found', 404, ErrorCodes.AUTH_002);
-    }
-    
-    if (getUser.role !== 'admin') {
-      throw new AppError('Unauthorized. User not admin', 401, ErrorCodes.AUTH_006);
-    }
-    req.user.role = getUser.role
-    next()
-
-  } catch (error: any) {
-    res.status(401).json({ error: error.message });
-  }
-}
-public getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  try {
-    const user = await User.find()
-    if (!user) {
-      throw new AppError("couldn't find user")
-    }
-    res.json(user)
-  } catch (error: any) {
-    res.json(error.message)
-  }
-}
-
+  };
 }
 
 export const authController = new AuthController();
