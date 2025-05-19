@@ -1,14 +1,21 @@
+import { Transaction } from '../../models/transactions';
 export interface PaymentDetails {
     amount: number;
+    paymentCategory?: string;
     customerEmail: string;
     customerName: string;
     paymentReference: string;
     transactionReference?: string;
     paymentDescription: string;
-    redirectUrl: string | undefined;
-    currencyCode: string | undefined;
-    contractCode: string | undefined;
+    transactionType?: string | undefined;
+    redirectUrl?: string | undefined;
+    currencyCode?: string | undefined;
+    contractCode?: string | undefined;
     paymentMethods?: string[]
+    metaData?: {[key: string]: any} | undefined
+    // transactionReference?: string;
+    // paymentReference?: string;
+
   }
   export interface ValidationError {
     field: string;
@@ -46,7 +53,7 @@ export interface PaymentDetails {
     };
   }
 
-  export interface TransactionStatus {
+  export interface TransactionResponse {
     requestSuccessful: boolean;
     responseMessage: string;
     responseBody: {
@@ -63,4 +70,16 @@ export interface PaymentDetails {
         name: string
       }
     };
+  }
+
+  export interface WalletPayment extends PaymentDetails {
+    amount: number;
+    customerName: string;
+    customerEmail: string;
+    paymentReference: string;
+    paymentDescription: string;
+    metaData?: {[key: string]: any} | undefined; // Make metaData optional with ?
+    redirectUrl?: string | undefined; // Make redirectUrl optional if not always needed
+    currencyCode?: string | undefined; // Make currencyCode optional if not always needed
+    contractCode?: string | undefined; // Make contractCode optional if not always needed
   }

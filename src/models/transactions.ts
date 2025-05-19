@@ -1,15 +1,17 @@
 import { Schema, model, Document, Types } from 'mongoose';
+import Wallet from './wallet';
 
 // Define the possible transaction types
 export enum TransactionType {
   AIRTIME = 'airtime',
   DATA = 'data',
   ELECTRICITY = 'electricity',
-  TV = 'tv'
+  TV = 'tv',
+  Wallet = 'fund_wallet'
 }
 
 // Define the possible transaction statuses
-export enum TransactionStatus {
+export enum TransactionStatusEnum {
   PENDING = 'pending',
   SUCCESS = 'success',
   FAILED = 'failed'
@@ -25,7 +27,7 @@ export interface ITransaction extends Document {
   user: Types.ObjectId;
   type: TransactionType;
   amount: number;
-  status: TransactionStatus;
+  status: TransactionStatusEnum;
   paymentReference: string;
   transactionReference: string;
   metadata: TransactionMetadata;
@@ -51,8 +53,8 @@ const transactionSchema = new Schema<ITransaction>({
   },
   status: {
     type: String,
-    enum: Object.values(TransactionStatus),
-    default: TransactionStatus.PENDING
+    enum: Object.values(TransactionStatusEnum),
+    default: TransactionStatusEnum.PENDING
   },
   paymentReference: {
     type: String,

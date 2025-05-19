@@ -1,7 +1,8 @@
 import mongoose, { Document, Model, Schema, Types } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
-import { ITransaction, TransactionStatus, Transaction } from './transactions';
+import { ITransaction, TransactionStatusEnum, Transaction } from './transactions';
+import Wallet from './wallet';
 
 // Interface for the User document
 export interface IUser extends Document {
@@ -10,12 +11,13 @@ export interface IUser extends Document {
   email: string;
   phone: string;
   password: string;
-  // pin: string;
+  image?: string | undefined;
   role: 'user' | 'agent' | 'admin';
   isVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
   transactions?: Types.ObjectId[] | ITransaction[];
+  wallet?: Types.ObjectId | string | typeof Wallet;
  
   // Helper methods
   getTransactions(filters?: Partial<ITransaction>): Promise<ITransaction[]>;
@@ -74,13 +76,9 @@ const userSchema = new Schema<IUser>(
       minlength: [8, 'Password must be at least 8 characters'],
       select: false, // Don't include password in queries by default
     },
-    // pin: {
-    //   type: String,
-    //   required: [true, 'PIN is required'],
-    //   minlength: [4, 'PIN must be 4 digits'],
-    //   maxlength: [4, 'PIN must be 4 digits'],
-    //   select: false, // Don't include PIN in queries by default
-    // },
+    image: {
+      type: String,
+    },
     role: {
       type: String,
       enum: ['user', 'agent', 'admin'],
@@ -101,7 +99,11 @@ const userSchema = new Schema<IUser>(
     transactions: [{
       type: Schema.Types.ObjectId,
       ref: 'Transaction'
-    }]
+    }],
+    wallet: {
+      type: Schema.Types.ObjectId,
+      ref: 'Wallet',
+    },
   },
   {
     timestamps: true, // Automatically handle createdAt and updatedAt
@@ -144,6 +146,13 @@ userSchema.pre('save', async function (next) {
   }
 });
 
+userSchema.pre('findOneAndDelete', async function(next) {
+  const user = await this.model.findOne(this.getFilter());
+  if (user) {
+    await mongoose.model('Wallet').deleteOne({ user: user._id });
+  }
+  next();
+});
 // Get user's transactions with optional filters
 userSchema.methods.getTransactions = async function(
   filters: Partial<Omit<ITransaction, keyof Document>> = {}
@@ -159,8 +168,8 @@ userSchema.methods.getTotalSpent = async function(): Promise<number> {
   const result = await Transaction.aggregate([
     {
       $match: {
-        user: new mongoose.Types.ObjectId(this._id),
-        status: TransactionStatus.SUCCESS
+        user: this._id,
+        status: TransactionStatusEnum.SUCCESS
       }
     },
     {

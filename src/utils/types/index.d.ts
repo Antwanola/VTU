@@ -19,7 +19,7 @@ declare global {
 
 declare global {
   namespace Express {
-    export interface DataRequest extends Request {
+    export interface DataRequest extends UserRequest {
       data?: {
         id?: string;
         network: string;

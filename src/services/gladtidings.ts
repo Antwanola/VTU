@@ -53,28 +53,50 @@ class GladTidingsService {
     };
 
     // Buy data
+    /**
+     * Finding Available Data Plan from gladtidings API
+     * @param network 
+     * @param plan 
+     * @param duration 
+     * @returns data object or error message
+     * @throws AppError if the data plan is not found or unavailable
+     */
     public findData = async (network: string, plan: string, duration: string): Promise<FindDataRespose | any> => {
         let service;
         try {
             const response = await this.initialize();
             if (!response || !response[network] || !response[network].ALL) {
-                throw new Error ("Failed to find data plan");
+                throw new Error("Failed to find data plan");
             }
+            
             const networkServices = response[network].ALL;
-            const findService = networkServices.filter((service: any) => 
-                service.plan == plan 
-            && service.month_validate.substring(0, 2) == duration.substring(0, 2)
-            );
-            for (let index = 0; index < findService.length; index++) {
-             service = findService[index];
-           }
-           if (service.month_validate.includes("CURRENTLY UNAVAILABLE")) {
-            throw new Error("Data plan is currently unavailable");
-           }
+            const durationNumber = duration.split(" ")[0]; // Gets "30" from "30 days"
+            
+            // First filter out null/undefined and ensure properties exist
+            const findService = networkServices
+                .filter((service: any) =>
+                    // service &&
+                    // service.month_validate &&
+                    // service.plan &&
+                    // console.log(service.month_validate.split(" ")[0] == durationNumber)
+                    service.month_validate.split(" ")[0] == durationNumber &&
+                    service.plan === plan &&
+                    service.plan_amount &&
+                    service.plan_amount.substring(0, 6).length >= 6
+                );
+                console.log({findService})
+            // Check if we found any services
             if (!findService || findService.length === 0) {
-                throw new AppError("No matching data service found");
+                throw new Error("No matching data service found");
             }
-    
+            
+            // Assign the first matching service (or you could use findService[0] directly)
+            service = findService[0];
+            // Now we know service exists, so we can safely check its properties
+            if (service?.month_validate.includes("CURRENTLY UNAVAILABLE")) {
+                throw new Error("Data plan is currently unavailable");
+            }
+            // console.log({service})
             return service;
         } catch (error: any) {
             return new Error(error.message || "Failed to find data plan");
