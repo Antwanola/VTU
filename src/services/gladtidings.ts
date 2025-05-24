@@ -90,13 +90,7 @@ class GladTidingsService {
             if (!findService || findService.length === 0) {
                 throw new Error("No matching data service found");
             }
-            //find the cheapest data if data is more than one
-            if (findService.length > 1) {
-                cheapestData = findService.reduce((prev: any, cur: any) => {
-                    return parseFloat(cur.plan_amount) < parseFloat(prev.plan_amount) ? cur : prev;
-                })
-            }
-            console.log({cheapestData})
+           
             
             //Assign the cheapest
             service = findService[0];
