@@ -98,7 +98,8 @@ const userSchema = new Schema<IUser>(
     },
     transactions: [{
       type: Schema.Types.ObjectId,
-      ref: 'Transaction'
+      ref: 'Transaction',
+      select: false
     }],
     wallet: {
       type: Schema.Types.ObjectId,

@@ -63,6 +63,7 @@ class GladTidingsService {
      */
     public findData = async (network: string, plan: string, duration: string): Promise<FindDataRespose | any> => {
         let service;
+        let cheapestData;
         try {
             const response = await this.initialize();
             if (!response || !response[network] || !response[network].ALL) {
@@ -89,8 +90,15 @@ class GladTidingsService {
             if (!findService || findService.length === 0) {
                 throw new Error("No matching data service found");
             }
+            //find the cheapest data if data is more than one
+            if (findService.length > 1) {
+                cheapestData = findService.reduce((prev: any, cur: any) => {
+                    return parseFloat(cur.plan_amount) < parseFloat(prev.plan_amount) ? cur : prev;
+                })
+            }
+            console.log({cheapestData})
             
-            // Assign the first matching service (or you could use findService[0] directly)
+            //Assign the cheapest
             service = findService[0];
             // Now we know service exists, so we can safely check its properties
             if (service?.month_validate.includes("CURRENTLY UNAVAILABLE")) {

@@ -76,6 +76,9 @@ class AuthController {
   ): Promise<void> => {
     const API_KEY = process.env.BREV0_API_KEY;
     const BrevoUri = "https://api.brevo.com/v3/smtp/email";
+    const htmlTemplate = path.join(__dirname, "../../email_template/email.html");
+    const htmlContent = fs.readFileSync(htmlTemplate, "utf8");
+    const emailContent = htmlContent.replace("{{context}}",context).replace("{{token}}", token);
 
     const emailData = {
       sender: {
@@ -84,7 +87,7 @@ class AuthController {
       },
       to: [{ email: clientEmail }],
       subject: "Authentication Token",
-      htmlContent: `<html><bod><h1> ${context}: ${token}</h1></bod></html>`,
+      htmlContent: emailContent,
     };
     try {
       const sendTask = await axios.post(BrevoUri, emailData, {
@@ -307,7 +310,7 @@ class AuthController {
       console.log(token);
       const addWallet = await (
         await user.populate("wallet")
-      ).populate("transactions");
+      );
 
       logger.info(`User logged in: ${email}`);
 
@@ -317,10 +320,9 @@ class AuthController {
         data: addWallet,
       });
     } catch (error: any) {
-      res.send(error.message);
+      res.status(error.statusCode).json(error.message);
     }
   };
-
   /**
    * Auth header validation and JWT verification
    * @param req - Request from express
@@ -626,8 +628,8 @@ class AuthController {
         status: "success",
         data: searchUser,
       });
-    } catch (error) {
-      next(error);
+    } catch (error: any) {
+      res.status(error.statusCode).json(error.message);
     }
   };
   // Update profile
