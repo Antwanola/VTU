@@ -2337,3 +2337,339 @@
 {"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-05-19T14:52:25.979Z"}
 {"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-19T14:59:12.496Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-19T14:59:12.548Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-19T16:46:37.977Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-19T16:46:38.093Z"}
+{"error":{},"level":"error","message":"[Global Error Handler] Cannot read properties of undefined (reading 'user')","method":"GET","path":"/api/v1/get-profile","stack":"TypeError: Cannot read properties of undefined (reading 'user')\n    at AuthController.getUserProfile (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:618:29)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:364:9\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:190:16\n    at getSecret (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:97:14)\n    at Object.module.exports [as verify] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:101:10)\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:352:9)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)","timestamp":"2025-05-19T16:46:40.826Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-19T16:46:48.468Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-19T17:30:16.296Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-19T17:30:16.322Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:13:15.188Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:13:15.270Z"}
+{"level":"error","message":{"error":"Cannot read properties of undefined (reading 'user')"},"timestamp":"2025-05-20T02:13:21.159Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-20T02:13:21.161Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-20T02:13:29.623Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:13:59.821Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:14:01.190Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707239820-0001","timestamp":"2025-05-20T02:14:01.191Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707239820-0001","status":"success","timestamp":"2025-05-20T02:14:01.536Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:14:01.561Z"}
+{"error":{"_message":"Transaction validation failed","errors":{"user":{"kind":"required","message":"User ID is required","name":"ValidatorError","path":"user","properties":{"message":"User ID is required","path":"user","type":"required"}}},"message":"Transaction validation failed: user: User ID is required","name":"ValidationError"},"level":"error","message":"[Global Error Handler] Transaction validation failed: user: User ID is required","method":"POST","path":"/api/v1/make-payment","stack":"ValidationError: Transaction validation failed: user: User ID is required\n    at model.Document.invalidate (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\document.js:3334:32)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\document.js:3095:17\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\mongoose\\lib\\schemaType.js:1407:9\n    at processTicksAndRejections (node:internal/process/task_queues:77:11)","timestamp":"2025-05-20T02:14:01.570Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:15:01.629Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:15:01.662Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:15:07.926Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:15:07.949Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:15:27.182Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:15:27.204Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:15:30.681Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:15:31.468Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707330681-0001","timestamp":"2025-05-20T02:15:31.470Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707330681-0001","status":"success","timestamp":"2025-05-20T02:15:31.895Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:15:31.916Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-20T02:15:31.920Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707367280-0003","timestamp":"2025-05-20T02:16:07.281Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707367280-0003","status":"success","timestamp":"2025-05-20T02:16:07.973Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:16:07.980Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-20T02:16:07.982Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:16:24.612Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:16:24.635Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:16:29.175Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:16:29.936Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707389175-0001","timestamp":"2025-05-20T02:16:29.938Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707389175-0001","status":"success","timestamp":"2025-05-20T02:16:30.222Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:16:30.241Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-20T02:16:30.246Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:17:01.123Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:17:01.152Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:17:08.485Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:17:09.688Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707428484-0001","timestamp":"2025-05-20T02:17:09.689Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707428484-0001","status":"success","timestamp":"2025-05-20T02:17:10.131Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:17:10.152Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-20T02:17:10.156Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:18:16.338Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:18:16.360Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:18:18.543Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:18:19.395Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707498542-0001","timestamp":"2025-05-20T02:18:19.397Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707498542-0001","status":"success","timestamp":"2025-05-20T02:18:19.655Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:18:19.683Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:19:01.989Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:19:02.014Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:19:05.575Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:19:06.354Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707545575-0001","timestamp":"2025-05-20T02:19:06.356Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707545575-0001","status":"success","timestamp":"2025-05-20T02:19:06.649Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:19:06.674Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:19:33.689Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:19:33.711Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:19:36.709Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:19:37.587Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707576708-0001","timestamp":"2025-05-20T02:19:37.589Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707576708-0001","status":"success","timestamp":"2025-05-20T02:19:37.865Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:19:37.923Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:20:46.185Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:20:46.208Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:20:50.766Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:20:51.854Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707650766-0001","timestamp":"2025-05-20T02:20:51.856Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707650766-0001","status":"success","timestamp":"2025-05-20T02:20:52.215Z"}
+{"level":"error","message":{"error":"Transaction validation failed: user: User ID is required"},"timestamp":"2025-05-20T02:20:52.234Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:21:41.790Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:21:41.818Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:21:48.515Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:21:48.536Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:21:53.045Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:21:53.822Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747707713044-0001","timestamp":"2025-05-20T02:21:53.824Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747707713044-0001","status":"success","timestamp":"2025-05-20T02:21:54.404Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:24:18.641Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:24:18.669Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:24:30.462Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:24:30.482Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-20T02:27:01.463Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-20T02:27:01.488Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-20T02:27:58.290Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-20T02:27:59.173Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1747708078289-0001","timestamp":"2025-05-20T02:27:59.174Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1747708078289-0001","status":"success","timestamp":"2025-05-20T02:27:59.453Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T10:51:24.389Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T10:51:24.468Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-24T10:51:36.053Z"}
+{"level":"error","message":{"error":"Cannot read properties of undefined (reading 'user')"},"timestamp":"2025-05-24T10:58:38.309Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T10:59:06.387Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T10:59:08.940Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748084346384-0001","timestamp":"2025-05-24T10:59:08.942Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748084346384-0001","status":"success","timestamp":"2025-05-24T10:59:09.306Z"}
+{"amount":4000,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748084815189-0003","timestamp":"2025-05-24T11:06:55.190Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748084815189-0003","status":"success","timestamp":"2025-05-24T11:06:56.713Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T11:11:29.663Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T11:11:36.721Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-05-24T11:11:53.699Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-05-24T11:19:47.824Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-05-24T11:20:54.369Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T11:25:12.855Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T11:25:12.915Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T11:25:33.984Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T11:25:34.014Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find / on this server","method":"GET","path":"/","stack":"Error: Can't find / on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:67:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-24T11:31:30.471Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find /favicon.ico on this server","method":"GET","path":"/favicon.ico","stack":"Error: Can't find /favicon.ico on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:67:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-24T11:31:31.713Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find / on this server","method":"GET","path":"/","stack":"Error: Can't find / on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:67:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-24T11:33:17.737Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T11:35:07.816Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T11:35:07.896Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T11:51:51.726Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T11:51:51.751Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-24T11:52:06.327Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:05:36.139Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:05:36.208Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:07:34.736Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:07:34.755Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-24T12:07:36.609Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:09:16.448Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:09:16.468Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-24T12:09:20.136Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T12:09:45.992Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T12:15:41.037Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T12:15:42.837Z"}
+{"amount":300,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748088941036-0001","timestamp":"2025-05-24T12:15:42.838Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748088941036-0001","status":"success","timestamp":"2025-05-24T12:15:43.262Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:42:37.626Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:42:37.727Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find / on this server","method":"GET","path":"/","stack":"Error: Can't find / on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:63:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-24T12:49:15.951Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find /favicon.ico on this server","method":"GET","path":"/favicon.ico","stack":"Error: Can't find /favicon.ico on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:63:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-24T12:49:16.704Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:51:25.649Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:51:25.672Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:51:57.448Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:51:57.471Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:52:50.051Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:52:50.074Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:53:11.925Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:53:11.946Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:53:26.291Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:53:26.315Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:53:51.548Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:53:51.570Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:54:02.797Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:54:02.826Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:54:17.826Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:54:17.863Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:54:36.550Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:54:36.584Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:55:07.792Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:55:07.814Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T12:55:25.173Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T12:55:25.190Z"}
+{"level":"error","message":"Transaction already processed","timestamp":"2025-05-24T12:55:26.497Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:00:30.425Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:00:30.449Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:01:01.976Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:01:02.010Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T13:01:36.739Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T13:01:37.777Z"}
+{"amount":300,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748091696738-0001","timestamp":"2025-05-24T13:01:37.780Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748091696738-0001","status":"success","timestamp":"2025-05-24T13:01:38.235Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T13:08:40.750Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:17:09.770Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:17:09.792Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:17:18.758Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:17:18.786Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:26:31.458Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:26:31.481Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:30:14.747Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:30:14.767Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:30:22.950Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:30:22.967Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T13:34:06.255Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:35:22.376Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:35:22.395Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:35:35.126Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:35:35.146Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T13:35:44.598Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T13:35:45.799Z"}
+{"amount":300,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748093744597-0001","timestamp":"2025-05-24T13:35:45.801Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748093744597-0001","status":"success","timestamp":"2025-05-24T13:35:46.469Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T13:38:39.115Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:45:33.608Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:45:33.642Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:50:23.906Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:50:23.950Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:51:12.133Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:51:12.154Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T13:55:24.425Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T13:55:24.444Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:04:21.136Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:04:21.172Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:06:38.365Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:06:38.388Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T14:07:20.655Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T14:07:22.936Z"}
+{"amount":300,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748095640654-0001","timestamp":"2025-05-24T14:07:22.938Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748095640654-0001","status":"success","timestamp":"2025-05-24T14:07:23.429Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:10:45.612Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T14:10:45.617Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:12:12.929Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T14:12:12.932Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:13:24.637Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:13:24.656Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:14:22.004Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:14:22.024Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:15:50.848Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:15:50.876Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T14:15:54.401Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T14:15:55.555Z"}
+{"amount":300,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748096154401-0001","timestamp":"2025-05-24T14:15:55.557Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748096154401-0001","status":"success","timestamp":"2025-05-24T14:15:56.357Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:16:53.691Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:16:53.711Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:17:13.039Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:18:55.529Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:18:55.558Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:19:11.608Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:22:29.465Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:22:29.487Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T14:22:47.660Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T14:22:49.980Z"}
+{"amount":500,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748096567660-0001","timestamp":"2025-05-24T14:22:49.982Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748096567660-0001","status":"success","timestamp":"2025-05-24T14:22:50.412Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find / on this server","method":"GET","path":"/","stack":"Error: Can't find / on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:63:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-24T14:26:29.865Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find /favicon.ico on this server","method":"GET","path":"/favicon.ico","stack":"Error: Can't find /favicon.ico on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:63:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-24T14:26:31.390Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:27:22.498Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:27:40.222Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:28:39.970Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'settlementAmount_inApp')","timestamp":"2025-05-24T14:28:58.823Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:47:18.933Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:47:18.958Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:47:38.960Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:47:38.994Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:47:49.296Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:47:49.341Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:48:31.690Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:48:31.712Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T14:48:34.878Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T14:48:35.913Z"}
+{"amount":500,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748098114877-0001","timestamp":"2025-05-24T14:48:35.914Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748098114877-0001","status":"success","timestamp":"2025-05-24T14:48:36.364Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:51:33.484Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:51:33.519Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T14:56:03.786Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T14:56:03.809Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:02:23.288Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:02:23.313Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-05-24T15:05:29.623Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-05-24T15:05:30.803Z"}
+{"amount":300,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1748099129621-0001","timestamp":"2025-05-24T15:05:30.804Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1748099129621-0001","status":"success","timestamp":"2025-05-24T15:05:31.198Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:06:44.594Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:06:44.614Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:22:11.192Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:22:11.220Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:22:17.808Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:22:17.845Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:22:32.209Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:22:32.228Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:22:58.825Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:22:58.844Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:23:33.014Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:23:33.039Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:24:03.532Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:24:03.549Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:24:25.010Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:24:25.035Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:24:39.397Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:24:39.422Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:24:47.483Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:24:47.503Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:25:06.876Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:25:06.902Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:25:24.628Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:25:24.648Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:28:02.620Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:28:02.640Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:29:30.634Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:29:30.672Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:29:49.852Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:29:49.875Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T15:39:07.740Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T15:39:07.759Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'plan_amount')","timestamp":"2025-05-24T16:01:43.591Z"}
+{"error":{},"level":"error","message":"[Global Error Handler] Cannot read properties of undefined (reading 'plan_amount')","method":"POST","path":"/api/v1/buy-data","stack":"TypeError: Cannot read properties of undefined (reading 'plan_amount')\n    at DataCntroller.buyData (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\dataController.ts:61:70)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:366:9\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:261:12\n    at getSecret (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:97:14)\n    at Object.module.exports [as verify] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:101:10)\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:354:9)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)","timestamp":"2025-05-24T16:01:43.617Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'plan_amount')","timestamp":"2025-05-24T16:02:06.288Z"}
+{"error":{},"level":"error","message":"[Global Error Handler] Cannot read properties of undefined (reading 'plan_amount')","method":"POST","path":"/api/v1/buy-data","stack":"TypeError: Cannot read properties of undefined (reading 'plan_amount')\n    at DataCntroller.buyData (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\dataController.ts:61:70)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:366:9\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:261:12\n    at getSecret (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:97:14)\n    at Object.module.exports [as verify] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\jsonwebtoken\\verify.js:101:10)\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:354:9)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)","timestamp":"2025-05-24T16:02:06.292Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:02:38.118Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:02:38.165Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:03:13.290Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:03:13.319Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'plan_amount')","timestamp":"2025-05-24T16:03:19.222Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T16:03:19.225Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:04:06.543Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:04:06.566Z"}
+{"level":"error","message":{"error":"Cannot set headers after they are sent to the client"},"timestamp":"2025-05-24T16:06:53.575Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T16:06:53.577Z"}
+{"level":"error","message":{"error":"Cannot set headers after they are sent to the client"},"timestamp":"2025-05-24T16:07:05.288Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-05-24T16:07:05.289Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-05-24T16:07:45.061Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:18:46.282Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:18:46.302Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:28:15.132Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:28:15.178Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:28:25.580Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:28:25.602Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:29:08.335Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:29:08.362Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:29:20.600Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:29:20.625Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:32:54.495Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:32:54.514Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:33:12.763Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:33:12.794Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:33:17.969Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:33:17.995Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:37:15.488Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:37:15.509Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:37:30.786Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:37:30.807Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:37:38.610Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:37:38.631Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:41:29.991Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:41:30.012Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-05-24T16:43:55.953Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-05-24T16:43:55.973Z"}

@@ -7,6 +7,7 @@ import { logger } from './utils/logger'; // Ensure you have the logger imported
 import { corsOptions } from './config/corsOptions';
 import cors from "cors"
 import router from './routes';
+import path from 'path';
 import { dataService } from './services/gladtidings';
 import { quickTellerService } from './services/quickTeller';
 import { seedData } from './utils/seeData';
@@ -22,11 +23,8 @@ app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-
-// Middleware
-app.use(express.json()); // Add JSON body parser
-app.use(express.urlencoded({ extended: true })); // Add URL-encoded body parser
 
 
 

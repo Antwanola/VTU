@@ -71,11 +71,11 @@ class WalletController {
             if (monnifyPayment instanceof Error) {
                 throw new AppError("Failed to initiate payment", 404);
             }
-            const wallet = await walletService.creditWallet(userId, amount);
-            if (wallet instanceof Error) {
-                throw new AppError("Failed to credit wallet", 404);
-            }
-            res.json(wallet)
+            res.status(200).json({
+                success: true,
+                data: monnifyPayment,
+                message: "Payment initiated successfully, please complete the payment to fund your wallet"
+            });
         } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
