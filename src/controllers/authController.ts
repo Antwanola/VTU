@@ -39,6 +39,13 @@ class AuthController {
     });
   }
 
+  public hello = (req: Request, res: Response, next: NextFunction) => {
+    res.status(200).json({
+      status: "success",
+      message: "Hello, welcome to Ambitious Data Plug API!",
+    });
+  }
+
   // Generate Verification Token.
   private generateOTP(): string {
     return Math.floor(100000 + Math.random() * 9000).toString();
