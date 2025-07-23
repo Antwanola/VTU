@@ -1,5 +1,7 @@
-import Wallet from "../models/wallet" // Assuming you have a Wallet mongoose model
-import mongoose from 'mongoose';
+import { AppError } from "../utils/HandleErrors";
+import Wallet, { IWallet } from "../models/wallet" // Assuming you have a Wallet mongoose model
+import { Transaction, TransactionStatusEnum } from "../models/transactions";
+import { PaymentContollers } from "../controllers/paymentController";
 
 class WalletService {
   
@@ -41,31 +43,75 @@ class WalletService {
   }
 
   // Debit Wallet
-  public async debitWallet(email: string, amount: number) {
-    const wallet = await this.getWallet(email);
-
-    if (wallet.balance < amount) {
-      throw new Error('Insufficient balance');
-    }
-
-    wallet.balance -= amount;           // Reduce available balance
-    // Ledger balance might remain until transaction settles
-    wallet.updatedAt = new Date();
-
-    await wallet.save();
-    return wallet;
+public async debitWallet(
+  email: string,
+  amount: number,
+  transactionData: {
+    userId: string;
+    paymentCategory: string;
+    servicePaidFor: string;
+    amount: number;
+    paymentDescription: string;
+    customerName: string;
+    transactionReference: string;
   }
+): Promise<IWallet> {
+  const wallet = await this.getWallet(email);
+
+  if (!wallet) {
+    throw new Error("Couldn't get user wallet");
+  }
+
+  if (wallet.balance < amount) {
+    throw new Error('Insufficient balance');
+  }
+
+  wallet.balance -= amount;
+  wallet.updatedAt = new Date();
+  await wallet.save();
+
+  const transaction = await Transaction.create({
+    user: transactionData.userId,
+    paymentCategory: transactionData.paymentCategory,
+    type: transactionData.servicePaidFor,
+    amount: transactionData.amount,
+    status: TransactionStatusEnum.SUCCESS,
+    paymentReference: await PaymentContollers.generateReference(),
+    transactionReference: transactionData.transactionReference,
+    metadata: {
+      paymentDescription: transactionData.paymentDescription,
+      customer: transactionData.customerName,
+      paymentStatus: TransactionStatusEnum.SUCCESS,
+    },
+  });
+const saved = transaction.save()
+if (saved instanceof Error) {
+    throw new AppError("Transaction could not be saved from debit wallet", 500);
+}
+  return wallet;
+}
+
+
 
   // Freeze Wallet
-  public async freezeWallet(email: string) {
-    const wallet = await this.getWallet(email);
+public async freezeWallet(email: string): Promise<IWallet | Error> {
+  const wallet = await this.getWallet(email);
 
-    wallet.status = 'suspended';
-    wallet.updatedAt = new Date();
-
-    await wallet.save();
-    return wallet;
+  if (!wallet) {
+    return new Error("Wallet not found for the provided email.");
   }
+
+  if (wallet.status === 'suspended') {
+    return new Error("Wallet is already suspended.");
+  }
+
+  wallet.status = 'suspended';
+  wallet.updatedAt = new Date();
+
+  await wallet.save();
+  return wallet;
+}
+
 
   // Get Wallet Balance
   public async getWalletBalance(email: string) {

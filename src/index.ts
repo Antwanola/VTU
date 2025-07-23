@@ -8,9 +8,10 @@ import { corsOptions } from './config/corsOptions';
 import cors from "cors"
 import router from './routes';
 import path from 'path';
-import { dataService } from './services/gladtidings';
+import { dataService } from './services/VTU_data/gladtidings';
 import { quickTellerService } from './services/quickTeller';
 import { seedData } from './utils/seeData';
+import { GsubzService } from './services/VTU_data/gsubz';
 
 
 
@@ -44,6 +45,11 @@ connectDB();
 //   await seedData()
 // }
 
+const callGSubzService = async() => {
+  const service = new  GsubzService();
+   const daa = await service.getAllServicesBYProvider("airtel");
+}
+callGSubzService()
 
 // const initializeGladTidings = async () => {
 //   await dataService.initialize()

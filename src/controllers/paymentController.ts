@@ -20,22 +20,23 @@ import { ErrorCodes } from "../utils/errorCodes";
 
 config(); // Changed to config() as configDotenv is deprecated
 
+
+
 class PaymentController {
   private counter;
   constructor() {
     this.counter = 0;
   }
-
+ public generateReference = async () => {
+      const timestamp = Date.now();
+      this.counter++;
+      return `PAY_${timestamp}-${this.counter.toString().padStart(4, "0")}`;
+    };
   public initializePayment = async (
     req: UserRequest,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    const generateReference = async () => {
-      const timestamp = Date.now();
-      this.counter++;
-      return `PAY_${timestamp}-${this.counter.toString().padStart(4, "0")}`;
-    };
     try {
       const {
         sku,
@@ -55,7 +56,7 @@ class PaymentController {
         customerEmail: req.user.user.email,
         customerName: `${req.user.user.firstName} ${req.user.user.lastName}`,
         paymentDescription: paymentDescription,
-        paymentReference: await generateReference(),
+        paymentReference: await this.generateReference(),
         contractCode: process.env.MONNIFY_CONTRACT_CODE,
         currencyCode: "NGN",
         redirectUrl: process.env.PAYMENT_REDIRECT_URL,
@@ -79,7 +80,7 @@ class PaymentController {
         type: req.body.servicePaidFor,
         amount: details.amount,
         status: TransactionStatusEnum.PENDING,
-        paymentReference: await generateReference(),
+        paymentReference: await this.generateReference(),
         transactionReference: payment.responseBody.transactionReference,
         metadata: {
           paymentDescription: details.paymentDescription,

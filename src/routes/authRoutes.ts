@@ -14,6 +14,7 @@ const authRouter = express.Router();
 // Apply rate limiting to auth routes
 authRouter.use(limiter);
 
+authRouter.get('hello', authController.hello())
 authRouter.post('/register', validateRequest, authController.register );
 authRouter.post('/login', validateRequest, authController.login);
 authRouter.post('/verify-email', authController.verifyEmail);

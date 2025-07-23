@@ -35,7 +35,7 @@ export interface FindDataRespose {
     
         id: number,
         dataplan_id: string,
-        network: number,
+        network: string,
         plan_type: string,
         plan_network: string,
         month_validate: string,

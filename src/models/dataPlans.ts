@@ -1,8 +1,8 @@
 import { Schema, model,Types,  Document } from 'mongoose';
 
 
-interface IData extends Document {
-  sku: string,
+export interface IData extends Document {
+  // sku: string,
   networkProvider: string;
   plan?: string;
   duration?: string;
@@ -14,7 +14,7 @@ interface IData extends Document {
 
 const DataSchema = new Schema<IData>({
   networkProvider: { type: String, required: true },
-  sku: { type: String, require: true },
+  // sku: { type: String, require: true },
   plan: { type: String },
   duration: { type: String },
   price: { type: Number },
