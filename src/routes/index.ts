@@ -1,4 +1,4 @@
-import { dataService } from './../services/gladtidings';
+import { dataService } from '../services/VTU_data/gladtidings';
 import express from "express"
 import authRouter from "./authRoutes"
 import paymentRouter from "./payment"

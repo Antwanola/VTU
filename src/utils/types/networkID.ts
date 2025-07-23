@@ -1,4 +1,4 @@
-import { MTN_PLAN } from './gladTidingsPayload';
+import { MTN_PLAN, AIRTEL_PLAN } from './gladTidingsPayload';
 export enum NetworkID {
     MTN_PLAN = 1,
     AIRTEL_PLAN = 3,

@@ -307,10 +307,10 @@ class AuthController {
         isVerified: user.isVerified,
       };
       const token = this.generateToken(tokenPayload);
-      console.log(token);
-      const addWallet = await (
+      const addWallet = (
         await user.populate("wallet")
       );
+      console.log(addWallet)
 
       logger.info(`User logged in: ${email}`);
 
@@ -329,44 +329,60 @@ class AuthController {
    * @param res - Response from express
    * @param next - Nextfunction from express
    */
+  /**
+   * Middleware to authenticate JWT tokens from the Authorization header.
+   * Attaches the decoded user to req.user if valid.
+   */
   public async authenticationToken(
     req: UserRequest,
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    // Extract the Authorization header
-    const authHeader = req.headers["authorization"];
+    try {
+      const authHeader = req.headers["authorization"];
 
-    // Check if the Authorization header exists and is in the correct format
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      res.status(401).json({ message: "User not authenticated" });
-    }
-
-    // Extract the token from the Authorization header
-    const token = authHeader.split(" ")[1]; // "Bearer <token>"
-
-    // Check if the token exists
-    if (!token) {
-      res.status(401).json({ message: "User not authenticated" });
-    }
-
-    // Verify the JWT
-    jwt.verify(
-      token,
-      process.env.JWT_SECRET as string,
-      (err: any, user: any) => {
-        if (err) {
-          res.status(403).json({ message: "Invalid or expired token" });
-        }
-
-        // Attach the decoded user information to the request object
-        req.user = user;
-
-        // Proceed to the next middleware or route handler
-        next();
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        // Use organization error codes and logging
+        logger.warn("Missing or malformed Authorization header");
+        throw new AppError(
+          "Authorization token missing or malformed",
+          401,
+          ErrorCodes.AUTH_001
+        );
       }
-    );
-  }
+
+      const token = authHeader.split(" ")[1];
+
+      if (!token) {
+        logger.warn("Token not found in Authorization header");
+        throw new AppError(
+          "User not authenticated",
+          401,
+          ErrorCodes.AUTH_001
+        );
+      }
+
+      // Synchronous verification for cleaner async/await flow
+      let decodedUser: any;
+      try {
+        decodedUser = jwt.verify(token, process.env.JWT_SECRET as string);
+      } catch (err) {
+        logger.warn("Invalid or expired token", { error: err });
+        throw new AppError(
+          "Invalid or expired token",
+          403,
+          ErrorCodes.AUTH_001
+        );
+      }
+
+      req.user = decodedUser;
+      next();
+    } catch (error: any) {
+      // Pass error to Express error handling middleware
+      next(error);
+    }
+}
+
 
   /**
    *   Verify email again when it has expired
@@ -644,6 +660,9 @@ class AuthController {
     let userDetails = req.user.user;
   
     try {
+      if (!userDetails) {
+        throw new AppError("User not authenticated", 401, ErrorCodes.AUTH_001);
+      }
       const { firstName, lastName, phone } = req.body;
       console.log({ file: req.file?.originalname });
   
