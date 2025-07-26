@@ -2,12 +2,18 @@ import { CorsOptions } from 'cors';
 import { configDotenv } from 'dotenv';
 configDotenv()
 
-export const corsOptions: CorsOptions = {
-  origin: process.env.ALLOWED_ORIGINS?.split(',') || [], // Allow requests from these origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  // allowedHeaders: ['Content-Type', 'Authorization'],
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || []; // ✅ Lowercase to match usage
+
+export const corsOptions = {
+  origin: (origin:any, callback:any) => {
+    console.log("CORS request from:", origin);
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked: Origin ${origin} not allowed`));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
-  maxAge: 600, // 10 minutes
-  exposedHeaders: ['Authorization', 'Content-Type']
 };
 
