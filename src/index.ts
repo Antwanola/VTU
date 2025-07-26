@@ -4,7 +4,6 @@ import { limiter } from './middleware/rateLimiter';
 import { connectDB } from './config/database';
 import { globalErrorHandler, AppError } from './utils/HandleErrors'; // Import the global error handler
 import { logger } from './utils/logger'; // Ensure you have the logger imported
-import { corsOptions } from './config/corsOptions';
 import cors from "cors"
 import router from './routes';
 import path from 'path';
@@ -14,6 +13,11 @@ import { seedData } from './utils/seeData';
 import { GsubzService } from './services/VTU_data/gsubz';
 
 
+
+const corsOptions = {
+  origin: ['http://localhost:5173,https://vtu-frontend-rvbx.onrender.com'],
+  credentials: true,
+};
 
 const app = express();
 
