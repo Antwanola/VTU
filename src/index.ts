@@ -11,13 +11,8 @@ import { dataService } from './services/VTU_data/gladtidings';
 import { quickTellerService } from './services/quickTeller';
 import { seedData } from './utils/seeData';
 import { GsubzService } from './services/VTU_data/gsubz';
+import { corsOptions } from './config/corsOptions';
 
-
-
-const corsOptions = {
-  origin: ['http://localhost:5173,https://vtu-frontend-rvbx.onrender.com'],
-  credentials: true,
-};
 
 const app = express();
 

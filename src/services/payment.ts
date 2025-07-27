@@ -150,6 +150,7 @@ export class MonifyService {
       );
 
       if (!response.data.requestSuccessful) {
+        console.log(`${response.data.responseMessage}`)
         throw new AppError(`Payment initiation failed: ${response.data.responseMessage}`);
       }
 

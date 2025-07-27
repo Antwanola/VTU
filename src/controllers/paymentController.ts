@@ -89,7 +89,6 @@ class PaymentController {
         },
       });
       const saved = await createTransaction.save();
-      console.log(req.user.user.id);
 
       const update_user = await User.findByIdAndUpdate(req.user.user.id, {
         $push: { transactions: saved._id },
