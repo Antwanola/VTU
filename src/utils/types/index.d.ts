@@ -30,5 +30,17 @@ declare global {
   }
 }
 
+declare global {
+  namespace Express {
+  export  interface SELECTED_CONTROLLER extends Request{
+    selectedController?:{
+      findData: (req: Request, res: any) => Promise<void>;
+      buyData: (req: Request, res: any) => Promise<void>;
+      findGsubData:  (req: Request, res: any) => Promise<void>;
+      buyGsubzData: (req: Request, res: any) => Promise<void>;
+    }
+  }
+}
+}
 // Export the type for reuse
-export type { UserRequest, DataRequest };
+export type { UserRequest, DataRequest, SELECTED_CONTROLLER };

@@ -1,13 +1,14 @@
 import { AppError } from "../utils/HandleErrors";
 import Wallet, { IWallet } from "../models/wallet" // Assuming you have a Wallet mongoose model
-import { Transaction, TransactionStatusEnum } from "../models/transactions";
+import { ITransaction, Transaction, TransactionStatusEnum } from "../models/transactions";
 import { PaymentContollers } from "../controllers/paymentController";
+import { TransactionMetadata } from "@/utils/types/gsubz_service_Enums";
 
 class WalletService {
   
   // Get Wallet
-  public async getWallet(email: string) {
-    const wallet = await Wallet.findOne({ userEmail: email });
+  public async getWallet(userID: string) {
+    const wallet = await Wallet.findOne({ user: userID });
     if (!wallet) {
       throw new Error('Wallet not found');
     }
@@ -44,20 +45,12 @@ class WalletService {
 
   // Debit Wallet
 public async debitWallet(
-  email: string,
+  userID: string,
   amount: number,
-  transactionData: {
-    userId: string;
-    paymentCategory: string;
-    servicePaidFor: string;
-    amount: number;
-    paymentDescription: string;
-    customerName: string;
-    transactionReference: string;
-  }
-): Promise<IWallet> {
-  const wallet = await this.getWallet(email);
-
+): Promise<IWallet | any> {
+  try {
+    const wallet = await this.getWallet(userID);
+console.log(`from debitwalle: ${wallet}`)
   if (!wallet) {
     throw new Error("Couldn't get user wallet");
   }
@@ -69,27 +62,12 @@ public async debitWallet(
   wallet.balance -= amount;
   wallet.updatedAt = new Date();
   await wallet.save();
-
-  const transaction = await Transaction.create({
-    user: transactionData.userId,
-    paymentCategory: transactionData.paymentCategory,
-    type: transactionData.servicePaidFor,
-    amount: transactionData.amount,
-    status: TransactionStatusEnum.SUCCESS,
-    paymentReference: await PaymentContollers.generateReference(),
-    transactionReference: transactionData.transactionReference,
-    metadata: {
-      paymentDescription: transactionData.paymentDescription,
-      customer: transactionData.customerName,
-      paymentStatus: TransactionStatusEnum.SUCCESS,
-    },
-  });
-const saved = transaction.save()
-if (saved instanceof Error) {
-    throw new AppError("Transaction could not be saved from debit wallet", 500);
-}
   return wallet;
+  } catch (error: any) {
+    return error.message
+  }
 }
+  
 
 
 

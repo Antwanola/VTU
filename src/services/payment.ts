@@ -8,6 +8,7 @@ import { Transaction, TransactionStatusEnum, TransactionType } from '../models/t
 import { stringify } from 'querystring';
 import Wallet, { IWallet } from '../models/wallet';
 import User from '../models/users';
+import { Types } from 'mongoose';
 
 export class MonifyService {
   private readonly baseUrl: string;
@@ -345,6 +346,7 @@ public async createWallet_InApp(payload: any): Promise<IWallet | any> {
       currency: 'NGN',
       accountReference: await generateReference(),
       lastTransactionReference: "",
+      transactions:Array<Types.ObjectId>(),
       getAllAvailableBanks: true,
       createdAt: new Date(),
       updatedAt: new Date(),

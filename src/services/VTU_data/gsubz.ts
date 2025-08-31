@@ -32,27 +32,19 @@ export class GsubzService {
   };
 
   // Get All Services
-  public getAllServicesBYProvider = async (provider: string): Promise<any> => {
+  public getAllServicesBYServiceType = async (serviceType: string): Promise<any> => {
     // Get all subservices for a provider (like ['mtn_sme', 'mtn_gifting', ...])
-    const allProviderServices = this.getAllServicesFor(provider);
-
-    const requests = allProviderServices.map((service) =>
-      this.axiosInstance.get(`/api/plans?service=${service}`)
-    );
-
-    try {
-      //Await all response in parallel
-      const responses = await Promise.all(requests);
-
-      // Flatten the results into a single array
-      const allData = responses.map((response) => response.data);
-      const filteredData = allData
-        .filter((data) => data && Array.isArray(data.plans))
-        .flatMap((data) => data.plans);
-        console.log(`${provider}: `, filteredData)
-      return filteredData;
+    // const allProviderServices = this.getAllServicesFor(provider);
+   try {
+     const response = this.axiosInstance.get(`/api/plans?service=${serviceType}`)
+      if (!response) {
+        throw new Error("Failed to fetch data from Gsubz API");
+      }
+      const dataService = (await response).data;
+      return dataService.plans;
     } catch (error: any) {
-      console.error("Error fetching services:", error.message);
+
+      return new Error(`Failed to fetch services for provider ${serviceType}: ${error.message}`)
       // throw new Error(`Failed to fetch services for provider ${provider}: ${error.message}`);
     }
   };
@@ -65,6 +57,18 @@ export class GsubzService {
     return `${prefix}-${randString}-${paddeNum}`;
   };
 
+  
+// private convertToMB = (sizeStr: string): number => {
+//   const match = sizeStr.match(/([\d.]+)\s*(GB|MB)/i);
+//   if (!match) return 0;
+
+//   const value = parseFloat(match[1]);
+//   const unit = match[2].toUpperCase();
+
+//   return unit === 'GB' ? value * 1024 : value;
+// }
+
+
   //Find Network Service Plan
   public findNetworkServicePlan = (
     networkService: string
@@ -75,64 +79,76 @@ export class GsubzService {
     if (!services) {
       throw new Error(`Network service ${networkService} not found`);
     }
-    console.log("Network Service Plan:", services);
     return services;
   };
 
   // Get Gsubz Data by Network Service
-  public getGsubzDataBYNetworkService = async (
-    plan_category: string
-  ): Promise<GSubzDataPlanResponse> => {
-    const networkService = this.findNetworkServicePlan(plan_category);
-    console.log("Network Service:", networkService);
-    try {
-      const response = await this.axiosInstance.get(
-        `/api/plans?service=${networkService}`
-      );
-      if (!response.data) {
-        throw new Error("Failed to fetch data from Gsubz API");
-      }
-      const dataService = response.data;
-      // console.log("Data Service:", dataService);
-      return dataService;
-    } catch (error: any) {
-      console.log(error.message);
-      return error.message;
-    }
-  };
+  // public getGsubzDataBYNetworkService = async (
+  //   plan_category: string
+  // ): Promise<GSubzDataPlanResponse> => {
+  //   const networkService = this.findNetworkServicePlan(plan_category);
+  //   console.log({networkService})
+  //   try {
+  //     const response = await this.axiosInstance.get(
+  //       `/api/plans?service=${networkService}`
+  //     )
+  //     if (!response.data) {
+  //       throw new Error("Failed to fetch data from Gsubz API");
+  //     }
+  //     const dataService = response.data;
+  //     return dataService;
+  //   } catch (error: any) {
+  //     logger.error(error.message);
+  //     return error.message;
+  //   }
+  // };
 
-  public findOneData = async (
-    provider: string,
-    plan: string,
-    duration: string
-  ): Promise<GsubzDataPlan | Error> => {
-    try {
-      const dataPlans = await this.getAllServicesBYProvider(provider);
-      if (!dataPlans) {
-        throw new Error(
-          `No data plans found for the specified network service`
-        );
-      }
 
-      const matched = dataPlans.find(
-        (item: any) =>
-          item.displayName.includes(plan) && item.displayName.includes(duration)
-      );
-      if (!matched) {
-        throw new Error("No matched data found on Gsubz network");
-      }
-      console.log({ matched });
-      return matched;
-    } catch (error: any) {
-      console.log("Error finding data:", error.message);
-      return error.message;
+private normalize(str: string): string {
+  return str.replace(/\s+/g, '');
+}
+
+public findOneData = async (
+  serviceType: string,
+  size: string,
+  duration: string,
+  network: string
+): Promise<GsubzDataPlan | Error> => {
+  try {
+    const dataPlans = await this.getAllServicesBYServiceType(serviceType);
+    if (!dataPlans) {
+      return new Error(`No data plans found for the specified network service`);
     }
-  };
-     public buyGsubzDataPlan = async ( {plan, phone, value}: { plan: string, phone: string, value: string}): Promise<AxiosInstance | Error> => {
+    const normalizedPlan = this.normalize(size).toUpperCase();
+    const normalizedDuration = this.normalize(duration).toLowerCase();
+    
+    const matched = dataPlans.find((item: any) => {
+      const parts = item.displayName.split('-');
+      if (parts.length !== 2) return false;
+
+      const left = this.normalize(parts[0]); // e.g., "300MB"
+      const right = this.normalize(parts[1]); // e.g., "2days"
+
+      return left == normalizedPlan && right == normalizedDuration;
+    });
+   
+    if (!matched) {
+      throw new Error("No matched data found on Gsubz network");
+    }
+    return matched;
+  } catch (error: any) {
+    logger.error("Error finding data:", error.message);
+    return error.message;
+  }
+};
+
+
+
+     public buyGsubzDataPlan = async ( {size, phone, value, serviceType}: { size: string, phone: string, value: string, serviceType:string}): Promise<AxiosInstance | any> => {
         try {
             const requestID = this.createRandomString()
           const requestBody: GSubzBuyData = {
-              // serviceID: "",
+              serviceID: serviceType,
               plan: value,
               api: this.authToken,
               amount: "",
@@ -141,12 +157,14 @@ export class GsubzService {
           };
           const response = await this.axiosInstance.post(
             `/api/pay/`,
-            requestBody
+            requestBody, {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
           );
-          if (response.status !== 200) {
-            throw new Error("Failed to buy data plan");
+          if (response.data.code !== 200) {
+            return new Error("Failed to buy data plan");
           }
-          console.log("Data plan purchased successfully:", response.data);
+          if (response instanceof Error) {
+            return new Error(response.message);
+          }
           return response.data;
         } catch (error: any) {
           logger.error("Error buying Gsubz data plan:", error.message);

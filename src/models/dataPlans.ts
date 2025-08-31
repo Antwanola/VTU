@@ -4,7 +4,7 @@ import { Schema, model,Types,  Document } from 'mongoose';
 export interface IData extends Document {
   // sku: string,
   networkProvider: string;
-  plan?: string;
+  size?: string;
   duration?: string;
   price?: number;
   serviceType?: string;
@@ -15,12 +15,12 @@ export interface IData extends Document {
 const DataSchema = new Schema<IData>({
   networkProvider: { type: String, required: true },
   // sku: { type: String, require: true },
-  plan: { type: String },
+  size: { type: String },
   duration: { type: String },
-  price: { type: Number },
+  price: { type: String },
   serviceType: { type: String },
   createdAt: { type: Date, default: Date.now },
-  setBy: { type: String, required: true },
+  setBy: { type: String, default: 'admin' },
 });
 
 DataSchema.pre('save', function (next) {

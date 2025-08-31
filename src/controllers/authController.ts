@@ -40,6 +40,8 @@ class AuthController {
   }
 
   public hello = (req: Request, res: Response, next: NextFunction) => {
+    const ip = req.ip || req.connection.remoteAddress;
+    console.log(`Request received from IP: ${ip}`);
     res.status(200).json({
       status: "success",
       message: "Hello, welcome to Ambitious Data Plug API!",
