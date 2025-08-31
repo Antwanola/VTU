@@ -47,7 +47,7 @@ connectDB();
 
 const callGSubzService = async() => {
   const service = new  GsubzService();
-   const daa = await service.getAllServicesBYProvider("airtel");
+   const daa = service.getAllServicesFor("mtn");
 }
 callGSubzService()
 
@@ -87,7 +87,7 @@ process.on('uncaughtException', (error: Error) => {
   process.exit(1);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);

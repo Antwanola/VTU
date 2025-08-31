@@ -1,5 +1,3 @@
-import { MTN_PLAN } from './gladTidingsPayload';
-import { GsubzService } from '../../services/VTU_data/gsubz';
 export enum GSubzServiceEnums {
     MTN_SME = "mtn_sme",
     MTN_SME2 = "mtn_cg_lite",
@@ -36,9 +34,9 @@ export const groupedServices: Record<string, string[]> = {
 
 
 export interface GSubzBuyData {
-    //  serviceID: string,
-     plan: string,
-     api: string,
+     serviceID: string,
+     plan: number | string,
+     api: string ,
      amount: string,
      phone: string,
      request_id: string
@@ -50,6 +48,8 @@ export interface GSubzBuyData {
 };
 
 
+
+
 export interface GSubzDataPlanResponse {
 service: string,
 PlanName: null,
@@ -57,3 +57,23 @@ fixedPrice: true
 plans: GsubzDataPlan[]
 }
 
+
+export interface TransactionMetadata {
+  userId: string;
+  paymentCategory: string;
+  servicePaidFor: string;
+  amount: number;
+  paymentDescription: string;
+  customerName: string;
+  transactionReference: string;
+}
+
+export interface TransactionObject {
+  user: string; // Mongo ObjectId stored as string
+  type: string;
+  amount: number;
+  status: string;
+  paymentReference?: string; // optional in case it's null/undefined
+  email: string;
+  metadata: TransactionMetadata;
+}

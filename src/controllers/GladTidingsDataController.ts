@@ -118,7 +118,7 @@ private activeService: any; // This will hold the active service instance
                     transactionReference: await generateIdent()
                  }}
             
-            const deduct_from_wallet = await walletService.debitWallet(user_email, price, transactionObject.transactionData)
+            const deduct_from_wallet = await walletService.debitWallet(user_email, price,)
             if(deduct_from_wallet instanceof Error){
                 logger.error(deduct_from_wallet.message);
                 throw new AppError(deduct_from_wallet.message, 500);

@@ -65,14 +65,14 @@ export class GladTidingsService {
   /**
    * Finding Available Data Plan from gladtidings API
    * @param network /
-   * @param plan
+   * @param size
    * @param duration
    * @returns data object or error message
    * @throws AppError if the data plan is not found or unavailable
    */
   public findData = async (
     network: string,
-    plan: string,
+    size: string,
     duration: string
   ): Promise<FindDataRespose | any> => {
     let service;
@@ -95,7 +95,7 @@ export class GladTidingsService {
           service.plan &&
           
           service.month_validate.split(" ")[0] == durationNumber &&
-          service.plan == plan &&
+          service.plan == size &&
           service.plan_amount &&
           service.plan_amount.substring(0, 6).length <=  6
       );
