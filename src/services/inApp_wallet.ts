@@ -26,8 +26,7 @@ class WalletService {
             throw new Error('Wallet not found');
         }
 
-        wallet.balance += amount;           // Available immediately
-        wallet.ledgerBalance += amount;     // Reflect in ledger too
+        wallet.balance += amount;           // Available immediately    // Reflect in ledger too
         wallet.updatedAt = new Date();
         wallet.lastTransactionReference = transactionReference
 
@@ -100,7 +99,6 @@ public async freezeWallet(email: string): Promise<IWallet | Error> {
     }
     return {
       balance: wallet.balance,
-      ledgerBalance: wallet.ledgerBalance,
       currency: wallet.currency || 'NGN',
       status: wallet.status,
     };

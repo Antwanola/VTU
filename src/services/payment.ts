@@ -341,7 +341,6 @@ public async createWallet_InApp(payload: any): Promise<IWallet | any> {
       user: payload._id,
       userEmail: payload.email,
       balance: 0,
-      ledgerBalance: 0,
       status: 'active',
       currency: 'NGN',
       accountReference: await generateReference(),

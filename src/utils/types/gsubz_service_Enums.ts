@@ -10,6 +10,12 @@ export enum GSubzServiceEnums {
     GLO_SME = "glo_sme",
     ETISALAT = "etisalat_data",
 }
+export enum GSubsAirtimeEnum {
+MTN = "mtn",
+AIRTEL = "airtel",
+GLO = "glo",
+ETISALAT = "etisalat"
+}
 
 export const groupedServices: Record<string, string[]> = {
   mtn: [
@@ -76,4 +82,13 @@ export interface TransactionObject {
   paymentReference?: string; // optional in case it's null/undefined
   email: string;
   metadata: TransactionMetadata;
+}
+
+export interface GSubzAirtimePayload {
+  serviceID: string;
+  amount: string;
+  phone: string;
+  api: string;
+  // request_id: string;
+
 }

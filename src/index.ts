@@ -9,7 +9,7 @@ import router from './routes';
 import path from 'path';
 import { dataService } from './services/VTU_data/gladtidings';
 import { quickTellerService } from './services/quickTeller';
-import { seedData } from './utils/seeData';
+import { seedData, seedDataBulk } from './utils/seeData';
 import { GsubzService } from './services/VTU_data/gsubz';
 import { corsOptions } from './config/corsOptions';
 
@@ -42,8 +42,9 @@ connectDB();
 // initQuick()
 
 // const seed = async () => {
-//   await seedData()
+//   await seedDataBulk()
 // }
+// seed()
 
 const callGSubzService = async() => {
   const service = new  GsubzService();
