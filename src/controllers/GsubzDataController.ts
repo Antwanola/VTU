@@ -7,10 +7,20 @@ import crypto from "crypto";
 import { AppError } from "../utils/HandleErrors";
 import { UserRequest } from "../utils/types/index";
 import { Price } from "../models/dataPrice";
-import { Transaction, TransactionType, TransactionStatusEnum } from '../models/transactions';
+import {
+  Transaction,
+  TransactionType,
+  TransactionStatusEnum,
+} from "../models/transactions";
 import { TransactionObject } from "../utils/types/gsubz_service_Enums";
-import Wallet from '../models/wallet';
+import Wallet from "../models/wallet";
 import { Types } from "mongoose";
+
+ export const generateReference = async (purposre: string) => {
+    const timestamp = Date.now();
+    const random = crypto.randomBytes(4).toString("hex");
+    return `${purposre}-${timestamp}${random}`;
+  };
 
 class GsubsDataController {
   private gsubzService: GsubzService;
@@ -43,7 +53,7 @@ class GsubsDataController {
   ) => {
     try {
       const { phone, price, network, size, duration, serviceType } = req.body;
-      if (!network ) {
+      if (!network) {
         throw new AppError("Missing required fields", 400);
       }
       const matchedData = await this.gsubzService.findOneData(
@@ -63,100 +73,111 @@ class GsubsDataController {
     }
   };
 
-public buyGsubzData = async (
-  req: UserRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  try {
-    const { price, provider, size, duration, mobile_number, serviceType } = req.body;
+  public buyGsubzData = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const {
+        price,
+        networkProvider,
+        size,
+        duration,
+        mobile_number,
+        serviceType,
+      } = req.body;
 
-    if (!price || !provider || !size || !duration || !mobile_number) {
-      throw new AppError("Missing required fields", 400);
+      if (!price || !size || !duration || !mobile_number) {
+        throw new AppError("Missing required fields", 400);
+      }
+
+      // 1. Find plan
+      const findData = await Data.findOne({
+        networkProvider,
+        size: { $regex: size, $options: "i" },
+        duration,
+      });
+      console.log({ body: findData });
+      if (!findData) {
+        throw new AppError("Data plan not found on server", 404);
+      }
+
+      // 2. Get wallet & check balance
+      const wallet = await walletService.getWallet(req.user.user.id);
+      if (!wallet || wallet.balance < findData.price!) {
+        throw new AppError("Insufficient wallet balance", 400);
+      }
+
+      // 3. Check availability on gsubz
+      const dataAvailable = await this.gsubzService.findOneData(
+        serviceType,
+        size,
+        duration,
+        networkProvider
+      );
+      if (dataAvailable instanceof Error) {
+        throw new AppError(dataAvailable.message, 404);
+      }
+
+      // 4. Buy data from gsubz
+      const buyDataplan = await this.gsubzService.buyGsubzDataPlan({
+        size,
+        phone: mobile_number,
+        value: dataAvailable.value,
+        serviceType,
+      });
+      if (buyDataplan instanceof Error || buyDataplan.status == "failed") {
+        throw new AppError(buyDataplan.message || "Transaction failed", 400);
+      }
+
+      // 5. Create transaction + debit wallet
+      const transaction = await Transaction.create({
+        user: req.user.user.id,
+        type: TransactionType.DATA, // ✅ must match enum
+        amount: findData.price,
+        status:
+          buyDataplan.status == "failed"
+            ? TransactionStatusEnum.FAILED
+            : TransactionStatusEnum.SUCCESS, // ✅ not "successful"
+        paymentReference: buyDataplan.transactionID,
+        transactionReference: await this.generateIdent(),
+        metadata: {
+          userId: req.user.user._id,
+          paymentCategory: "Data",
+          servicePaidFor: "Data Purchase",
+          amount: findData.price,
+          paymentDescription: `Data purchase for ${mobile_number} on ${networkProvider}`,
+          customerName: req.user.user.name,
+        },
+      });
+
+      if (buyDataplan.status == "successful") {
+        wallet.balance -= findData.price!;
+      }
+      wallet.lastTransactionReference = transaction.transactionReference;
+      wallet.transactions.push(transaction?._id as Types.ObjectId);
+      await wallet.save();
+
+      logger.info(`Data plan purchased successfully for ${mobile_number}`);
+      res.status(200).json({
+        success: true,
+        message: "Data plan purchased successfully",
+        data: buyDataplan,
+        walletBalance: wallet.balance,
+      });
+    } catch (error: any) {
+      logger.error(error.message);
+
+      if (!(error instanceof AppError)) {
+        return next(new AppError("Internal Server Error", 500));
+      }
+
+      res.status(error.statusCode).json({
+        success: false,
+        error: error.message,
+      });
     }
-
-    // 1. Find plan
-    const findData = await Data.findOne({
-      networkProvider: provider,
-      size: { $regex: size, $options: "i" },
-      duration,
-    });
-    if (!findData) {
-      throw new AppError("Data plan not found on server", 404);
-    }
-
-    // 2. Get wallet & check balance
-    const wallet = await walletService.getWallet(req.user.user.id);
-    if (!wallet || wallet.balance < findData.price!) {
-      throw new AppError("Insufficient wallet balance", 400);
-    }
-
-    // 3. Check availability on gsubz
-    const dataAvailable = await this.gsubzService.findOneData(
-      serviceType,
-      size,
-      duration,
-      provider
-    );
-    if (dataAvailable instanceof Error) {
-      throw new AppError(dataAvailable.message, 404);
-    }
-
-    // 4. Buy data from gsubz
-    const buyDataplan = await this.gsubzService.buyGsubzDataPlan({
-      size,
-      phone: mobile_number,
-      value: dataAvailable.value,
-      serviceType,
-    });
-    console.log({ buyDataplan });
-    if (buyDataplan instanceof Error || buyDataplan.status === "TRANSACTION_FAILED") {
-      throw new AppError(buyDataplan.message || "Transaction failed", 400);
-    }
-
-    // 5. Create transaction + debit wallet
-  const transaction = await Transaction.create({
-  user: req.user.user.id,
-  type: TransactionType.DATA, // ✅ must match enum
-  amount: findData.price,
-  status: TransactionStatusEnum.SUCCESS, // ✅ not "successful"
-  paymentReference: buyDataplan.transactionID,
-  transactionReference: await this.generateIdent(),
-  metadata: {
-    userId: req.user.user._id,
-    paymentCategory: "Data",
-    servicePaidFor: "Data Purchase",
-    amount: findData.price,
-    paymentDescription: `Data purchase for ${mobile_number} on ${provider}`,
-    customerName: req.user.user.name,
-  },
-});
-
-    wallet.balance -= findData.price!;
-    wallet.lastTransactionReference = transaction.transactionReference;
-    wallet.transactions.push(transaction?._id as Types.ObjectId);
-    await wallet.save();
-
-    logger.info(`Data plan purchased successfully for ${mobile_number}`);
-    res.status(200).json({
-      success: true,
-      message: "Data plan purchased successfully",
-      data: buyDataplan,
-      walletBalance: wallet.balance,
-    });
-  } catch (error: any) {
-    logger.error(error.message);
-
-    if (!(error instanceof AppError)) {
-      return next(new AppError("Internal Server Error", 500));
-    }
-
-    res.status(error.statusCode).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
-
+  };
 }
 export const gsubzDataController = new GsubsDataController();

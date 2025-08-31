@@ -35,6 +35,16 @@ class UserRoleController {
             res.status(error.statusCode).json({ message: error.message });
         }
     }
+
+    public async getAllUsers(req: Request, res: Response): Promise<void> {
+        try {
+            const users = await User.find().select('-password'); // Exclude password field
+            res.status(200).json({ users });
+        } catch (error: AppError | any) {
+            console.error('Error fetching users:', error);
+            res.status(error.statusCode || 500).json({ message: error.message });
+        }
+}
 }
 
 

@@ -58,7 +58,7 @@ const transactionSchema = new Schema<ITransaction>({
   },
   paymentReference: {
     type: String,
-    required: [true, 'Transaction reference is required'],
+    required: [true, 'Payment reference is required'],
   },
   transactionReference: {
     type: String,

@@ -7,7 +7,6 @@ interface IWallet {
   user: Types.ObjectId;
   userEmail: string; // Optional field for user email
   balance: number;
-  ledgerBalance: number;
   status: "active" | "suspended";
   currency: string; // Optional field for currency
   accountReference: string; // Optional field for account reference
@@ -39,12 +38,6 @@ const walletSchema = new Schema<IWalletDocument>(
     },
 
     balance: {
-      type: Number,
-      required: true,
-      default: 0,
-      min: 0,
-    },
-    ledgerBalance: {
       type: Number,
       required: true,
       default: 0,

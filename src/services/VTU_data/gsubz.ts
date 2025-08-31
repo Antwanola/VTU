@@ -112,7 +112,7 @@ public findOneData = async (
   serviceType: string,
   size: string,
   duration: string,
-  network: string
+  networkProvider: string
 ): Promise<GsubzDataPlan | Error> => {
   try {
     const dataPlans = await this.getAllServicesBYServiceType(serviceType);
@@ -160,15 +160,15 @@ public findOneData = async (
             requestBody, {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
           );
           if (response.data.code !== 200) {
-            return new Error("Failed to buy data plan");
+            throw new Error("Failed to buy data plan");
           }
           if (response instanceof Error) {
-            return new Error(response.message);
+            throw new Error(response.message);
           }
           return response.data;
         } catch (error: any) {
           logger.error("Error buying Gsubz data plan:", error.message);
-          return error.message;
+          throw error.message;
         }
       }
     }

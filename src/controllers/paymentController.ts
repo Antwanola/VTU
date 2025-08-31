@@ -254,6 +254,19 @@ class PaymentController {
       }
     }
   }
+
+  public async getAllTransactions(req: Request, res: Response): Promise<void> {
+    try {
+      const transactions = await Transaction.find().populate("user", "-password");
+      if(!transactions || transactions instanceof Error){
+        throw new AppError("No transactions found", 404);
+      }
+      res.status(200).json({ success: true, data: transactions });
+    } catch (error: any) {
+      logger.error("Error fetching transactions:", error.message);
+      res.status(error.statusCode).json({ success: false, error: "Internal Server Error" });
+    }
+  }
 }
 
 export const PaymentContollers = new PaymentController();
