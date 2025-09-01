@@ -669,11 +669,12 @@ class AuthController {
     let userDetails = req.user.user;
   
     try {
+      
       if (!userDetails) {
         throw new AppError("User not authenticated", 401, ErrorCodes.AUTH_001);
       }
       const { firstName, lastName, phone } = req.body;
-      console.log({ file: req.file?.originalname });
+      console.log({ firstName, lastName, phone });
   
       if (req.file) {
         fileExtension = path.extname(req.file.originalname);
@@ -713,26 +714,17 @@ class AuthController {
         }
       }
   
-      const updatedUser = await User.findByIdAndUpdate(
-        userDetails.id,
+      const updatedUser = await User.findOneAndUpdate(
+        {email:userDetails.email},
         { firstName, lastName, phone, image: imagePath || user.image },
         { new: true, runValidators: true }
       );
-  
+  console.log(userDetails)
       logger.info(`Profile updated for user: ${user.email}`);
   
       res.status(200).json({
         status: "success",
-        data: {
-          id: updatedUser?._id,
-          firstName: updatedUser?.firstName,
-          lastName: updatedUser?.lastName,
-          email: updatedUser?.email,
-          phone: updatedUser?.phone,
-          image: updatedUser?.image,
-          role: updatedUser?.role,
-          isVerified: updatedUser?.isVerified
-        }
+        data: updatedUser 
       });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
