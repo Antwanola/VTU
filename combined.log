@@ -5321,3 +5321,47 @@
 {"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:20:06.883Z"}
 {"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:20:41.674Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:20:41.694Z"}
+{"error":{"expiredAt":"2025-06-02T21:45:31.000Z","message":"jwt expired","name":"TokenExpiredError"},"level":"warn","message":"Invalid or expired token","timestamp":"2025-09-01T09:15:04.338Z"}
+{"error":{"ErrorCodes":"Authentication failed","isOperational":true,"statusCode":403},"level":"error","message":"[Global Error Handler] Invalid or expired token","method":"PUT","path":"/api/v1/update-profile","stack":"Error: Invalid or expired token\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:380:15)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express-rate-limit\\dist\\index.cjs:752:7\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-09-01T09:15:04.459Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:15:42.291Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:16:00.291Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:19:09.059Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:19:09.112Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:19:12.043Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:20:45.688Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:20:45.725Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:20:59.987Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:21:00.019Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:21:04.111Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:22:42.273Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:22:42.310Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:22:51.320Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:22:51.344Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:22:54.210Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:23:59.287Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:23:59.310Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:24:00.701Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:26:15.902Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:26:15.926Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:27:16.125Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:27:16.146Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:28:30.838Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:28:30.865Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:29:34.360Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:29:34.387Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:30:22.725Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:30:22.751Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:30:25.789Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:31:03.404Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:31:03.430Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:32:29.937Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:32:29.958Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:33:14.421Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:33:14.446Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:33:21.864Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:37:46.836Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:37:46.859Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:37:52.717Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:37:52.737Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:38:04.937Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:38:18.255Z"}
