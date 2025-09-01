@@ -168,7 +168,7 @@ public findOneData = async (
           return response.data;
         } catch (error: any) {
           logger.error("Error buying Gsubz data plan:", error.message);
-          throw error.message;
+          return  error;
         }
       }
     }

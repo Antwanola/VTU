@@ -5219,3 +5219,105 @@
 {"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-08-31T23:02:58.111Z"}
 {"amount":700,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756681377139-0001","timestamp":"2025-08-31T23:02:58.114Z"}
 {"level":"info","message":"Payment initiated successfully","reference":"PAY_1756681377139-0001","status":"success","timestamp":"2025-08-31T23:02:58.492Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:08:42.485Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T06:10:05.322Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T06:10:05.357Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:10:09.760Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T06:12:37.535Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T06:12:37.579Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:12:41.681Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T06:13:12.901Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T06:13:12.925Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:13:16.410Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:13:29.357Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T06:13:46.151Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T06:13:46.203Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T06:13:56.075Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T06:13:56.097Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:14:00.332Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-09-01T06:14:21.650Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T06:59:53.532Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T06:59:53.666Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T07:46:31.834Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T07:46:31.895Z"}
+{"level":"info","message":"Data plan purchased successfully for 07087013965","timestamp":"2025-09-01T07:56:37.815Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T07:59:33.159Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T07:59:33.182Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T07:59:53.069Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T07:59:53.093Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T07:59:57.236Z"}
+{"level":"error","timestamp":"2025-09-01T07:59:57.241Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T07:59:57.264Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:00:04.785Z"}
+{"level":"error","timestamp":"2025-09-01T08:00:04.787Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:00:04.790Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:01:05.020Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:01:05.045Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:01:09.751Z"}
+{"level":"error","timestamp":"2025-09-01T08:01:09.752Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:01:09.754Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:04:49.565Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:04:49.585Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:05:10.317Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:05:10.341Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:05:13.191Z"}
+{"level":"error","timestamp":"2025-09-01T08:05:13.192Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:05:13.194Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:07:04.580Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:07:04.605Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:07:23.809Z"}
+{"level":"error","timestamp":"2025-09-01T08:07:23.810Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:07:23.813Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:07:49.922Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:07:49.945Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:08:46.947Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:08:46.968Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:09:21.285Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:09:21.306Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:09:27.941Z"}
+{"level":"error","message":"Transaction validation failed: paymentReference: Payment reference is required","timestamp":"2025-09-01T08:09:27.955Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:09:27.957Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:10:20.070Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:10:20.093Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:11:14.168Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:11:14.188Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:11:26.646Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:11:26.667Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:13:13.354Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:13:13.376Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:13:33.805Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:13:33.829Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:13:43.903Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:13:43.906Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:13:43.912Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:14:20.989Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:14:21.009Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:14:55.106Z"}
+{"level":"error","message":"socket hang up","timestamp":"2025-09-01T08:14:55.107Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:14:55.108Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:15:19.266Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:15:19.289Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:15:28.373Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:15:28.407Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:15:28.409Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:15:49.659Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:15:49.682Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:15:52.307Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:15:52.309Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:15:52.314Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:18:09.901Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:18:09.922Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:18:16.569Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:18:16.570Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:18:16.571Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:18:51.387Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:18:51.423Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:18:54.450Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:18:54.451Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:18:54.453Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:20:00.888Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:20:00.916Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:20:06.881Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:20:06.883Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T08:20:41.674Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T08:20:41.694Z"}

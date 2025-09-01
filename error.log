@@ -962,3 +962,47 @@
 {"error":{"isOperational":true,"statusCode":400},"level":"error","message":"[Global Error Handler] Airtime purchase failed","method":"POST","path":"/api/v1/buy-airtime","stack":"Error: Airtime purchase failed\n    at buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:49:15)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-08-31T22:31:44.835Z"}
 {"level":"error","message":"Airtime purchase error: Airtime purchase failed: Request failed with status code 404","stack":"Error: Airtime purchase failed: Request failed with status code 404\n    at GSubzAirtime.purchaseAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\airtime\\Gsubz_airtime.ts:32:19)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:47:24)","timestamp":"2025-08-31T22:40:09.066Z"}
 {"error":{"ErrorCodes":"Authentication failed","isOperational":true,"statusCode":403},"level":"error","message":"[Global Error Handler] Invalid or expired token","method":"POST","path":"/api/v1/make-payment","stack":"Error: Invalid or expired token\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:380:15)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-08-31T23:02:17.719Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:08:42.485Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:10:09.760Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:12:41.681Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:13:16.410Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:13:29.357Z"}
+{"level":"error","message":"Airtime purchase error: Wallet not found","stack":"Error: Wallet not found\n    at WalletService.getWallet (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\services\\inApp_wallet.ts:13:13)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async buyAirtime (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\Gsubz_Airtime_Controller.ts:38:22)","timestamp":"2025-09-01T06:14:00.332Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T07:59:57.236Z"}
+{"level":"error","timestamp":"2025-09-01T07:59:57.241Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T07:59:57.264Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:00:04.785Z"}
+{"level":"error","timestamp":"2025-09-01T08:00:04.787Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:00:04.790Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:01:09.751Z"}
+{"level":"error","timestamp":"2025-09-01T08:01:09.752Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:01:09.754Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:05:13.191Z"}
+{"level":"error","timestamp":"2025-09-01T08:05:13.192Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:05:13.194Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:07:23.809Z"}
+{"level":"error","timestamp":"2025-09-01T08:07:23.810Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:07:23.813Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:09:27.941Z"}
+{"level":"error","message":"Transaction validation failed: paymentReference: Payment reference is required","timestamp":"2025-09-01T08:09:27.955Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:09:27.957Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:13:43.903Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:13:43.906Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:13:43.912Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:14:55.106Z"}
+{"level":"error","message":"socket hang up","timestamp":"2025-09-01T08:14:55.107Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:14:55.108Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:15:28.373Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:15:28.407Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:15:28.409Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:15:52.307Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:15:52.309Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:15:52.314Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:18:16.569Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:18:16.570Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:18:16.571Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:18:54.450Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:18:54.451Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T08:18:54.453Z"}
+{"level":"error","message":"Error buying Gsubz data plan:","timestamp":"2025-09-01T08:20:06.881Z"}
+{"level":"error","message":"Request failed with status code 404","timestamp":"2025-09-01T08:20:06.883Z"}
