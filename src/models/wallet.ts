@@ -4,12 +4,13 @@ import { IUser } from "./users";
 
 // Interface for the base Wallet document
 interface IWallet {
+  // _id?: Types.ObjectId;
   user: Types.ObjectId;
   userEmail: string; // Optional field for user email
   balance: number;
   status: "active" | "suspended";
   currency: string; // Optional field for currency
-  accountReference: string; // Optional field for account reference
+  accountReference: string | undefined; // Optional field for account reference
   lastTransactionReference?: string | undefined;
   transactions:Array<Types.ObjectId>;
   getAllAvailableBanks: boolean;
@@ -18,8 +19,10 @@ interface IWallet {
 }
 
 // Interface for Wallet document with Mongoose methods
-interface IWalletDocument extends IWallet, Document {
-  // Add custom instance methods here if needed
+interface IWalletDocument extends IWallet, Document<Types.ObjectId> {
+    _id: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // Schema definition

@@ -5365,3 +5365,66 @@
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:37:52.737Z"}
 {"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:38:04.937Z"}
 {"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T09:38:18.255Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:38:40.813Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:38:40.832Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:46:22.669Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:46:22.688Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:47:26.114Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:47:26.133Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:47:39.832Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:47:39.856Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:47:56.407Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:47:56.428Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:52:33.802Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:52:33.826Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T09:58:31.999Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T09:58:32.022Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find /register on this server","method":"POST","path":"/register","stack":"Error: Can't find /register on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:70:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-09-01T09:58:48.406Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:00:33.371Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:00:33.393Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:01:26.478Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:01:26.499Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:02:30.552Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:02:30.577Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:07:07.402Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:07:07.429Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:20:06.768Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:20:06.788Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:25:05.266Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:25:05.302Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:27:14.345Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:27:14.369Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:28:42.029Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:28:42.063Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T10:31:24.912Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T10:31:24.937Z"}
+{"level":"info","message":"New user registered: olayiwolaolatunjisodiq@yahoo.com","timestamp":"2025-09-01T10:31:34.188Z"}
+{"level":"info","message":"New user registered: oolaywiola@folti.io","timestamp":"2025-09-01T10:35:59.168Z"}
+{"level":"info","message":"New user registered: oolayiwola@folti.io","timestamp":"2025-09-01T10:48:17.127Z"}
+{"level":"info","message":"Email verified for user: oolayiwola@folti.io","timestamp":"2025-09-01T10:49:49.403Z"}
+{"level":"info","message":"✅ Data plan purchased successfully for 07087013965","timestamp":"2025-09-01T11:17:43.371Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T11:35:35.375Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T11:35:35.412Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T11:35:42.490Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-01T11:39:55.337Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T11:41:33.910Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T11:41:33.930Z"}
+{"level":"info","message":"New user registered: oolayiwola@folti.io","timestamp":"2025-09-01T11:43:31.325Z"}
+{"level":"info","message":"Email verified for user: oolayiwola@folti.io","timestamp":"2025-09-01T11:44:02.702Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T11:45:35.321Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T11:45:35.362Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T11:47:30.276Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T11:47:30.303Z"}
+{"level":"info","message":"User logged in: oolayiwola@folti.io","timestamp":"2025-09-01T11:47:38.745Z"}
+{"level":"info","message":"User logged in: oolayiwola@folti.io","timestamp":"2025-09-01T11:48:20.322Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T11:51:02.341Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T11:51:02.369Z"}
+{"level":"info","message":"New user registered: oolayiwola@folti.io","timestamp":"2025-09-01T11:51:19.251Z"}
+{"level":"info","message":"Email verified for user: oolayiwola@folti.io","timestamp":"2025-09-01T11:52:29.464Z"}
+{"level":"info","message":"User logged in: oolayiwola@folti.io","timestamp":"2025-09-01T11:52:37.535Z"}
+{"level":"info","message":"User logged in: oolayiwola@folti.io","timestamp":"2025-09-01T11:54:03.648Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T11:54:24.763Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T11:54:24.813Z"}
+{"level":"info","message":"User logged in: oolayiwola@folti.io","timestamp":"2025-09-01T11:54:33.639Z"}
+{"level":"info","message":"Profile updated for user: antwanola29@gmail.com","timestamp":"2025-09-01T11:58:39.267Z"}
+{"error":{"isOperational":true,"statusCode":404},"level":"error","message":"[Global Error Handler] Can't find /api/v1/uploads/profile-Ola-1756727919077.png on this server","method":"GET","path":"/api/v1/uploads/profile-Ola-1756727919077.png","stack":"Error: Can't find /api/v1/uploads/profile-Ola-1756727919077.png on this server\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\index.ts:70:8\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:265:14)","timestamp":"2025-09-01T11:58:57.006Z"}
