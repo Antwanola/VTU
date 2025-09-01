@@ -706,7 +706,7 @@ class AuthController {
       }
   
       // Delete old image if exists
-      if (req.file && user.image) {
+      if (user.image) {
         const baseName = path.basename(user.image);
         const oldImagePath = path.join(__dirname, "../../uploads", baseName);
         if (fs.existsSync(oldImagePath)) {
