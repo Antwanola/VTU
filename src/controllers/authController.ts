@@ -312,6 +312,7 @@ class AuthController {
 
       // Get user with password
       const user = await User.findOne({ email }).select("+password");
+      console.log({user})
       const oldPass = user?.password;
       if (!user || !(await user.comparePassword(password as string))) {
         throw new AppError(
