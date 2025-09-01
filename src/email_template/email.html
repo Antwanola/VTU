@@ -1,176 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Email Template</title>
-    <style>
-      /* Inline CSS for email compatibility */
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-      }
-      table {
-        border-collapse: collapse;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-      }
-      td {
-        border: none;
-        padding: 0;
-      }
-      img {
-        border: 0;
-        line-height: 100%;
-        outline: none;
-        text-decoration: none;
-        -ms-interpolation-mode: bicubic;
-        display: block; /* added to prevent extra space below image */
-      }
-      a {
-        text-decoration: none;
-        color: #0078d7; /* Default link color */
-      }
+  <table
+    role="presentation"
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    style="background-color: #f4f4f4; margin: 0; padding: 0"
+  >
+    <tr>
+      <td align="center">
+        <table
+          role="presentation"
+          class="container"
+          width="600"
+          cellpadding="0"
+          cellspacing="0"
+          border="0"
+          style="background-color: #ffffff; margin: 0 auto; max-width: 600px; width: 100%;"
+        >
+          <!-- HEADER -->
+          <tr>
+            <td align="center" style="padding: 20px 0; background-color: #0078d7">
+              <h1 style="font-size: 24px; color: #ffffff; margin: 0">Ambituox Data</h1>
+            </td>
+          </tr>
 
-      @media screen and (max-width: 600px) {
-        .container {
-          width: 100% !important;
-        }
-        .content-section {
-          padding: 10px !important;
-        }
-        .header-text {
-          font-size: 20px !important;
-        }
-        .button {
-          padding: 10px 20px !important;
-        }
-      }
-    </style>
-  </head>
-  <body style="margin: 0; padding: 0; background-color: #f4f4f4">
-    <table
-      width="100%"
-      cellpadding="0"
-      cellspacing="0"
-      border="0"
-      style="background-color: #f4f4f4"
-    >
-      <tr>
-        <td align="center">
-          <table
-            class="container"
-            width="600"
-            cellpadding="0"
-            cellspacing="0"
-            border="0"
-            style="background-color: #ffffff; margin: 0 auto; max-width: 600px"
-          >
-            <tr>
-              <td
-                align="center"
-                class="header"
-                style="padding: 20px 0; background-color: #0078d7"
-              >
-                <h1
-                  class="header-text"
-                  style="font-size: 24px; color: #ffffff; margin: 0"
-                >
-                  Ambituox Data
-                </h1>
-              </td>
-            </tr>
-            <tr>
-              <td class="content-section" style="padding: 20px">
-                <h2
-                  style="font-size: 20px; color: #333333; margin-bottom: 20px"
-                >
-                  Welcome!
-                </h2>
-                <p
-                  style="
-                    font-size: 16px;
-                    color: #555555;
-                    line-height: 1.5;
-                    margin-bottom: 20px;
-                  "
-                >
-                  Thank you for signing up for our service. We're excited to
-                  have you on board.
-                </p>
-                <p
-                  style="
-                    font-size: 16px;
-                    color: #555555;
-                    line-height: 1.5;
-                    margin-bottom: 20px;
-                  "
-                >
-                 Your {{context}} is: <strong>{{token}}</strong>
-                </p>
-                <table
-                  cellpadding="0"
-                  cellspacing="0"
-                  border="0"
-                  align="center"
-                  style="margin-bottom: 20px"
-                >
-                  <tr>
-                    <td align="center">
-                      <!-- <a
-                        href="#"
-                        class="button"
-                        style="
-                          display: inline-block;
-                          background-color: #0078d7;
-                          color: #ffffff;
-                          padding: 12px 24px;
-                          text-decoration: none;
-                          border-radius: 5px;
-                          font-size: 16px;
-                        "
-                        >Shop Now</a
-                      > -->
-                    </td>
-                  </tr>
-                </table>
-                <p
-                  style="
-                    font-size: 16px;
-                    color: #555555;
-                    line-height: 1.5;
-                    margin-bottom: 20px;
-                  "
-                >
-                  If you have any questions, feel free to contact us at
-                  support@example.com.
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td
-                align="center"
-                class="footer"
-                style="
-                  padding: 20px 0;
-                  background-color: #f0f0f0;
-                  color: #777777;
-                  font-size: 14px;
-                "
-              >
-                <p>Copyright © 2025 Ambituox Data Plug. All rights reserved.</p>
-                <p>
-                  <a href="#" style="color: #0078d7">Unsubscribe</a> |
-                  <a href="#" style="color: #0078d7">View Online</a>
-                </p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
-</html>
+          <!-- CONTENT -->
+          <tr>
+            <td style="padding: 20px">
+              <h2 style="font-size: 20px; color: #333333; margin: 0 0 20px 0">Welcome!</h2>
+              <p style="font-size: 16px; color: #555555; line-height: 1.5; margin: 0 0 20px 0;">
+                Thank you for signing up for our service. We're excited to have you on board.
+              </p>
+
+              <p style="font-size: 16px; color: #555555; line-height: 1.5; margin: 0 0 20px 0;">
+                Your {{context}} is: <strong>{{token}}</strong>
+              </p>
+
+              <p style="font-size: 16px; color: #555555; line-height: 1.5; margin: 0 0 20px 0;">
+                If you have any questions, feel free to contact us at
+                <a href="mailto:support@example.com" style="color: #0078d7">support@example.com</a>.
+              </p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td align="center" style="padding: 20px 0; background-color: #f0f0f0; color: #777777; font-size: 14px; line-height: 1.5;">
+              <p style="margin: 0">&copy; 2025 Ambituox Data Plug. All rights reserved.</p>
+              <p style="margin: 5px 0 0 0">
+                <a href="#" style="color: #0078d7">Unsubscribe</a> | 
+                <a href="#" style="color: #0078d7">View Online</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+

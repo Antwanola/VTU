@@ -15,6 +15,7 @@ import { VerificationData } from "../utils/types/cacheOptions";
 import fs from "fs";
 import path from "path";
 import { monifyService } from "../services/payment";
+import Wallet, { IWallet, IWalletDocument } from "../models/wallet";
 
 configDotenv();
 
@@ -22,8 +23,6 @@ interface JwtPayload {
   id: string;
   email: string;
 }
-
-
 
 interface DataStructure {
   [key: string]: VerificationData; // This allows any string key to map to VerificationData
@@ -46,7 +45,7 @@ class AuthController {
       status: "success",
       message: "Hello, welcome to Ambitious Data Plug API!",
     });
-  }
+  };
 
   // Generate Verification Token.
   private generateOTP(): string {
@@ -83,11 +82,20 @@ class AuthController {
     context: string,
     token: string
   ): Promise<void> => {
-    const API_KEY = process.env.BREV0_API_KEY;
+    const API_KEY = process.env.BREVO_API_KEY as string;
     const BrevoUri = "https://api.brevo.com/v3/smtp/email";
-    const htmlTemplate = path.join(__dirname, "../../email_template/email.html");
+
+    // Ensure template path works after build
+    const htmlTemplate = path.resolve(
+      process.cwd(),
+      "src/email_template/email.html"
+    );
     const htmlContent = fs.readFileSync(htmlTemplate, "utf8");
-    const emailContent = htmlContent.replace("{{context}}",context).replace("{{token}}", token);
+    console.log({ BrevoKey: API_KEY });
+    // Replace placeholders
+    const emailContent = htmlContent
+      .replace("{{context}}", context)
+      .replace("{{token}}", token);
 
     const emailData = {
       sender: {
@@ -98,6 +106,7 @@ class AuthController {
       subject: "Authentication Token",
       htmlContent: emailContent,
     };
+
     try {
       const sendTask = await axios.post(BrevoUri, emailData, {
         headers: {
@@ -105,12 +114,11 @@ class AuthController {
           "api-key": API_KEY,
         },
       });
-      console.log(sendTask.data);
+      console.log("✅ Email sent:", sendTask.data);
     } catch (error: any) {
       throw new AppError(error.message);
     }
   };
-
   /**
    * Generate a verification token for email
    * @param email - User email
@@ -257,6 +265,24 @@ class AuthController {
       await this.brevoSendEmail(email, "Verification token", token);
 
       if (user) {
+        const newWallet = await Wallet.create({
+          user: user._id,
+          userEmail: user.email,
+          balance: 0, // default
+          status: "active", // default
+          currency: "NGN", // or get from req.body if multi-currency
+          accountReference: undefined, // can be generated later if needed
+          lastTransactionReference: undefined,
+          transactions: [],
+        });
+        if(!newWallet){
+          throw new AppError("unable to create waller", 404)
+        }
+        //push wallet ID to user list and save
+        user.wallet = newWallet?._id!
+        user.save()
+      }
+      console.log({userWallet: user})
         //log user registratino
         logger.info(`New user registered: ${email}`);
 
@@ -265,9 +291,8 @@ class AuthController {
           message: "Registration successful. Please verify your email.",
           redirectURI: redirectURI,
         });
-      }
-    } catch (error: any) {
-      res.status(404).send({ error: error.message });
+      }catch (error: any) {
+      res.status(error.statusCode || 500).json({ error: error.message });
     }
   };
 
@@ -316,10 +341,8 @@ class AuthController {
         isVerified: user.isVerified,
       };
       const token = this.generateToken(tokenPayload);
-      const addWallet = (
-        await user.populate("wallet")
-      );
-      console.log(addWallet)
+      const addWallet = await user.populate("wallet");
+      console.log(addWallet);
 
       logger.info(`User logged in: ${email}`);
 
@@ -364,11 +387,7 @@ class AuthController {
 
       if (!token) {
         logger.warn("Token not found in Authorization header");
-        throw new AppError(
-          "User not authenticated",
-          401,
-          ErrorCodes.AUTH_001
-        );
+        throw new AppError("User not authenticated", 401, ErrorCodes.AUTH_001);
       }
 
       // Synchronous verification for cleaner async/await flow
@@ -390,8 +409,7 @@ class AuthController {
       // Pass error to Express error handling middleware
       next(error);
     }
-}
-
+  }
 
   /**
    *   Verify email again when it has expired
@@ -667,44 +685,45 @@ class AuthController {
     let filename;
     let fileExtension;
     let userDetails = req.user.user;
-  
+
     try {
-      
       if (!userDetails) {
         throw new AppError("User not authenticated", 401, ErrorCodes.AUTH_001);
       }
       const { firstName, lastName, phone } = req.body;
       console.log({ firstName, lastName, phone });
-  
+
       if (req.file) {
         fileExtension = path.extname(req.file.originalname);
         const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
         if (!allowedTypes.includes(req.file.mimetype)) {
           throw new AppError("Only JPG, PNG, and WebP images are allowed", 400);
         }
-  
+
         // Ensure uploads directory exists
         const uploadsDir = path.join(__dirname, "../../uploads");
         if (!fs.existsSync(uploadsDir)) {
           fs.mkdirSync(uploadsDir);
         }
-  
-        filename = `profile-${userDetails?.firstName}-${Date.now()}${fileExtension}`;
+
+        filename = `profile-${
+          userDetails?.firstName
+        }-${Date.now()}${fileExtension}`;
         const filepath = path.join(uploadsDir, filename);
-  
+
         await sharp(req.file.buffer)
           .resize(300, 300)
           .jpeg({ quality: 70 })
           .toFile(filepath);
-  
+
         imagePath = `/uploads/${filename}`;
       }
-  
+
       const user = await User.findByEmail(userDetails?.email);
       if (!user) {
         throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
       }
-  
+
       // Delete old image if exists
       if (user.image) {
         const baseName = path.basename(user.image);
@@ -713,24 +732,23 @@ class AuthController {
           fs.unlinkSync(oldImagePath);
         }
       }
-  
+
       const updatedUser = await User.findOneAndUpdate(
-        {email:userDetails.email},
+        { email: userDetails.email },
         { firstName, lastName, phone, image: imagePath || user.image },
         { new: true, runValidators: true }
       );
-  console.log(userDetails)
+      console.log(userDetails);
       logger.info(`Profile updated for user: ${user.email}`);
-  
+
       res.status(200).json({
         status: "success",
-        data: updatedUser 
+        data: updatedUser,
       });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
     }
   };
-  
 
   // Change password
   public changePassword = async (
