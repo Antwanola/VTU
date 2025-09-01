@@ -20,17 +20,13 @@ const app = express();
 app.use(helmet());
 const uploadsPath = path.join(process.cwd(), "uploads")
 // cors
-app.use(cors({
-  origin: "*", // allow all origins
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // in case you use cookies
-}));
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(uploadsPath, {
   setHeaders: (res) => {
-    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin")
   },
 }));
 
