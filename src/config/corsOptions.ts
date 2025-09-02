@@ -31,7 +31,9 @@ export const corsOptions: CorsOptions = {
     'Accept',
     'Authorization',
     'Cache-Control',
-    'X-Access-Token'
+    'X-Access-Token',
+    'x-service-type',
+    
   ],
   credentials: true,
   optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
