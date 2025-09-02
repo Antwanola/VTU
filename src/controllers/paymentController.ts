@@ -32,77 +32,67 @@ class PaymentController {
       this.counter++;
       return `PAY_${timestamp}-${this.counter.toString().padStart(4, "0")}`;
     };
-  public initializePayment = async (
-    req: UserRequest,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
-    try {
-      const {
-        sku,
-        paymentDescription,
-        amount,
-        paymentCategory,
-        servicePaidFor,
-      } = req.body;
-      // const getAmount = await Data.find({sku});
-      // if (!getAmount){
-      //   throw new AppError("Product not identified. Please provide producnt Sku number")
-      // }
-      console.log(req.user.user.id);
-      const details: PaymentDetails = {
-        amount: amount,
-        paymentCategory: paymentCategory,
-        customerEmail: req.user.user.email,
-        customerName: `${req.user.user.firstName} ${req.user.user.lastName}`,
-        paymentDescription: paymentDescription,
-        paymentReference: await this.generateReference(),
-        contractCode: process.env.MONNIFY_CONTRACT_CODE,
-        currencyCode: "NGN",
-        redirectUrl: process.env.PAYMENT_REDIRECT_URL,
-        paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
-        metaData: {
-          servicePaidFor: req.body.servicePaidFor,
-        },
-      };
 
-      const payment = await monifyService.initiatePayment(details);
-      if (!payment) {
-        throw new AppError(
-          "Payment initialization failed",
-          400,
-          ErrorCodes.PAY__001
-        );
-      }
-      const createTransaction = await Transaction.create({
-        user: req.user.user.id,
-        paymentCategory,
-        type: req.body.servicePaidFor,
-        amount: details.amount,
-        status: TransactionStatusEnum.PENDING,
-        paymentReference: await this.generateReference(),
-        transactionReference: payment.responseBody.transactionReference,
-        metadata: {
-          paymentDescription: details.paymentDescription,
-          customer: details.customerName,
-          paymentStatus: TransactionStatusEnum.PENDING,
-        },
-      });
-      const saved = await createTransaction.save();
+public initializePayment = async (
+  req: UserRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { sku, paymentDescription, amount, paymentCategory, servicePaidFor } = req.body;
 
-      const update_user = await User.findByIdAndUpdate(req.user.user.id, {
-        $push: { transactions: saved._id },
-      });
+    const paymentRef = await this.generateReference();
 
-      res.status(200).json({
-        success: true,
-        data: payment,
-      });
-    } catch (error: any) {
-      logger.error({ error: error.message });
-      res.status(error.statusCode).json(error.mesage);
+    const details: PaymentDetails = {
+      amount,
+      paymentCategory,
+      customerEmail: req.user.user.email,
+      customerName: `${req.user.user.firstName} ${req.user.user.lastName}`,
+      paymentDescription,
+      paymentReference: paymentRef,
+      contractCode: process.env.MONNIFY_CONTRACT_CODE!,
+      currencyCode: "NGN",
+      redirectUrl: process.env.PAYMENT_REDIRECT_URL!,
+      paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
+      metaData: { servicePaidFor },
+    };
+
+    const payment = await monifyService.initiatePayment(details);
+
+    if (!payment) {
+      throw new AppError("Payment initialization failed", 400, ErrorCodes.PAY__001);
     }
-  };
+
+    const createTransaction = await Transaction.create({
+      user: req.user.user.id,
+      paymentCategory,
+      type: TransactionType.Wallet,
+      amount: details.amount,
+      status: TransactionStatusEnum.PENDING,
+      paymentReference: details.paymentReference, // Use same reference
+      transactionReference: payment.responseBody.transactionReference,
+      metadata: {
+        paymentDescription: details.paymentDescription,
+        customer: details.customerName,
+        paymentStatus: TransactionStatusEnum.PENDING,
+      },
+    });
+
+    await User.findByIdAndUpdate(req.user.user.id, {
+      $push: { transactions: createTransaction._id },
+    });
+
+    res.status(200).json({
+      success: true,
+      data: payment,
+    });
+
+  } catch (error: any) {
+    logger.error( error.message );
+    res.status(error.statusCode || 500).json({ error: error.message || "Internal Server Error" });
+  }
+};
+
 
   async verifyTransaction(
     req: UserRequest,

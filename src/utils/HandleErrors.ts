@@ -1,6 +1,5 @@
 // src/middleware/global-error-handler.ts
 import { Request, Response, NextFunction } from 'express';
-
 import mongoose from 'mongoose';
 import { logger } from '../utils/logger';
 
@@ -93,38 +92,6 @@ export const globalErrorHandler = (
     error.stack = err.stack;
   }
 
-  
-// Process-level exception handlers
-process.on('uncaughtException', (error: Error) => {
-  logger.error('Uncaught Exception:', {
-    error: {
-      name: error.name,
-      message: error.message,
-      stack: error.stack
-    },
-    timestamp: new Date().toISOString()
-  });
-  
-  // Gracefully shutdown the server
-  console.error('Uncaught Exception! Shutting down...');
-  process.exit(1);
-});
-
-process.on('unhandledRejection', (reason: any) => {
-  logger.error('Unhandled Rejection:', {
-    error: {
-      name: reason?.name,
-      message: reason?.message,
-      stack: reason?.stack
-    },
-    timestamp: new Date().toISOString()
-  });
-  
-  // Gracefully shutdown the server
-  console.error('Unhandled Rejection! Shutting down...');
-  process.exit(1);
-});
-
   // Send error response
   res.status(error.statusCode).json({
     status: error.status,
@@ -133,9 +100,6 @@ process.on('unhandledRejection', (reason: any) => {
     ...(error.stack && { stack: error.stack })
   });
 };
-
-
-
 
 // Async error wrapper to reduce try-catch boilerplate
 export const catchAsync = (
@@ -146,3 +110,37 @@ export const catchAsync = (
   };
 };
 
+// MOVE THESE OUTSIDE - Process-level exception handlers (call once at app startup)
+export const setupProcessHandlers = () => {
+  process.on('uncaughtException', (error: Error) => {
+    logger.error('Uncaught Exception:', {
+      error: {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      },
+      timestamp: new Date().toISOString()
+    });
+    
+    console.error('Uncaught Exception! Shutting down...');
+    process.exit(1);
+  });
+
+  process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
+    logger.error('Unhandled Rejection:', {
+      error: reason instanceof Error ? {
+        name: reason.name,
+        message: reason.message,
+        stack: reason.stack
+      } : {
+        message: String(reason),
+        type: typeof reason
+      },
+      promise: promise.toString(),
+      timestamp: new Date().toISOString()
+    });
+    
+    console.error('Unhandled Rejection! Shutting down...');
+    process.exit(1);
+  });
+};

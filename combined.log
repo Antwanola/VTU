@@ -5445,3 +5445,88 @@
 {"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T12:46:16.446Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T12:46:16.476Z"}
 {"level":"info","message":"User logged in: oolayiwola@folti.io","timestamp":"2025-09-01T12:46:16.655Z"}
+{"level":"info","message":"User logged in: oolayiwola@folti.io","timestamp":"2025-09-01T12:56:33.266Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T16:00:11.829Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T16:00:11.912Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-01T22:18:37.239Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-01T22:18:37.340Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T01:34:29.735Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T01:34:30.703Z"}
+{"amount":"200","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756776869734-0001","timestamp":"2025-09-02T01:34:30.704Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756776869734-0001","status":"success","timestamp":"2025-09-02T01:34:31.051Z"}
+{"level":"error","message":{"error":"Transaction validation failed: type: `Fund Wallet` is not a valid enum value for path `type`."},"timestamp":"2025-09-02T01:34:31.088Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-02T01:34:31.089Z"}
+{"amount":"3000","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756776907702-0003","timestamp":"2025-09-02T01:35:07.703Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756776907702-0003","status":"success","timestamp":"2025-09-02T01:35:08.443Z"}
+{"level":"error","message":{"error":"Transaction validation failed: type: `Fund Wallet` is not a valid enum value for path `type`."},"timestamp":"2025-09-02T01:35:08.448Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-02T01:35:08.450Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756777475004-0005","timestamp":"2025-09-02T01:44:35.006Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756777475004-0005","status":"success","timestamp":"2025-09-02T01:44:35.746Z"}
+{"level":"error","message":{"error":"Transaction validation failed: type: `Fund Wallet` is not a valid enum value for path `type`."},"timestamp":"2025-09-02T01:44:35.750Z"}
+{"level":"error","message":"Unhandled Rejection at:","timestamp":"2025-09-02T01:44:35.751Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:06:09.057Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:06:09.086Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:06:19.851Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:06:20.687Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756778779850-0001","timestamp":"2025-09-02T02:06:20.688Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756778779850-0001","status":"success","timestamp":"2025-09-02T02:06:20.978Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:09:15.168Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:09:15.186Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:09:22.204Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:09:22.999Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756778962203-0001","timestamp":"2025-09-02T02:09:23.000Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756778962203-0001","status":"success","timestamp":"2025-09-02T02:09:23.310Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:10:17.269Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:10:17.288Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:10:33.004Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:10:34.166Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779033004-0001","timestamp":"2025-09-02T02:10:34.167Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779033004-0001","status":"success","timestamp":"2025-09-02T02:10:34.511Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:15:13.438Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:15:13.461Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:15:19.379Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:15:20.109Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779319379-0001","timestamp":"2025-09-02T02:15:20.111Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779319379-0001","status":"success","timestamp":"2025-09-02T02:15:20.538Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:19:17.784Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:19:17.804Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:19:19.960Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:19:20.936Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779559959-0001","timestamp":"2025-09-02T02:19:20.938Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779559959-0001","status":"success","timestamp":"2025-09-02T02:19:21.268Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:21:14.700Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:21:14.726Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:21:23.939Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:21:24.788Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779683938-0001","timestamp":"2025-09-02T02:21:24.789Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779683938-0001","status":"success","timestamp":"2025-09-02T02:21:25.130Z"}
+{"level":"error","message":{"error":"Transaction validation failed: type: `Fund Wallet` is not a valid enum value for path `type`."},"timestamp":"2025-09-02T02:21:25.149Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:22:33.403Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:22:33.424Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:22:41.291Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:22:42.056Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779761291-0001","timestamp":"2025-09-02T02:22:42.058Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779761291-0001","status":"success","timestamp":"2025-09-02T02:22:42.366Z"}
+{"level":"error","message":"Transaction validation failed: type: `Fund Wallet` is not a valid enum value for path `type`.","timestamp":"2025-09-02T02:22:42.385Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-02T02:24:21.282Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-02T02:24:21.305Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:24:26.251Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:24:27.022Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779866250-0001","timestamp":"2025-09-02T02:24:27.023Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779866250-0001","status":"success","timestamp":"2025-09-02T02:24:27.473Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779927876-0002","timestamp":"2025-09-02T02:25:27.876Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779927876-0002","status":"success","timestamp":"2025-09-02T02:25:28.534Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756779967568-0003","timestamp":"2025-09-02T02:26:07.569Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756779967568-0003","status":"success","timestamp":"2025-09-02T02:26:08.186Z"}
+{"level":"info","message":"Initializing Monify API connection...","timestamp":"2025-09-02T02:27:19.516Z"}
+{"level":"info","message":"Successfully initialized Monify API connection","timestamp":"2025-09-02T02:27:20.258Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756780039516-0004","timestamp":"2025-09-02T02:27:20.259Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756780039516-0004","status":"success","timestamp":"2025-09-02T02:27:20.605Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756780248510-0005","timestamp":"2025-09-02T02:30:48.510Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756780248510-0005","status":"success","timestamp":"2025-09-02T02:30:49.200Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756780418846-0006","timestamp":"2025-09-02T02:33:38.847Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756780418846-0006","status":"success","timestamp":"2025-09-02T02:33:39.444Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756780445901-0007","timestamp":"2025-09-02T02:34:05.901Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756780445901-0007","status":"success","timestamp":"2025-09-02T02:34:06.564Z"}
+{"amount":"300","customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1756780530566-0008","timestamp":"2025-09-02T02:35:30.566Z"}
+{"level":"info","message":"Payment initiated successfully","reference":"PAY_1756780530566-0008","status":"success","timestamp":"2025-09-02T02:35:31.211Z"}

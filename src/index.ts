@@ -2,7 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import { limiter } from './middleware/rateLimiter';
 import { connectDB } from './config/database';
-import { globalErrorHandler, AppError } from './utils/HandleErrors'; // Import the global error handler
+import { globalErrorHandler, AppError, setupProcessHandlers } from './utils/HandleErrors'; // Import the global error handler
 import { logger } from './utils/logger'; // Ensure you have the logger imported
 import cors from "cors"
 import router from './routes';
@@ -16,9 +16,11 @@ import { corsOptions } from './config/corsOptions';
 
 const app = express();
 
+
+setupProcessHandlers(); // Setup global process handlers for unhandled rejections and uncaught exceptions
 // Security middleware
 app.use(helmet());
-const uploadsPath = path.join(process.cwd(), "uploads")
+const uploadsPath = path.join(process.cwd(), "uploads");
 // cors
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));

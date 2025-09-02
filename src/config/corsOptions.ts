@@ -33,7 +33,7 @@ export const corsOptions: CorsOptions = {
     'Cache-Control',
     'X-Access-Token'
   ],
-  // credentials: true,
+  credentials: true,
   optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
   maxAge: 86400, // Cache preflight response for 24 hours
 };
