@@ -2,6 +2,7 @@ import express from 'express';
 import {PaymentContollers} from '../controllers/paymentController';
 import { authController } from '../controllers/authController';
 import { walletController } from '../controllers/WalletController';
+import cors from 'cors';
 
 
 
@@ -11,7 +12,7 @@ const paymentRouter = express.Router();
 paymentRouter.post('/make-payment',authController.authenticationToken, PaymentContollers.initializePayment)
 paymentRouter.post('/verify-payment', authController.authenticationToken, PaymentContollers.verifyTransaction)
 paymentRouter.post('/webhook', PaymentContollers.webHook)
-paymentRouter.post('/fund-wallet', authController.authenticationToken, walletController.creditWalllet)
+paymentRouter.post('/fund-wallet',cors(), authController.authenticationToken, walletController.creditWalllet)
 
 
 
