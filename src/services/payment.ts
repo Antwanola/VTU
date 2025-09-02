@@ -109,15 +109,34 @@ export class MonifyService {
     }
   }
 
-  async getApiClient(): Promise<AxiosInstance> {
+ async getApiClient(): Promise<AxiosInstance> {
+  try {
     await this.ensureValidToken();
     
     if (!this.axiosInstance) {
-      throw new AppError('API client not initialized');
+      // This should not happen after ensureValidToken, but just in case
+      logger.error('API client not initialized after token validation');
+      throw new AppError('API client not initialized', 500);
     }
     
     return this.axiosInstance;
+  } catch (error: any) {
+    logger.error('Failed to get API client:', {
+      error: error.message,
+      hasToken: !!this.accessToken,
+      tokenExpiry: this.tokenExpiry,
+      hasAxiosInstance: !!this.axiosInstance
+    });
+    
+    // If it's already an AppError, re-throw it
+    if (error instanceof AppError) {
+      throw error;
+    }
+    
+    // Otherwise, wrap it in an AppError
+    throw new AppError(`Failed to get API client: ${error.message}`, 500);
   }
+}
 
   async initiatePayment(details: WalletPayment): Promise<PaymentResponse> {
     try {
