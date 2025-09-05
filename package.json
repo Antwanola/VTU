@@ -5,7 +5,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=production  echo \"Error: no test specified\" && exit 1",
     "start": "node --max-old-space-size=4096 ./node_modules/.bin/ts-node ./src/index.ts",
-    "dev": "cross-env NODE_ENV=development ts-node src/index.ts"
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --ext ts --exec ts-node src/index.ts"
 
   },
   "keywords": [],

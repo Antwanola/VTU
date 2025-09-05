@@ -29,12 +29,12 @@ function selectController(req: SELECTED_CONTROLLER, res: Response, next: NextFun
 }
 
 
-dataContollerRoute.post('/buy-data',authController.authenticationToken, selectController, (req: SELECTED_CONTROLLER, res: Response) => {
+dataContollerRoute.post('/buy-data',authController.authenticationToken, selectController, (req: SELECTED_CONTROLLER, res: Response, next: NextFunction) => {
     if (req.selectedController == new gladTidingsController){
         req.selectedController.buyData(req, res)
     }
     else {
-        req.selectedController.buyGsubzData(req, res)
+        req.selectedController.buyGsubzData(req, res, next)
     }
 });
 dataContollerRoute.post('/find-data', authController.authenticationToken, selectController, (req: SELECTED_CONTROLLER, res: Response) => {

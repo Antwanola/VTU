@@ -41,6 +41,7 @@ export class GsubzService {
         throw new Error("Failed to fetch data from Gsubz API");
       }
       const dataService = (await response).data;
+      console.log(dataService)
       return dataService.plans;
     } catch (error: any) {
 

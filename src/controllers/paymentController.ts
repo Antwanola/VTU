@@ -15,11 +15,14 @@ import { UserRequest } from "../utils/types/index";
 import { Data } from "../models/dataPlans";
 import User from "../models/users";
 import { walletService } from "../services/inApp_wallet";
-import Wallet from "../models/wallet";
+import Wallet, { IWalletDocument } from "../models/wallet";
 import { ErrorCodes } from "../utils/errorCodes";
+import mongoose from "mongoose";
 
 config(); // Changed to config() as configDotenv is deprecated
 
+// More specific typing for the change stream operations
+type WalletOperationType = "insert" | "update" | "replace" | "delete";
 
 
 class PaymentController {
@@ -203,6 +206,11 @@ public initializePayment = async (
       if (!updateTransaction) {
         throw new AppError("Unable to update transaction", 404);
       }
+      const walletOwner = await User.findOne({email:data.customer.email });
+      console.log({walletOwner})
+      if (!walletOwner){
+        throw new AppError("User not found for payment made", 404)
+      }
 
       // Fund user wallet if service is "fund_wallet"
       console.log("data:", data);
@@ -214,7 +222,7 @@ public initializePayment = async (
         //get wallet and verify transaction reference to curb double payment on a single transaction
         const userWallet = await Wallet.findOne({
           userEmail: data.customer.email,
-        });
+        })
         if (!userWallet) {
           throw new AppError("User wallet not found", 404);
         }
@@ -222,7 +230,7 @@ public initializePayment = async (
           throw new AppError("Transaction already processed", 400);
         }
         const update_user_wallet = await walletService.creditWallet(
-          data.customer.email,
+          walletOwner?._id as string,
           updateTransaction.metadata.settlementAmount_inApp,
           data.transactionReference
         );
@@ -257,6 +265,117 @@ public initializePayment = async (
       res.status(error.statusCode).json({ success: false, error: "Internal Server Error" });
     }
   }
+
+
+public SubscribeToWallet = async (req: UserRequest, res: Response) => {
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Cache-Control");
+  res.flushHeaders();
+
+  let watcher: any = null;
+  // You could also type the userId more strictly if you know it's always a string
+const userId: string = req.user.user.id;
+
+// Type the wallet query result
+const wallet: IWalletDocument | null = await Wallet.findOne({ user: userId });
+
+
+  try {
+    // Send initial balance immediately when subscribing
+    const wallet = await Wallet.findOne({ user: userId });
+    if (wallet) {
+      res.write(`data: ${JSON.stringify({ balance: wallet.balance })}\n\n`);
+    } else {
+      res.write(`data: ${JSON.stringify({ error: "Wallet not found" })}\n\n`);
+      return;
+    }
+
+    // Watch for changes in this user's wallet - include both insert and update operations
+    watcher = Wallet.watch([
+      {
+        $match: {
+          $and: [
+            {
+              $or: [
+                { operationType: "update" },
+                { operationType: "replace" },
+                { operationType: "insert" }
+              ]
+            },
+            {
+              $or: [
+                { "fullDocument.user": new mongoose.Types.ObjectId(userId) },
+                { "documentKey._id": wallet?._id }
+              ]
+            }
+          ]
+        }
+      }
+    ], { fullDocument: "updateLookup" });
+
+    watcher.on("change", (change: any) => {
+      console.log("Wallet change detected:", change);
+      
+      try {
+        // Handle different types of changes
+        if (change.operationType === "update" || change.operationType === "replace") {
+          // Check if balance was updated
+          if (change.updateDescription?.updatedFields?.balance !== undefined) {
+            const newBalance = change.updateDescription.updatedFields.balance;
+            res.write(`data: ${JSON.stringify({ balance: newBalance })}\n\n`);
+          }
+          // Also check fullDocument in case of replace operations
+          else if (change.fullDocument?.balance !== undefined) {
+            res.write(`data: ${JSON.stringify({ balance: change.fullDocument.balance })}\n\n`);
+          }
+        } else if (change.operationType === "insert" && change.fullDocument) {
+          // Handle new wallet creation
+          res.write(`data: ${JSON.stringify({ balance: change.fullDocument.balance })}\n\n`);
+        }
+      } catch (writeError) {
+        console.error("Error writing to SSE stream:", writeError);
+        // Client likely disconnected
+        if (watcher) {
+          watcher.close();
+        }
+      }
+    });
+
+    watcher.on("error", (error: any) => {
+      console.error("Change stream error:", error);
+      res.write(`data: ${JSON.stringify({ error: "Stream error occurred" })}\n\n`);
+      if (watcher) {
+        watcher.close();
+      }
+    });
+
+    // Handle client disconnect
+    req.on("close", () => {
+      console.log("Client disconnected, closing watcher");
+      if (watcher) {
+        watcher.close();
+      }
+    });
+
+    // Handle server shutdown gracefully
+    req.on("aborted", () => {
+      console.log("Request aborted, closing watcher");
+      if (watcher) {
+        watcher.close();
+      }
+    });
+
+  } catch (error) {
+    console.error("Error setting up wallet subscription:", error);
+    res.write(`data: ${JSON.stringify({ error: "Failed to setup wallet subscription" })}\n\n`);
+    if (watcher) {
+      watcher.close();
+    }
+  }
+};
 }
 
 export const PaymentContollers = new PaymentController();

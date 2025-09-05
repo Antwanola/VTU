@@ -36,12 +36,11 @@ class BuyGSubzAirtime {
       }
 
       const wallet = await walletService.getWallet(req.user.user.id);
-      console.log(req.user.user.id);
       if (wallet.balance < amount) {
         throw new AppError("Insufficient balance", 400);
       }
 
-      console.log({ wallet });
+      // console.log({ wallet });
 
       // Purchase airtime
       const response = await gSubzAirtime.purchaseAirtime(
@@ -49,7 +48,7 @@ class BuyGSubzAirtime {
         amount,
         network
       );
-
+console.log(response)
       if (response.status !== "successful") {
         throw new AppError(response.message || "Airtime purchase failed", 400);
       }
