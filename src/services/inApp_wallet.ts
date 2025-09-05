@@ -3,12 +3,15 @@ import Wallet, { IWallet } from "../models/wallet" // Assuming you have a Wallet
 import { ITransaction, Transaction, TransactionStatusEnum } from "../models/transactions";
 import { PaymentContollers } from "../controllers/paymentController";
 import { TransactionMetadata } from "@/utils/types/gsubz_service_Enums";
+import { error } from "console";
+import mongoose from "mongoose";
 
 class WalletService {
   
   // Get Wallet
   public async getWallet(userID: string) {
-    const wallet = await Wallet.findOne({ user: userID });
+    console.log({userID})
+    const wallet = await Wallet.findOne({ user:userID });
     if (!wallet) {
       throw new Error('Wallet not found');
     }
@@ -35,8 +38,8 @@ class WalletService {
 
         return wallet;
     } catch (error) {
-        // await session.abortTransaction();   // Rollback on error
-        throw error;                        // Re-throw the error
+      throw new Error("Error crediting wallet: " + (error as Error).message);
+        // await session.abortTransaction();   // Rollback on error                     // Re-throw the error
     } finally {
         // session.endSession();               // End the session
     }

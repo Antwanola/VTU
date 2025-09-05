@@ -677,79 +677,90 @@ class AuthController {
     }
   };
   // Update profile
-  public updateProfile = async (
-    req: UserRequest,
-    res: Response,
-    next: NextFunction
-  ) => {
-    let imagePath;
-    let filename;
-    let fileExtension;
-    let userDetails = req.user.user;
+// Update profile
+public updateProfile = async (
+  req: UserRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  let imagePath;
+  let filename;
+  let fileExtension;
+  let userDetails = req.user.user;
 
-    try {
-      if (!userDetails) {
-        throw new AppError("User not authenticated", 401, ErrorCodes.AUTH_001);
-      }
-      const { firstName, lastName, phone } = req.body;
-      console.log({ firstName, lastName, phone });
-
-      if (req.file) {
-        fileExtension = path.extname(req.file.originalname);
-        const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
-        if (!allowedTypes.includes(req.file.mimetype)) {
-          throw new AppError("Only JPG, PNG, and WebP images are allowed", 400);
-        }
-
-        // Ensure uploads directory exists
-        const uploadsDir = path.join(__dirname, "../../uploads");
-        if (!fs.existsSync(uploadsDir)) {
-          fs.mkdirSync(uploadsDir);
-        }
-
-        filename = `profile-${
-          userDetails?.firstName
-        }-${Date.now()}${fileExtension}`;
-        const filepath = path.join(uploadsDir, filename);
-
-        await sharp(req.file.buffer)
-          .resize(300, 300)
-          .jpeg({ quality: 70 })
-          .toFile(filepath);
-
-        imagePath = `/uploads/${filename}`;
-      }
-
-      const user = await User.findByEmail(userDetails?.email);
-      if (!user) {
-        throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
-      }
-
-      // Delete old image if exists
-      if (user.image) {
-        const baseName = path.basename(user.image);
-        const oldImagePath = path.join(__dirname, "../../uploads", baseName);
-        if (fs.existsSync(oldImagePath)) {
-          fs.unlinkSync(oldImagePath);
-        }
-      }
-
-      const updatedUser = await User.findOneAndUpdate(
-        { email: userDetails.email },
-        { firstName, lastName, phone, image: imagePath || user.image },
-        { new: true, runValidators: true }
-      );
-      console.log(userDetails);
-      logger.info(`Profile updated for user: ${user.email}`);
-
-      res.status(200).json({
-        status: "success",
-        data: updatedUser,
-      });
-    } catch (error: any) {
-      res.status(error.statusCode || 500).json({ error: error.message });
+  try {
+    if (!userDetails) {
+      throw new AppError("User not authenticated", 401, ErrorCodes.AUTH_001);
     }
-  };
+
+    const { firstName, lastName, phone } = req.body;
+
+    // Handle image upload (local storage version)
+    if (req.file) {
+      fileExtension = path.extname(req.file.originalname);
+      const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+      if (!allowedTypes.includes(req.file.mimetype)) {
+        throw new AppError("Only JPG, PNG, and WebP images are allowed", 400);
+      }
+
+      // Ensure uploads directory exists
+      const uploadsDir = path.join(__dirname, "../../uploads");
+      if (!fs.existsSync(uploadsDir)) {
+        fs.mkdirSync(uploadsDir);
+      }
+
+      filename = `profile-${userDetails?.firstName}-${Date.now()}${fileExtension}`;
+      const filepath = path.join(uploadsDir, filename);
+
+      await sharp(req.file.buffer)
+        .resize(300, 300)
+        .jpeg({ quality: 70 })
+        .toFile(filepath);
+
+      imagePath = `/uploads/${filename}`;
+    }
+
+    const user = await User.findByEmail(userDetails?.email);
+    if (!user) {
+      throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
+    }
+
+    // ✅ Duplicate phone check
+    if (phone && phone !== user.phone) {
+      const existingPhoneUser = await User.findOne({ phone });
+      if (existingPhoneUser) {
+        throw new AppError(
+          "Phone number already in use",
+          400
+        );
+      }
+    }
+
+    // Delete old image if exists
+    if (user.image && imagePath) {
+      const baseName = path.basename(user.image);
+      const oldImagePath = path.join(__dirname, "../../uploads", baseName);
+      if (fs.existsSync(oldImagePath)) {
+        fs.unlinkSync(oldImagePath);
+      }
+    }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { email: userDetails.email },
+      { firstName, lastName, phone, image: imagePath || user.image },
+      { new: true, runValidators: true }
+    );
+
+    logger.info(`Profile updated for user: ${user.email}`);
+
+    res.status(200).json({
+      status: "success",
+      data: updatedUser,
+    });
+  } catch (error: any) {
+    res.status(error.statusCode || 500).json({ error: error.message });
+  }
+};
 
   // Change password
   public changePassword = async (

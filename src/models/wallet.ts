@@ -4,7 +4,7 @@ import { IUser } from "./users";
 
 // Interface for the base Wallet document
 interface IWallet {
-  // _id?: Types.ObjectId;
+  _id?: Types.ObjectId;
   user: Types.ObjectId;
   userEmail: string; // Optional field for user email
   balance: number;
