@@ -23,23 +23,22 @@ class GSubzElectric {
     amount: string,
     variation_code: string
   ) {
-    const normalised = serviceID.charAt(0).toUpperCase() + serviceID.slice(1).toLowerCase()
+    const normalised = serviceID.toUpperCase()
     const convertService = DiscoProviders[normalised as keyof typeof DiscoProviders]
-    console.log(convertService)
+   
     const payload = {
       serviceID: convertService,
+      api: this.apiKey,
       phone,
       customerID,
-      api: this.apiKey,
       amount,
       variation_code,
     };
     try {
-      const response = await this.AxiosInstance.post("/api/pay/", {
+      const response = await this.AxiosInstance.post("/api/pay/",
         payload,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        {headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
-      console.log(response.data)
 
       if (!response) {
         throw new Error('response not found for')

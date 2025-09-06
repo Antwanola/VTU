@@ -71,7 +71,7 @@ class WalletController {
                 paymentDescription: "Wallet funding",
 
             }
-            const getUserWallet = await User.findOne({userId}).populate('wallet');
+            const getUserWallet = await Wallet.findOne({userId});
             console.log({getUserWallet})
             if(userId && !getUserWallet){
                 createWall = await this.createWallet(userId)

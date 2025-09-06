@@ -16,10 +16,10 @@ import { TransactionObject } from "../utils/types/gsubz_service_Enums";
 import Wallet from "../models/wallet";
 import { Types } from "mongoose";
 
- export const generateReference = async (purposre: string) => {
+ export const generateReference = async (purpose: string) => {
     const timestamp = Date.now();
     const random = crypto.randomBytes(4).toString("hex");
-    return `${purposre}-${timestamp}${random}`;
+    return `${purpose}-${timestamp}${random}`;
   };
 
 class GsubsDataController {

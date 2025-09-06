@@ -371,8 +371,9 @@ class AuthController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
+    let token: string | undefined;  
     try {
-      const authHeader = req.headers["authorization"];
+      const authHeader = req.headers["authorization"]
 
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
         // Use organization error codes and logging
@@ -384,7 +385,21 @@ class AuthController {
         );
       }
 
-      const token = authHeader.split(" ")[1];
+      if(authHeader && authHeader.startsWith("Bearer ")){
+        token = authHeader.split(" ")[1];
+      }
+       
+
+
+          // Check cookie if no Authorization header
+    if (!token && req.cookies?.token) {
+      token = req.cookies.token;
+    }
+
+    // Check query param as a last fallback
+    if (!token && req.query?.token) {
+      token = req.query.token as string;
+    }
 
       if (!token) {
         logger.warn("Token not found in Authorization header");
