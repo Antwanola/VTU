@@ -4,17 +4,19 @@ import { UserRequest } from '../utils/types/index';
 // import { walletService } from "@/services/inApp_wallet";
 import Wallet from "../models/wallet";
 import { gSubsElectric } from "../services/Electricity/Gsubz_Electric";
+import { error } from 'console';
+import { logger } from "../utils/logger";
 
 
 
 class GsubzElectricityController {
     constructor(){}
 
-    public async BuyGsubzElectric(req: UserRequest, res: Response, next: NextFunction): Promise<void>{
+    public async BuyGsubzElectric(req: UserRequest, res: Response, next: NextFunction): Promise<any>{
         try {
             const {provider, phone, meterNumber, amount, variation_code } = req.body
-            if(!provider || phone || meterNumber || variation_code){
-                throw new AppError("one or more inputs missing", 404)
+            if(!provider || !phone || !meterNumber || !variation_code){
+                throw new AppError("one or more inputs is missing", 404)
             }
             const userID = req.user.user.id;
             const getWalletBalance = await Wallet.findOne({user: userID})
@@ -26,8 +28,13 @@ class GsubzElectricityController {
             }
             const buyElectric = await gSubsElectric.BuyElectricity(provider, phone, meterNumber, amount, variation_code)
             console.log(buyElectric)
-        } catch (error) {
-            
+            if(buyElectric.status === 'TRANSACTION_FAILED'){
+                throw new AppError(`Unable to load electric unit due to ${buyElectric.description}`)
+            }
+            res.status(200).json({status: buyElectric.status, data: buyElectric})
+        } catch (error: any) {
+            logger.error(error.message)
+           res.status(error.statusCode).json({error: error.message})
         }
     }
 }
