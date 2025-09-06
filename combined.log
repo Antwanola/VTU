@@ -6393,3 +6393,9 @@
 {"level":"info","message":"Payment initiated successfully","reference":"PAY_1757179471048-0001","status":"success","timestamp":"2025-09-06T17:24:33.120Z"}
 {"amount":100,"customer":"antwanola29@gmail.com","level":"info","message":"Initiating payment:","reference":"PAY_1757179611390-0002","timestamp":"2025-09-06T17:26:51.391Z"}
 {"level":"info","message":"Payment initiated successfully","reference":"PAY_1757179611390-0002","status":"success","timestamp":"2025-09-06T17:26:52.166Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T17:34:22.423Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T17:34:22.476Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T17:51:52.874Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T17:51:52.919Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T17:52:02.273Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T17:52:02.318Z"}
