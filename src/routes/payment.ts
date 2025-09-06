@@ -12,7 +12,7 @@ const paymentRouter = express.Router();
 paymentRouter.post('/make-payment',authController.authenticationToken, PaymentContollers.initializePayment)
 paymentRouter.post('/verify-payment', authController.authenticationToken, PaymentContollers.verifyTransaction)
 paymentRouter.post('/webhook', cors(), PaymentContollers.webHook)
-paymentRouter.post('/fund-wallet',cors(), authController.authenticationToken, walletController.FundWallet)
+paymentRouter.post('/fund-wallet',cors(), authController.authenticationToken, PaymentContollers.initializePayment)
 paymentRouter.get('/wallet-balance/subscribe', authController.authenticationToken, PaymentContollers.SubscribeToWallet )
 
 
