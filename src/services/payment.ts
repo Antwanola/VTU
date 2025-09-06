@@ -143,7 +143,7 @@ export class MonifyService {
       // Validate payment details
       this.validatePaymentDetails(details);
       const client = await this.getApiClient();
-
+console.log(`defaul re: ${MONIFY_CONFIG.defaultRedirectUrl}`)
       const payload:PaymentDetails = {
         amount: details.amount,
         customerName: details.customerName,

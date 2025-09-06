@@ -19,12 +19,12 @@ class WalletService {
   }
 
   // Credit Wallet
-  public async creditWallet(email: string, amount: number, transactionReference?: string) {
+  public async creditWallet(userID: string, amount: number, transactionReference?: string) {
     // const session = await mongoose.startSession();
     try {
         // session.startTransaction();
 
-        const wallet = await this.getWallet(email);
+        const wallet = await this.getWallet(userID);
         if (!wallet) {
             throw new Error('Wallet not found');
         }
