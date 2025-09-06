@@ -23,8 +23,7 @@ class GSubzElectric {
     amount: string,
     variation_code: string
   ) {
-    const normalised = serviceID.toUpperCase()
-    const convertService = DiscoProviders[normalised as keyof typeof DiscoProviders]
+    const convertService = DiscoProviders[serviceID as keyof typeof DiscoProviders]
    
     const payload = {
       serviceID: convertService,
