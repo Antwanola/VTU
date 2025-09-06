@@ -159,7 +159,7 @@ public initializePayment = async (
     }
   }
 
-  public async webHook(req: UserRequest, res: Response, next: NextFunction) {
+  public async webHook(req: UserRequest, res: Response) {
     try {
       const payload = req.body;
       const signature = req.headers["monnify-signature"] as string;
@@ -169,6 +169,7 @@ public initializePayment = async (
       if (!data) {
         throw new AppError("Webhook verification failed", 401);
       }
+      console.log("data:", data);
 
       if (data.paymentStatus !== "PAID") {
         throw new AppError("Transaction not paid", 400);
@@ -212,23 +213,25 @@ public initializePayment = async (
         throw new AppError("User not found for payment made", 404)
       }
 
-      // Fund user wallet if service is "fund_wallet"
-      console.log("data:", data);
-      if (data.servicePaymentType === "fund_wallet") {
-        if (!data.customer?.email) {
-          throw new AppError("Customer email missing", 400);
-        }
+      // Always attempt to fund wallet after successful payment, regardless of servicePaymentType
+      
+      if (!data.customer?.email) {
+        throw new AppError("Customer email missing", 400);
+      }
 
-        //get wallet and verify transaction reference to curb double payment on a single transaction
-        const userWallet = await Wallet.findOne({
-          userEmail: data.customer.email,
-        })
-        if (!userWallet) {
-          throw new AppError("User wallet not found", 404);
-        }
-        if (userWallet.lastTransactionReference == data.transactionReference) {
-          throw new AppError("Transaction already processed", 400);
-        }
+      // Get wallet and verify transaction reference to prevent double payment on a single transaction
+      const userWallet = await Wallet.findOne({
+        userEmail: data.customer.email,
+      });
+      if (!userWallet) {
+        throw new AppError("User wallet not found", 404);
+      }
+      if (userWallet.lastTransactionReference === data.transactionReference) {
+        throw new AppError("Transaction already processed", 400);
+      }
+
+      // Only fund wallet if the transaction is for funding wallet or if you want to fund for all successful payments
+      if (data.servicePaymentType === "fund_wallet") {
         const update_user_wallet = await walletService.creditWallet(
           walletOwner?._id as string,
           updateTransaction.metadata.settlementAmount_inApp,
@@ -238,6 +241,7 @@ public initializePayment = async (
           throw new AppError("Failed to credit wallet", 404);
         }
       }
+
       res.status(200).json({
         success: true,
         message: "Webhook processed successfully",
