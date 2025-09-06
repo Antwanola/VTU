@@ -30,6 +30,7 @@ export interface ITransaction extends Document {
   status: TransactionStatusEnum;
   paymentReference: string;
   transactionReference: string;
+  description: string;
   metadata: TransactionMetadata;
   createdAt: Date;
 }
@@ -63,6 +64,9 @@ const transactionSchema = new Schema<ITransaction>({
   transactionReference: {
     type: String,
     required: [true, 'Transaction reference is required'],
+  },
+  description: {
+    type: String,
   },
   metadata: {
     type: Schema.Types.Mixed,

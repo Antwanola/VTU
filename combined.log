@@ -6399,3 +6399,36 @@
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T17:51:52.919Z"}
 {"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T17:52:02.273Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T17:52:02.318Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T17:52:29.964Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T17:52:30.074Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T22:14:11.872Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T22:14:11.924Z"}
+{"error":{"expiredAt":"2025-09-06T09:53:47.000Z","message":"jwt expired","name":"TokenExpiredError"},"level":"warn","message":"Invalid or expired token","timestamp":"2025-09-06T22:14:12.485Z"}
+{"error":{"ErrorCodes":"Authentication failed","isOperational":true,"statusCode":403},"level":"error","message":"[Global Error Handler] Invalid or expired token","method":"POST","path":"/api/v1/buy-electricity","stack":"Error: Invalid or expired token\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:415:15)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-09-06T22:14:12.496Z"}
+{"level":"error","message":"No wallet found for user","timestamp":"2025-09-06T22:14:50.304Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-09-06T22:15:13.560Z"}
+{"level":"error","message":"Unable to load electric unit due to AMOUNT_BELOW_MIN","timestamp":"2025-09-06T22:15:25.514Z"}
+{"level":"error","message":"Unable to load electric unit due to AMOUNT_BELOW_MIN","timestamp":"2025-09-06T22:18:12.305Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'serviceName')","timestamp":"2025-09-06T22:18:32.783Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T22:26:15.582Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T22:26:15.642Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T22:28:28.672Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T22:28:28.701Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T22:29:13.904Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T22:29:13.937Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T23:01:09.375Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T23:01:09.407Z"}
+{"level":"error","message":"Unable to load electric unit due to INSUFFICIENT_BALANCE","timestamp":"2025-09-06T23:01:19.508Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T23:03:34.230Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T23:03:34.268Z"}
+{"level":"error","message":"Unable to load electric unit due to INSUFFICIENT_BALANCE","timestamp":"2025-09-06T23:05:01.013Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T23:07:00.665Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T23:07:00.691Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T23:07:49.059Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T23:07:49.081Z"}
+{"level":"error","message":"Unable to load electric unit due to INSUFFICIENT_BALANCE","timestamp":"2025-09-06T23:08:34.555Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T23:08:56.189Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T23:08:56.218Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-06T23:09:06.281Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-06T23:09:06.317Z"}
+{"level":"error","message":"Unable to load electric unit due to INSUFFICIENT_BALANCE","timestamp":"2025-09-06T23:09:08.887Z"}

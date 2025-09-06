@@ -8,6 +8,8 @@ import { logger } from "../utils/logger";
 import { Transaction } from "../models/transactions";
 import { TransactionType, TransactionStatusEnum } from "../models/transactions";
 import { generateReference } from "./GsubzDataController";
+import { DiscoProviders } from "../utils/types/DiscoProviders";
+import { Types } from "mongoose";
 
 class GsubzElectricityController {
   constructor() {}
@@ -22,6 +24,8 @@ class GsubzElectricityController {
       if (!provider || !phone || !meterNumber || !variation_code) {
         throw new AppError("one or more inputs is missing", 404);
       }
+      const normalised = provider.toUpperCase()
+      const enumProvider = DiscoProviders[normalised as keyof typeof DiscoProviders]
       const userID = req.user.user.id;
       const getWalletBalance = await Wallet.findOne({ user: userID });
       console.log(getWalletBalance);
@@ -32,7 +36,7 @@ class GsubzElectricityController {
         throw new AppError("Insufficient balance for purchase", 409);
       }
       const buyElectric = await gSubsElectric.BuyElectricity(
-        provider,
+        normalised,
         phone,
         meterNumber,
         amount,
@@ -42,7 +46,7 @@ class GsubzElectricityController {
       if (buyElectric.status === "TRANSACTION_FAILED") {
         throw new AppError(
           `Unable to load electric unit due to ${buyElectric.description}`
-        );
+        , 409);
       }
       const createTransact = await Transaction.create({
         user: req.user.user.id,
@@ -54,13 +58,18 @@ class GsubzElectricityController {
             : TransactionStatusEnum.FAILED,
         paymentReference: await generateReference("Electricity"),
         transactionReference: buyElectric.transactionID.toString(),
-        description: `Electric token purchase of ${amount} on ${buyElectric.content.serviceName} using ${phone}`,
+        description: `Electric token purchase of ${amount} on ${enumProvider} using ${phone}`,
         metaData: buyElectric,
       });
-      res.status(200).json({ status: buyElectric.status, data: buyElectric });
+      if(buyElectric.status === 'successful'){
+        getWalletBalance.balance -= amount
+        getWalletBalance.transactions.push(createTransact._id as Types.ObjectId)
+        getWalletBalance.save()
+      }
+      res.status(200).json({ status: buyElectric.status, data: buyElectric, walletBalance: getWalletBalance.balance });
     } catch (error: any) {
       logger.error(error.message);
-      res.status(error.statusCode).json({ error: error.message });
+      res.status(error.statusCode).json({ error: error.message, });
     }
   }
 }
