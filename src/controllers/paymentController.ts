@@ -231,7 +231,7 @@ public initializePayment = async (
       }
 
       // Only fund wallet if the transaction is for funding wallet or if you want to fund for all successful payments
-      if (data.servicePaymentType === "fund_wallet") {
+      if (data.paymentStatus == "PAID") {
         const update_user_wallet = await walletService.creditWallet(
           walletOwner?._id as string,
           updateTransaction.metadata.settlementAmount_inApp,
