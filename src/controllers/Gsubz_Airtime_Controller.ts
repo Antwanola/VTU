@@ -50,7 +50,7 @@ class BuyGSubzAirtime {
       );
 console.log(response)
       if (response.status !== "successful") {
-        throw new AppError(response.message || "Airtime purchase failed", 400);
+        throw new AppError(response.description || "Airtime purchase failed", 400);
       }
 
       // Update wallet and create transaction record

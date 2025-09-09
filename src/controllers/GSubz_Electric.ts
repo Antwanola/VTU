@@ -10,6 +10,7 @@ import { TransactionType, TransactionStatusEnum } from "../models/transactions";
 import { generateReference } from "./GsubzDataController";
 import { DiscoProviders } from "../utils/types/DiscoProviders";
 import { Types } from "mongoose";
+import { authController } from "./authController";
 
 class GsubzElectricityController {
   constructor() {}
@@ -65,6 +66,7 @@ class GsubzElectricityController {
         getWalletBalance.balance -= amount
         getWalletBalance.transactions.push(createTransact._id as Types.ObjectId)
         getWalletBalance.save()
+        authController.brevoSendEmail(req.user.user.email, "Electricity Token",buyElectric.api_response )
       }
       res.status(200).json({ status: buyElectric.status, data: buyElectric, walletBalance: getWalletBalance.balance });
     } catch (error: any) {
