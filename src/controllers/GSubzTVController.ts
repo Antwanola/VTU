@@ -16,7 +16,7 @@ class GSubzCableTVController {
                const { provider } = req.body
         const TV = await gSubzTvService.findTVServices(provider)
         if(!TV) {
-            throw new AppError("No TV package found for provider")
+            throw new AppError("No TV package found for provider", 404)
         }
         res.status(200).json({ [`${provider}_Packages`]: TV.list })
         }
