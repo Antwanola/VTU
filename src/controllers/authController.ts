@@ -969,8 +969,8 @@ public updateProfile = async (
     next: NextFunction
   ) => {
     try {
-      const user = req.user;
-      const getUser = await User.findOne(user?.email);
+      const user = req.user.user;
+      const getUser = await User.findOne({email: user.email});
       if (!getUser) {
         throw new AppError("User not found", 404, ErrorCodes.AUTH_002);
       }
