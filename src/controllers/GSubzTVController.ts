@@ -25,9 +25,9 @@ class GSubzCableTVController {
         }
     }
 
-    public async findOneGsuzTvPackage(req: Request, res: Response) {
-
-    }
+    // public async findOneGsuzTvPackage(req: Request, res: Response) {
+    //     const { }
+    // }
 
     public async editOneInternalCableTV (req:Request, res: Response): Promise<void> {
         try {
