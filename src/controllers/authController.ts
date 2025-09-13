@@ -16,6 +16,9 @@ import fs from "fs";
 import path from "path";
 import { monifyService } from "../services/payment";
 import Wallet, { IWallet, IWalletDocument } from "../models/wallet";
+import { walletController } from "./WalletController";
+import { Types } from "mongoose";
+import { Transaction } from "../models/transactions";
 
 configDotenv();
 
@@ -302,60 +305,85 @@ class AuthController {
    * @param res - Response from express
    * @param next - Nextfunction from express
    */
-  public login = async (
-    req: UserRequest,
-    res: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const { email, password } = req.body;
+public login = async (
+  req: UserRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, password } = req.body;
 
-      // Get user with password
-      const user = await User.findOne({ email }).select("+password");
-      console.log({user})
-      const oldPass = user?.password;
-      if (!user || !(await user.comparePassword(password as string))) {
-        throw new AppError(
-          "Invalid email or password",
-          401,
-          ErrorCodes.AUTH_002
-        );
-      }
-
-      // Check if email is verified
-      if (!user.isVerified) {
-        throw new AppError(
-          "Please verify your email address first",
-          401,
-          ErrorCodes.AUTH_003
-        );
-      }
-
-      // Generate token
-      const tokenPayload = {
-        id: user._id as string,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phone: user.phone,
-        role: user.role,
-        isVerified: user.isVerified,
-      };
-      const token = this.generateToken(tokenPayload);
-      const addWallet = await user.populate("wallet");
-      console.log(addWallet);
-
-      logger.info(`User logged in: ${email}`);
-
-      res.status(200).json({
-        status: "success",
-        token,
-        data: addWallet,
-      });
-    } catch (error: any) {
-      res.status(error.statusCode).json(error.message);
+    // Get user with password
+    const user = await User.findOne({ email }).select("+password");
+    console.log({ user });
+    const oldPass = user?.password;
+    if (!user || !(await user.comparePassword(password as string))) {
+      throw new AppError(
+        "Invalid email or password",
+        401,
+        ErrorCodes.AUTH_002
+      );
     }
-  };
+
+    // Check if email is verified
+    if (!user.isVerified) {
+      throw new AppError(
+        "Please verify your email address first",
+        401,
+        ErrorCodes.AUTH_003
+      );
+    }
+
+    // Generate token
+    const tokenPayload = {
+      id: user._id as string,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      isVerified: user.isVerified,
+    };
+    const token = this.generateToken(tokenPayload);
+    let addWallet = await user.populate("wallet");
+    console.log({ addWallet });
+    if (!addWallet.wallet) {
+      const createUserWallet = await Wallet.create({
+        user: user._id,
+        userEmail: user.email,
+        balance: 0,
+        status: "active",
+        accountReference: await walletController.generateReference(),
+        lastTransactionReference: null,
+        transactions: null,
+      });
+      if (!createUserWallet) {
+        throw new AppError(
+          "Could not create user wallet. Kindly retry login",
+          409
+        );
+      }
+      user.wallet = createUserWallet._id;
+      addWallet = await user.save();
+      console.log("Wallet created for ", addWallet.lastName);
+    }
+
+    logger.info(`User logged in: ${email}`);
+
+    res.status(200).json({
+      status: "success",
+      token,
+      data: addWallet,
+    });
+  } catch (error: any) {
+    // Ensure a default status code is used if error.statusCode is undefined
+    const statusCode = error.statusCode || 500; // Default to 500 Internal Server Error
+    const message = error.message || "An unexpected error occurred";
+
+    logger.error(`Login error: ${message}`);
+    res.status(statusCode).json({ error: message });
+  }
+};
   /**
    * Auth header validation and JWT verification
    * @param req - Request from express
@@ -993,6 +1021,20 @@ public updateProfile = async (
       res.json(error.message);
     }
   };
+
+  public async getUserTransactions(req: UserRequest, res: Response): Promise<void> {
+    try {
+      const userID = req.user.user.id;
+    console.log(userID)
+    if(!userID) {
+      throw new AppError("Invalid or expired user token. Kindly sing in to view", 404)
+    }
+    const getTransactions = await Transaction.findOne({})
+    } catch (error) {
+      
+    }
+
+  }
 }
 
 export const authController = new AuthController();

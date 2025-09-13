@@ -64,7 +64,7 @@ class DataPrice {
               const who = req.user.role
             
               // Check if the data plan exists
-              const data: any = await Data.findOne({ networkProvider, plan });
+              const data: any = await Data.findOne({ networkProvider, size:plan });
               if ( data !== null ) {
                 throw new AppError('Data plan already exists', 400);
               }

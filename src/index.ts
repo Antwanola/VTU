@@ -12,6 +12,7 @@ import { quickTellerService } from './services/quickTeller';
 import { seedData, seedDataBulk } from './utils/seeData';
 import { GsubzService } from './services/VTU_data/gsubz';
 import { corsOptions } from './config/corsOptions';
+import { seedCableTVData } from './TVseed';
 
 
 const app = express();
@@ -50,6 +51,11 @@ connectDB();
 //   await seedDataBulk()
 // }
 // seed()
+
+// const seedCableTV = async () => {
+//   await seedCableTVData()
+// }
+// seedCableTV()
 
 const callGSubzService = async() => {
   const service = new  GsubzService();

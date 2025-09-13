@@ -14,6 +14,7 @@ paymentRouter.post('/verify-payment', authController.authenticationToken, Paymen
 paymentRouter.post('/webhook', cors(), PaymentContollers.webHook)
 paymentRouter.post('/fund-wallet',cors(), authController.authenticationToken, PaymentContollers.initializePayment)
 paymentRouter.get('/wallet-balance/subscribe', authController.authenticationToken, PaymentContollers.SubscribeToWallet )
+paymentRouter.get('/user-transactions', authController.authenticationToken, PaymentContollers.getUserTransaction)
 
 
 
