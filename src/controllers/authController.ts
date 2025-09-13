@@ -18,6 +18,7 @@ import { monifyService } from "../services/payment";
 import Wallet, { IWallet, IWalletDocument } from "../models/wallet";
 import { walletController } from "./WalletController";
 import { Types } from "mongoose";
+import { Transaction } from "../models/transactions";
 
 configDotenv();
 
@@ -1020,6 +1021,20 @@ public updateProfile = async (
       res.json(error.message);
     }
   };
+
+  public async getUserTransactions(req: UserRequest, res: Response): Promise<void> {
+    try {
+      const userID = req.user.user.id;
+    console.log(userID)
+    if(!userID) {
+      throw new AppError("Invalid or expired user token. Kindly sing in to view", 404)
+    }
+    const getTransactions = await Transaction.findOne({})
+    } catch (error) {
+      
+    }
+
+  }
 }
 
 export const authController = new AuthController();

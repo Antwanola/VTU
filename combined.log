@@ -7146,3 +7146,40 @@
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-09T09:23:39.216Z"}
 {"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-09T09:24:54.517Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-09T09:24:54.542Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-09T09:30:42.144Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-09T09:30:42.176Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-10T20:16:51.237Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-10T20:16:51.439Z"}
+{"error":{"expiredAt":"2025-02-18T22:55:25.000Z","message":"jwt expired","name":"TokenExpiredError"},"level":"warn","message":"Invalid or expired token","timestamp":"2025-09-10T20:16:56.696Z"}
+{"error":{"ErrorCodes":"Authentication failed","isOperational":true,"statusCode":403},"level":"error","message":"[Global Error Handler] Invalid or expired token","method":"POST","path":"/api/v1/admin/create-data","stack":"Error: Invalid or expired token\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:443:15)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-09-10T20:16:56.706Z"}
+{"level":"error","message":{"error":"Data plan already exists"},"timestamp":"2025-09-10T20:17:35.653Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:19:08.636Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:19:08.675Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:20:37.600Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:20:37.637Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:21:29.163Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:21:29.188Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:22:50.050Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:22:50.083Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:23:05.335Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:23:05.354Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:23:37.748Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:23:37.769Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:24:14.611Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:24:14.631Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:24:22.708Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:24:22.735Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:24:44.557Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:24:44.580Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:25:16.393Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:25:16.416Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:29:17.269Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:29:17.291Z"}
+{"level":"error","message":"Login error: Invalid email or password","timestamp":"2025-09-13T08:32:07.938Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-09-13T08:32:33.014Z"}
+{"error":{"expiredAt":"2025-09-11T20:17:10.000Z","message":"jwt expired","name":"TokenExpiredError"},"level":"warn","message":"Invalid or expired token","timestamp":"2025-09-13T08:32:58.789Z"}
+{"error":{"ErrorCodes":"Authentication failed","isOperational":true,"statusCode":403},"level":"error","message":"[Global Error Handler] Invalid or expired token","method":"GET","path":"/api/v1/user-transactions","stack":"Error: Invalid or expired token\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:443:15)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-09-13T08:32:58.796Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:33:51.076Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:33:51.099Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-13T08:41:15.910Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-13T08:41:15.929Z"}

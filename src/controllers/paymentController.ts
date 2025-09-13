@@ -280,7 +280,6 @@ public SubscribeToWallet = async (req: UserRequest, res: Response) => {
   res.flushHeaders();
 
   let watcher: any = null;
-  // You could also type the userId more strictly if you know it's always a string
 const userId: string = req.user.user.id;
 
 // Type the wallet query result
@@ -380,6 +379,22 @@ const wallet: IWalletDocument | null = await Wallet.findOne({ user: userId });
     }
   }
 };
+public async getUserTransaction (req: UserRequest, res: Response): Promise<void> {
+  try {
+    const userID = req.user.user.id;
+    console.log(userID)
+    const getTransactions = await Transaction.find({user: userID})
+    if(!getTransactions){
+      throw new AppError("No transaction for user", 404)
+    }
+    res.status(200).json({
+      status: "OK",
+      data: getTransactions
+    })
+  } catch (error: any) {
+    res.status(error.statusCode).send(error.message)
+  }
+}
 }
 
 export const PaymentContollers = new PaymentController();
