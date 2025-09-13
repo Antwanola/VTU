@@ -1,4 +1,3 @@
-import { dataService } from '../services/VTU_data/gladtidings';
 import express from "express"
 import authRouter from "./authRoutes"
 import paymentRouter from "./payment"
@@ -10,7 +9,7 @@ import userAdminRoute from './Admins/userAdminOperations';
 import BuyAirtimeRoute from './BuyAirtime';
 import ElectricRouter from './buyGSubzElectric';
 import TVRouter from './Admins/gSubzTV_AdminRoutes';
-import userTVroute from './GsubzTVRoutes';
+import userTVroute from './gSubzTVRoutes';
 
 const router = express.Router()
 
