@@ -14,11 +14,12 @@ class GSubzCableTVController {
     public async findAllGSubzTVPackage(req: Request, res: Response): Promise<void> {
         try {
                const { provider } = req.body
-        const TV = await gSubzTvService.findTVServices(provider)
+        // const TV = await gSubzTvService.findTVServices(provider)
+        const TV = await CableTV.find({provider})
         if(!TV) {
             throw new AppError("No TV package found for provider", 404)
         }
-        res.status(200).json({ [`${provider}_Packages`]: TV.list })
+        res.status(200).json({ [`${provider}_Packages`]: TV })
         }
         catch (error: any) {
             res.status(error.statusCode).send(error.message)
