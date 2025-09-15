@@ -11,6 +11,26 @@ import { Types } from "mongoose";
 import { authController } from "./authController";
 
 class GSubzCableTVController {
+    public async createTVData(req: Request, res: Response): Promise<void> {
+        try {
+            const { provider, title, serviceType, description, price } = req.body;
+            console.log({description})
+            const getTV = await CableTV.findOne({ provider, serviceType })
+            if(getTV) {
+                throw new AppError("Cable service already exist on DB", 409)
+            }
+            const createTV = await CableTV.create({provider, title, serviceType, description, price})
+            if (!createTV){
+                throw new AppError("Unable to create TV service", 422)
+            }
+            res.status(200).json({
+                status: 'OK',
+                data: createTV
+            })
+        } catch (error: any) {
+            res.status(error.statusCode).send(error.message)
+        }
+    }
     public async findAllGSubzTVPackage(req: Request, res: Response): Promise<void> {
         try {
                const { provider } = req.body
@@ -29,6 +49,27 @@ class GSubzCableTVController {
     // public async findOneGsuzTvPackage(req: Request, res: Response) {
     //     const { }
     // }
+
+    public  async deleteOneCableTV(req: Request, res: Response): Promise<void> {
+       try {
+         const { provider, serviceType } = req.body;
+        if(!provider || !serviceType) {
+            throw new AppError("Kindly fillin the missing params", 404)
+        }
+        const TV = await CableTV.findOne({provider, serviceType})
+        if (!TV) {
+            throw new AppError("No provider found for this service", 404)
+        }
+        const dlit = await TV.deleteOne();
+        if(dlit.acknowledged == true) {
+            res.status(200).json({status: "OK", message: "item deleted"})
+        }
+        else { throw new AppError("Unable to delete item", 500)}
+       } catch (error: any) {
+        res.status(error.statusCode).send(error.message)
+       }
+        
+    }
 
     public async editOneInternalCableTV (req:Request, res: Response): Promise<void> {
         try {

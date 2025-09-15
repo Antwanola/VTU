@@ -10,7 +10,9 @@ const TVRouter = express.Router();
 
 
 TVRouter.post('/find-cable-tv',  authController.authenticationToken, authController.isAdmin, gSubzCableTV.findAllGSubzTVPackage);
-TVRouter.post('/edit-cabletv', authController.authenticationToken, authController.isAdmin,gSubzCableTV.editOneInternalCableTV  );
+TVRouter.post('/update-cabletv', authController.authenticationToken, authController.isAdmin,gSubzCableTV.editOneInternalCableTV  );
+TVRouter.post('/create-cabletv', authController.authenticationToken, authController.isAdmin, gSubzCableTV.createTVData);
+TVRouter.post('/delet-cabletv', authController.authenticationToken, authController.isAdmin, gSubzCableTV.deleteOneCableTV)
 
 
 export default TVRouter;
