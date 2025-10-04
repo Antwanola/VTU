@@ -7282,3 +7282,103 @@
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-15T04:29:23.189Z"}
 {"level":"info","message":"Server is running on port 3002","timestamp":"2025-09-15T04:30:28.216Z"}
 {"level":"info","message":"MongoDB Connected using development","timestamp":"2025-09-15T04:30:28.274Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T01:48:27.361Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T01:48:27.417Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-10-04T01:51:58.083Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T01:56:12.241Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T01:56:12.261Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:04:45.477Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:04:45.547Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:06:04.034Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:06:04.090Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:08:13.878Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:08:13.899Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:08:41.039Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:08:41.058Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:08:55.700Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:08:55.721Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:10:09.265Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:10:09.294Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:12:08.630Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:12:08.650Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:12:19.371Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:12:19.405Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:12:28.911Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:12:28.938Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:13:25.057Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:13:25.076Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:14:17.334Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:14:17.355Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:16:22.523Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:16:22.544Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:16:33.968Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:16:33.990Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:16:49.547Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:16:49.565Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:17:34.478Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:17:34.499Z"}
+{"level":"warn","message":"Missing or malformed Authorization header","timestamp":"2025-10-04T02:20:13.733Z"}
+{"error":{"ErrorCodes":"Authentication failed","isOperational":true,"statusCode":401},"level":"error","message":"[Global Error Handler] Authorization token missing or malformed","method":"POST","path":"/api/v1/admin-debit-wallet/","stack":"Error: Authorization token missing or malformed\n    at authenticationToken (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\src\\controllers\\authController.ts:409:15)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\FOLTI-ADMIN\\Documents\\Ambitious_data\\VTU\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-10-04T02:20:13.754Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:26:11.235Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:26:11.255Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:27:28.671Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:27:28.688Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:27:58.098Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:27:58.127Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:28:23.702Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:28:23.733Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:28:47.558Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:28:47.581Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:28:56.545Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:28:56.625Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T02:30:37.056Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T02:30:37.078Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T09:31:13.462Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T09:31:13.523Z"}
+{"level":"info","message":"User logged in: antwanola29@gmail.com","timestamp":"2025-10-04T09:31:17.944Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T09:40:47.907Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T09:40:47.944Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T09:41:12.780Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T09:41:12.805Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T09:58:16.481Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T09:58:16.503Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T09:58:30.002Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T09:58:30.020Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:05:33.199Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:05:33.223Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:05:57.869Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:05:57.888Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:06:28.427Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:06:28.449Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:07:20.005Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:07:20.033Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:07:34.219Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:07:34.238Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:09:16.946Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:09:16.978Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:09:23.932Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:09:23.961Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:09:37.735Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:09:37.758Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:10:27.294Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:10:27.312Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:10:39.061Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:10:39.081Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:11:26.035Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:11:26.058Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:12:14.668Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:12:14.687Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:15:07.253Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:15:07.277Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:22:42.554Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:22:42.578Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:23:17.622Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:23:17.648Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:36:06.285Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:36:06.303Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:38:37.521Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:38:37.537Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:38:49.529Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:38:49.546Z"}
+{"level":"info","message":"Server is running on port 3002","timestamp":"2025-10-04T10:39:17.078Z"}
+{"level":"info","message":"MongoDB Connected using development","timestamp":"2025-10-04T10:39:17.138Z"}
