@@ -10,7 +10,7 @@ dataRoute.post('/create-data', authController.authenticationToken, authControlle
 //Update created data (admin only)
 dataRoute.put('/update-data', authController.authenticationToken, authController.isAdmin, newDataPrice.updateData );
 // Get all data by network Provider (admin only)
-dataRoute.get('/get-data/:networkProvider', authController.authenticationToken, authController.isAdmin, newDataPrice.getNetworkData );
+dataRoute.get('/get-data/:networkProvider', authController.authenticationToken, newDataPrice.getNetworkData );
 //Get all data (admin only)
 dataRoute.get('/get-all-data',  newDataPrice.allData)
 //Delete data by sku (admin only)

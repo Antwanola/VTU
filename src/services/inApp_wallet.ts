@@ -10,7 +10,6 @@ class WalletService {
   
   // Get Wallet
   public async getWallet(userID: string) {
-    console.log({userID})
     const wallet = await Wallet.findOne({ user:userID });
     if (!wallet) {
       throw new Error('Wallet not found');
@@ -29,7 +28,7 @@ class WalletService {
             throw new Error('Wallet not found');
         }
 
-        wallet.balance += amount;           // Available immediately    // Reflect in ledger too
+        wallet.balance += amount;
         wallet.updatedAt = new Date();
         wallet.lastTransactionReference = transactionReference
 
@@ -106,9 +105,64 @@ public async freezeWallet(email: string): Promise<IWallet | Error> {
       status: wallet.status,
     };
    } catch (error: any) {
+    if(error instanceof Error) {
+      return new Error(error.message)
+    }
     return error.message
    }
   }
+
+
+  //Admin fund user wallet
+  public async adminFundUserWallet(walletID: string, amount: number): Promise<IWallet | Error> {
+    if(amount <= 0) {
+      return new Error("Amount must be greater than zero");
+    }
+    if (!walletID) {
+      return new Error("Please provide a valid wallet ID");
+    }
+    try {
+      const wallet = await Wallet.findOne({_id: String(walletID)});
+      if (!wallet) {
+        return new Error("Wallet not found for the provided user ID.");
+      }
+
+      wallet.balance += amount;
+      wallet.updatedAt = new Date();
+      await wallet.save();
+      return wallet;
+    } catch (error: any) {
+      return new Error("Error funding wallet: " + error.message);
+    }
+
+}
+//Admin debit user wallet
+public async adminDebitUserWallet(walletID: string, amount: number): Promise<IWallet | Error> {
+  if (amount <= 0) {
+    return new Error("Amount must be greater than zero");
+  }
+  if (!walletID) {
+    return new Error("Please provide a valid wallet ID");
+  }
+  try {
+    const wallet = await Wallet.findOne({ _id: String(walletID) });
+    if (!wallet) {
+      return new Error("Wallet not found for the provided user ID.");
+    }
+
+    if (wallet.balance < amount) {
+      return new Error("Insufficient balance in the wallet");
+    }
+
+    wallet.balance -= amount; // subtract instead of add
+    wallet.updatedAt = new Date();
+    await wallet.save();
+
+    return wallet;
+  } catch (error: any) {
+    return new Error("Error debiting wallet: " + error.message);
+  }
+}
 
 }
 
