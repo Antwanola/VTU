@@ -203,7 +203,7 @@ class WalletController {
             amount: amount,
             status: TransactionStatusEnum.SUCCESS,
             paymentReference: "Admin debit wallet", // Use same reference
-            transactionReference: this.generateReference(),
+            transactionReference: await this.generateReference(),
             metadata: {
               paymentDescription: description || "Admin debited user wallet",
               customer: getUserToDebit,

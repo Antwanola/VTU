@@ -103,7 +103,7 @@ class AuthController {
     const emailData = {
       sender: {
         name: "Ambituox Data Plug",
-        email: "antwanola29@gmail.com",
+        email: "visionarydata2324@gmail.com",
       },
       to: [{ email: clientEmail }],
       subject: "Authentication Token",
