@@ -2,9 +2,25 @@
   "verification:oolayiwola@folti.io": {
     "value": {
       "email": "oolayiwola@folti.io",
-      "token": "107169",
-      "expires": 1756728377819
+      "token": "101814",
+      "expires": 1761309279154
     },
-    "ttl": 1758485105112078
+    "ttl": 1763070587531311
+  },
+  "verification:olayiwolaolatunjisodiq@yahoo.com": {
+    "value": {
+      "email": "olayiwolaolatunjisodiq@yahoo.com",
+      "token": "102721",
+      "expires": 1759912100779
+    },
+    "ttl": 1761672011976312
+  },
+  "verification:antwanola29@gmail.com": {
+    "value": {
+      "email": "antwanola29@gmail.com",
+      "token": "101595",
+      "expires": 1761374717041
+    },
+    "ttl": 1763136090858041
   }
 }
