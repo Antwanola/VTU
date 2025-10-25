@@ -89,9 +89,8 @@ class AuthController {
     const BrevoUri = "https://api.brevo.com/v3/smtp/email";
 
     // Ensure template path works after build
-    const htmlTemplate = path.resolve(
-      process.cwd(),
-      "src/email_template/email.html"
+    const htmlTemplate = path.resolve(__dirname,
+      "../email_template/email.html"
     );
     const htmlContent = fs.readFileSync(htmlTemplate, "utf8");
     console.log({ BrevoKey: API_KEY });
@@ -117,8 +116,9 @@ class AuthController {
           "api-key": API_KEY,
         },
       });
-      console.log("✅ Email sent:", sendTask.data);
+      console.log("Email sent:", sendTask.data);
     } catch (error: any) {
+      logger.error("Email send error:", error.response?.data || error.message)
       throw new AppError(error.message);
     }
   };
@@ -347,7 +347,7 @@ public login = async (
     const token = this.generateToken(tokenPayload);
     let addWallet = await user.populate("wallet");
     console.log({ addWallet });
-    if (!addWallet.wallet) {
+    if (!addWallet) {
       const createUserWallet = await Wallet.create({
         user: user._id,
         userEmail: user.email,
